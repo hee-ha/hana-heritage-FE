@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-800 py-8">
+    <footer className="bg-white text-gray-800">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between mb-6">
-          <div className="mb-6">
+        <div className="flex flex-col md:flex-row justify-between">
+          <div className="mb-2">
             <div className="mb-11">
               <ul className="flex flex-wrap text-sm md:mb-0 justify-center md:justify-start">
                 <li className="mr-4">사고신고</li>
@@ -47,11 +47,11 @@ const Footer = () => {
           </div>
           <div className="flex flex-col items-center md:items-end">
             <ul className="text-sm text-center md:text-right mb-4 md:mb-0">
+              <li className="mb-2">고객센터</li>
               <li className="mb-2">
-                고객센터 <strong>1588-1111 / 1599-1111</strong>
-              </li>
-              <li>
-                고객센터(해외) <strong>+82-42-520-2500</strong>
+                <span className="font-hana2 font-bold whitespace-nowrap min-w-[150px]">
+                  1588-1111 / 1599-1111
+                </span>
               </li>
             </ul>
           </div>

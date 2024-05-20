@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// import { NextUIProvider } from "@nextui-org/react";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 import "./styles/globals.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    {/* <NextUIProvider> */}
+    <App />
+    {/* </NextUIProvider> */}
   </React.StrictMode>
 );
 
