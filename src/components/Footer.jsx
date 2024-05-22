@@ -3,10 +3,10 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="bg-white text-gray-800">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mt-5">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-2">
-            <div className="mb-11">
+            <div className="mb-8">
               <ul className="flex flex-wrap text-sm md:mb-0 justify-center md:justify-start">
                 <li className="mr-4">사고신고</li>
                 <li className="mr-4">상품 공시실</li>

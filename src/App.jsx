@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import {
   Deposit,
+  Home,
   Login,
   RetirementManagement,
   Saving,
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route path="deposit" element={<Deposit />} />
             <Route path="savings" element={<Saving />} />
             <Route path="simple-transaction" element={<SimpleTransaction />} />
