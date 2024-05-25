@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
 	return (
-		<header className="bg-white shadow">
-			<div className="flex container mx-auto justify-between items-center sm:px-6 py-6 lg:px-8">
+		<header className="bg-white shadow  shadow-hanaGreen">
+			<div className="flex mx-auto justify-between items-center px-24 py-6">
 				<div className="flex items-center">
 					<Link to="/">
 						<img
