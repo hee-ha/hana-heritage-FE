@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function DepositDetail() {
-	const today = new Date();
 	return (
 		<div className="px-24 font-noto text-3xl">
 			<header>
@@ -39,9 +39,11 @@ function DepositDetail() {
 					</div>
 				</div>
 
-				<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-					가입하기
-				</button>
+				<Link to="/deposit/sign/1">
+					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						가입하기
+					</button>
+				</Link>
 				<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
 					상담예약
 				</button>
@@ -101,12 +103,16 @@ function DepositDetail() {
 					</li>
 				</ul>
 
-				<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-					가입하기
-				</button>
-				<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-					목록보기
-				</button>
+				<Link to="/deposit/sign/1">
+					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						가입하기
+					</button>
+				</Link>
+				<Link to="/deposit">
+					<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						목록보기
+					</button>
+				</Link>
 			</div>
 		</div>
 	);

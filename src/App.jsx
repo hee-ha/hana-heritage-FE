@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import {
 	Deposit,
 	DepositDetail,
+	DepositSign1,
 	Home,
 	Login,
 	RetirementManagement,
@@ -24,7 +25,7 @@ function App() {
 						<Route index element={<Home />} />
 						<Route path="deposit" element={<Deposit />} />
 						<Route path="deposit/detail" element={<DepositDetail />} />
-						<Route path="deposit/sign/1" element={<DepositDetail />} />
+						<Route path="deposit/sign/1" element={<DepositSign1 />} />
 						<Route path="deposit/sign/2" element={<DepositDetail />} />
 						<Route path="deposit/sign/3" element={<DepositDetail />} />
 						<Route path="deposit/sign/4" element={<DepositDetail />} />
