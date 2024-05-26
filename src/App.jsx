@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import {
   Deposit,
+  DepositDetail,
   Home,
   Login,
   RetirementManagement,
@@ -25,6 +26,11 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="deposit" element={<Deposit />} />
+            <Route path="deposit/detail" element={<DepositDetail />} />
+            <Route path="deposit/sign/1" element={<DepositDetail />} />
+            <Route path="deposit/sign/2" element={<DepositDetail />} />
+            <Route path="deposit/sign/3" element={<DepositDetail />} />
+            <Route path="deposit/sign/4" element={<DepositDetail />} />
             <Route path="savings" element={<Saving />} />
             <Route path="simple-transaction" element={<SimpleTransaction />} />
             <Route path="inheritance" element={<Inheritance />} />
