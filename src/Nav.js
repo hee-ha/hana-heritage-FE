@@ -14,7 +14,7 @@ const Nav = () => {
         to="/simple-transaction"
         className="text-gray-700 hover:text-hanaGreen"
       >
-        간단거래
+        이체
       </Link>
       <Link to="/inheritance" className="text-gray-700 hover:text-hanaGreen">
         상속

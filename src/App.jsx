@@ -10,9 +10,12 @@ import {
   RetirementManagement,
   Saving,
   SimpleTransaction,
+  AutoTransfer,
+  TransferView,
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
 import "./styles/globals.css";
+import "./styles/transaction.css";
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
               path="retirement-management"
               element={<RetirementManagement />}
             />
+            <Route path="auto" element={<AutoTransfer />} />
+            <Route path="transferView" element={<TransferView />} />
             <Route path="login" element={<Login />} />
           </Route>
         </Routes>
