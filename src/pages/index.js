@@ -1,5 +1,6 @@
 export { default as Deposit } from "./deposit/Deposit";
 export { default as DepositDetail } from "./deposit/DepositDetail";
+export { default as DepositSign1 } from "./deposit/DepositSign1";
 export { default as inheritance } from "./inheritance/Inheritance";
 export { default as RetirementManagement } from "./retirement-management/RetirementManagement";
 export { default as Saving } from "./saving/Saving";
