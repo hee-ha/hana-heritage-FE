@@ -45,6 +45,45 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSans-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSans-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSans-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSansLao-Regular.ttf");
+  unicode-range: U+0E80-0EFF;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSansLao-Medium.ttf");
+  unicode-range: U+0E80-0EFF;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("../assets/fonts/NotoSansLao-Bold.ttf");
+  unicode-range: U+0E80-0EFF;
+  font-weight: 700;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

@@ -12,6 +12,7 @@ module.exports = {
       },
       fontFamily: {
         hana2: ["Hana2", "sans-serif"],
+        noto: ["NotoSans", "sans-serif"],
       },
       keyframes: {
         float: {
