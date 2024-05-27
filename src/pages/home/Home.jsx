@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../components/common/Button/Button";
 
 const Home = () => {
   return (
     <div className="bg-landing flex flex-col items-center justify-center space-y-5">
       <div>
-        <h1 className="text-white font-hana2 font-semibold text-6xl z-10 animate-float">
+        <h1 className="text-white font-NotoSans font-semibold text-6xl z-10 animate-float">
           시니어를 위한 하나은행 웹사이트에 오신것을 환영합니다!
         </h1>
       </div>
@@ -28,24 +29,34 @@ const Home = () => {
         <h1 className="text-white font-hana2 font-semibold text-4xl z-10">
           시니어를 위한 하나은행 웹사이트에 오신것을 환영합니다! 4xl
         </h1>
-        <button className="text-white font-hana2 font-semibold text-3xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+        <button
+          className="text-white font-hana2 font-semibold text-3xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          disabled
+        >
           로그인
         </button>
       </div>
       <div className="flex space-x-5">
         <Link to="/login">
-          <button className="text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            로그인
-          </button>
-          <button className="text-white font-hana2 font-semibold text-4xl bg-hanaGreen py-4 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            로그인
-          </button>
-          <button className="text-white font-hana2 font-semibold text-3xl bg-hanaGreen py-4 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            로그인
-          </button>
-          <button className="text-white font-hana2 font-semibold text-xl bg-hanaGreen py-3 px-6 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            로그인
-          </button>
+          <Button isDisabled={true} label={"로그인"} fontSize="text-5xl" />
+          <Button
+            isDisabled={true}
+            label={"로그인"}
+            fontSize="text-5xl"
+            paddingY="py-2"
+          />
+          <Button isDisabled={true} label={"로그인"} fontSize="text-5xl" />
+          <Button
+            isDisabled={true}
+            label={"로그인"}
+            fontSize="text-5xl"
+            font={"font-notoSans"}
+          />
+          <Button isDisabled={true} label={"로그인"} fontSize="text-4xl" />
+          <Button isDisabled={true} label={"로그인"} fontSize="text-3xl" />
+          <Button isDisabled={true} label={"로그인"} fontSize="text-2xl" />
+          <Button isDisabled={true} label={"로그인"} fontSize="text-1xl" />
+
           <div class="relative h-11 w-full min-w-[200px]">
             <input
               placeholder="Static"

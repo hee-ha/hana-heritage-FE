@@ -31,6 +31,11 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="signupFull" element={<SignUpFull />} />
             <Route path="register" element={<Register />} />
+            <Route path="deposit/detail" element={<DepositDetail />} />
+						<Route path="deposit/sign/1" element={<DepositDetail />} />
+						<Route path="deposit/sign/2" element={<DepositDetail />} />
+						<Route path="deposit/sign/3" element={<DepositDetail />} />
+						<Route path="deposit/sign/4" element={<DepositDetail />} />
             <Route
               path="retirement-management"
               element={<RetirementManagement />}
