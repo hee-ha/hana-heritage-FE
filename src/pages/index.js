@@ -9,3 +9,6 @@ export { default as AutoTransfer } from "./simple-transaction/AutoTransfer";
 export { default as TransferView } from "./simple-transaction/TransferView";
 export { default as Login } from "./login/Login";
 export { default as Home } from "./home/Home";
+export { default as Identify } from "./signup/Identify";
+export { default as Register } from "./signup/Register";
+export { default as SignUpFull } from "./signup/SignupFull";
