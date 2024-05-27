@@ -7,6 +7,7 @@ export { default as Saving } from "./saving/Saving";
 export { default as SimpleTransaction } from "./simple-transaction/SimpleTransaction";
 export { default as AutoTransfer } from "./simple-transaction/AutoTransfer";
 export { default as TransferView } from "./simple-transaction/TransferView";
+export { default as TransactionHistory } from "./simple-transaction/TransactionHistory/TransactionHistory";
 export { default as Login } from "./login/Login";
 export { default as Home } from "./home/Home";
 export { default as Identify } from "./signup/Identify";
