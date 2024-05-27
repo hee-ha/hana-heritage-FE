@@ -12,6 +12,9 @@ import {
   SimpleTransaction,
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
+import Confirmation from "./pages/saving/Confirmation";
+import Joinsuccess from "./pages/saving/Joinsuccess";
+
 import "./styles/globals.css";
 
 function App() {
@@ -23,8 +26,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="deposit" element={<Deposit />} />
             <Route path="savings" element={<Saving />} />
+            <Route path="confirmation" element={<Confirmation />} />
             <Route path="simple-transaction" element={<SimpleTransaction />} />
             <Route path="inheritance" element={<Inheritance />} />
+            <Route path="Joinsuccess" element={<Joinsuccess />} />
             <Route
               path="retirement-management"
               element={<RetirementManagement />}
