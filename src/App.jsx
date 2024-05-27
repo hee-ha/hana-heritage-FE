@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import {
   Deposit,
+  DepositDetail,
+  DepositSign1,
   Home,
   Login,
   RetirementManagement,
@@ -13,9 +15,12 @@ import {
   Register,
   SignUpFull,
   Identify,
+  AutoTransfer,
+  TransferView,
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
 import "./styles/globals.css";
+import "./styles/transaction.css";
 
 function App() {
   return (
@@ -30,12 +35,14 @@ function App() {
             <Route path="inheritance" element={<Inheritance />} />
             <Route path="register" element={<Register />} />
             <Route path="signupFull" element={<SignUpFull />} />
-            <Route path="register" element={<Register />} />
             <Route path="deposit/detail" element={<DepositDetail />} />
 						<Route path="deposit/sign/1" element={<DepositDetail />} />
 						<Route path="deposit/sign/2" element={<DepositDetail />} />
 						<Route path="deposit/sign/3" element={<DepositDetail />} />
 						<Route path="deposit/sign/4" element={<DepositDetail />} />
+            <Route path="auto" element={<AutoTransfer />} />
+            <Route path="transferView" element={<TransferView />} />
+              
             <Route
               path="retirement-management"
               element={<RetirementManagement />}
@@ -46,6 +53,7 @@ function App() {
       </Router>
     </RecoilRoot>
   );
+
 }
 
 export default App;

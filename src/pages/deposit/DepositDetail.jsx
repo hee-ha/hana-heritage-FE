@@ -1,234 +1,118 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function DepositDetail() {
-	const [formData, setFormData] = useState({
-		fromAccount: "",
-		toAccount: "",
-		amount: "",
-		startDate: "",
-		endDate: "",
-		memoToRecipient: "",
-		memoToSelf: "",
-		memo: "",
-	});
-
-	const accounts = [
-		{
-			id: 1,
-			name: "Young 하나통장",
-			number: "하나 111-111111-111111",
-			balance: "1원",
-		},
-		{
-			id: 2,
-			name: "Savings Account",
-			number: "국민 222-222222-222222",
-			balance: "500,000원",
-		},
-		{
-			id: 3,
-			name: "Business Account",
-			number: "신한 333-333333-333333",
-			balance: "1,000,000원",
-		},
-	];
-
-	const handleChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
-
-	const today = new Date();
 	return (
-		<div className="px-24">
+		<div className="px-24 font-noto text-3xl">
 			<header>
 				<h2 className="font-hana2 font-semibold text-6xl py-10">
-					선택하신 <span className="text-blue-500">적금</span> 상품 상세 소개입니다.
+					선택하신 <span className="text-hanaGreen">펫사랑 적금</span>{" "}
+					안내드립니다.
 				</h2>
 				<hr />
 			</header>
 			<div className="py-10">
-				<label className="font-hana2 font-semibold text-5xl">
-					어디서 보낼까요?
-				</label>
-				<div className="form-group mt-6 mb-6">
-					<div className="font-hana2 text-3xl">
-						<h4 className="mb-6">
-							<img
-								className="finImg"
-								src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_HANA_Profile.png"
-							/>
-							{accounts[0].name}
-						</h4>
+				<p className="font-hana2 font-semibold text-5xl pb-5">펫사랑 적금</p>
+				<p className="font-hana2">우리 가족 댕냥이의 두근두근 첫 재테크 !!!</p>
+
+				<div className="grid grid-cols-2 gap-5 my-10">
+					<div className="bg-hanaGold rounded-lg p-10 text-white">
+						<p className="mb-5 font-hana2">특징</p>
+						<p className="text-5xl font-bold mb-5">보험서비스 무료가입</p>
+						<p className="text-5xl font-bold">사랑의 서약서</p>
 					</div>
-					<select
-						id="fromAccount"
-						name="fromAccount"
-						value={formData.fromAccount}
-						onChange={handleChange}
-						className="w-full p-2 border border-gray-300 text-3xl rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-					>
-						{accounts.map((account) => (
-							<option key={account.id} value={account.id}>
-								{account.number}
-							</option>
-						))}
-					</select>
-					<div className="balance font-hana2 mt-4">
-						<span className="text-3xl mr-4">통장 잔액 </span>
-						<span className="text-3xl"> 1,000,000원</span>
+
+					<div className="bg-hanaGold rounded-lg p-10 text-white">
+						<p className="mb-5 font-hana2"> 최고 가입한도</p>
+						<p className="text-5xl font-bold mb-5">월 50만원</p>
+					</div>
+
+					<div className="bg-hanaGold rounded-lg p-10 text-white">
+						<p className="mb-5 font-hana2">최고 가입한도</p>
+						<p className="text-5xl font-bold mb-5">보험서비스 무료가입</p>
+					</div>
+
+					<div className="bg-hanaGold rounded-lg p-10 text-white">
+						<p className="mb-5 font-hana2">금리 (2023.11.13 기준, 세전)</p>
+						<p className="text-5xl font-bold mb-5">기본 2.30%</p>
+						<p className="text-5xl font-bold mb-5">최고 2.80%</p>
 					</div>
 				</div>
 
-				<div className="form-group mb-6">
-					<label className="font-hana2 font-semibold text-5xl block mb-2">
-						누구에게 보낼까요?
-					</label>
-					<input
-						type="text"
-						name="toAccount"
-						value={formData.toAccount}
-						onChange={handleChange}
-						placeholder="은행/계좌번호 입력"
-						className="w-full font-noto text-3xl p-2 border border-gray-300 rounded-md mb-4"
-					/>
-					<div className="flex justify-between mb-4">
-						<button className="font-hana2 flex-1 text-3xl text-black bg-white p-2 rounded-md border border-gray-300 mx-1">
-							<img
-								className="finImg"
-								src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_HANA_Profile.png"
-							/>
-							하나
-						</button>
-						<button className="font-hana2 flex-1 text-3xl text-black bg-white p-2 rounded-md border border-gray-300 mx-1">
-							<img
-								className="finImg"
-								src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_KB_Profile.png"
-							/>
-							국민
-						</button>
-						<button className="font-hana2 flex-1 text-3xl text-black bg-white p-2 rounded-md border border-gray-300 mx-1">
-							<img
-								className="finImg"
-								src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_NH_Profile.png"
-							/>
-							농협
-						</button>
-						<button className="font-hana2 flex-1 text-black text-3xl bg-white p-2 rounded-md border border-gray-300 mx-1">
-							<img
-								className="finImg"
-								src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_SHINHAN_Profile.png"
-							/>
-							신한
-						</button>
-					</div>
-					<button className="transferbtn bg-hanaGreen w-full font-hana2 text-3xl text-white text-500">
-						은행 더보기 ▼
+				<Link to="/deposit/sign/1">
+					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						가입하기
 					</button>
-				</div>
-
-				<div className="form-group mb-6">
-					<label className="font-hana2 font-semibold text-5xl block mb-2">
-						얼마를 보낼까요?
-					</label>
-					<input
-						type="text"
-						name="amount"
-						value={formData.amount}
-						onChange={handleChange}
-						placeholder="1,000,000"
-						className="w-full font-noto text-3xl p-2 border border-gray-300 rounded-md mb-4"
-					/>
-					<div className="flex text-3xl justify-between mb-4">
-						<button className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1">
-							+1만
-						</button>
-						<button className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1">
-							+5만
-						</button>
-						<button className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1">
-							+10만
-						</button>
-						<button className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1">
-							+10만
-						</button>
-						<button className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1">
-							+100만
-						</button>
-					</div>
-				</div>
-
-				<div className="form-group">
-					<label className="font-hana2 font-semibold text-5xl block mb-2">
-						언제부터 언제까지 보낼까요?
-					</label>
-					<div className="p-5">
-						<div className="font-noto text-3xl flex items-center mb-8">
-							<div className="p-2 bg-hanaGreen rounded-md text-white">
-								<span className="font-hana2 font-semibold  mx-2">
-									자동이체 시작일
-								</span>
-							</div>
-							<input
-								type="date"
-								name="startDate"
-								value={formData.startDate}
-								onChange={handleChange}
-								className="flex-1 border border-gray-300 rounded-md ml-10"
-							/>
-						</div>
-						<div className="font-noto text-3xl flex items-center">
-							<div className="p-2 bg-hanaGreen rounded-md text-white">
-								<span className="font-hana2 font-semibold mx-2">
-									자동이체 종료일
-								</span>
-							</div>
-							<input
-								type="date"
-								name="endDate"
-								value={formData.endDate}
-								onChange={handleChange}
-								className="flex-1 border border-gray-300 rounded-md ml-10"
-							/>
-						</div>
-					</div>
-				</div>
-
-				<div className="form-group memo mb-6">
-					<label className="font-hana2 font-semibold text-5xl block mb-2">
-						통장에 표기할 내용 입력하기
-					</label>
-					<input
-						type="text"
-						name="memoToRecipient"
-						value={formData.memoToRecipient}
-						onChange={handleChange}
-						placeholder="받는 분에게 표기"
-						className="w-full p-2 border border-gray-300 rounded-md mb-4"
-					/>
-					<input
-						type="text"
-						name="memoToSelf"
-						value={formData.memoToSelf}
-						onChange={handleChange}
-						placeholder="나에게 표기"
-						className="w-full p-2 border border-gray-300 rounded-md mb-4"
-					/>
-					<input
-						type="text"
-						name="memo"
-						value={formData.memo}
-						onChange={handleChange}
-						placeholder="메모"
-						className="w-full p-2 border border-gray-300 rounded-md"
-					/>
-				</div>
-
-				<button
-					type="submit"
-					className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
-				>
-					다음
+				</Link>
+				<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+					상담예약
 				</button>
+
+				<ul role="list" class="divide-y divide-hanaSilver">
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							01. 상품 특징
+						</p>
+						<p className="text-5xl mb-5 leading-snug">
+							펫코노미 시대(반려인 1,500만명) 반려동물을 위한 목돈마련 저축상품
+						</p>
+					</li>
+
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							02. 가입대상
+						</p>
+						<p className="text-5xl mb-5 leading-snug">
+							실명의 개인 또는 개인사업자 (1인 1계좌)
+						</p>
+					</li>
+
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							03. 예금종류
+						</p>
+						<p className="text-5xl mb-5 leading-snug">적립식예금(정액적립식)</p>
+					</li>
+
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							04. 가입기간
+						</p>
+						<p className="text-5xl mb-5 leading-snug">1년</p>
+					</li>
+
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							05. 가입금액
+						</p>
+						<p className="text-5xl mb-5 leading-snug text-hanaRed">
+							월 10만원 ~ 50만원 (원단위)
+						</p>
+					</li>
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">
+							06. 이자지급방법
+						</p>
+						<p className="text-5xl mb-5 leading-snug">
+							만기일시지급식 : 만기(후)해지시 이자를 지급
+						</p>
+					</li>
+					<li className="justify-between gap-x-6 py-5">
+						<p className="my-5 font-hana2 font-bold text-hanaGreen">07. 금리</p>
+						<p className="text-5xl mb-5 leading-snug">2.3%</p>
+					</li>
+				</ul>
+
+				<Link to="/deposit/sign/1">
+					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						가입하기
+					</button>
+				</Link>
+				<Link to="/deposit">
+					<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						목록보기
+					</button>
+				</Link>
 			</div>
 		</div>
 	);
