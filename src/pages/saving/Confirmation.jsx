@@ -14,7 +14,7 @@ function Confirmation() {
     const formData = {
       
     };
-    navigate("/Joinsuccess", { state: { formData } });
+    navigate("/deposit/sign/4", { state: { formData } });
   };
 
   return (
