@@ -23,7 +23,7 @@ const Button = ({
     bgColor,
     paddingY,
     paddingX,
-    "font-semibold z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg",
+    "font-bold z-10 transition-transform transform hover:animate-bubbly rounded-lg",
     {
       "cursor-not-allowed": isDisabled,
     }
