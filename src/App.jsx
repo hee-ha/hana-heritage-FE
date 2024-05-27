@@ -11,6 +11,7 @@ import {
   Login,
   RetirementManagement,
   Saving,
+  Saving2,
   SimpleTransaction,
   Register,
   SignUpFull,
@@ -19,6 +20,9 @@ import {
   TransferView,
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
+import Confirmation from "./pages/saving/Confirmation";
+import Joinsuccess from "./pages/saving/Joinsuccess";
+
 import "./styles/globals.css";
 import "./styles/transaction.css";
 
@@ -37,9 +41,9 @@ function App() {
             <Route path="signupFull" element={<SignUpFull />} />
             <Route path="deposit/detail" element={<DepositDetail />} />
 						<Route path="deposit/sign/1" element={<DepositDetail />} />
-						<Route path="deposit/sign/2" element={<DepositDetail />} />
-						<Route path="deposit/sign/3" element={<DepositDetail />} />
-						<Route path="deposit/sign/4" element={<DepositDetail />} />
+						<Route path="deposit/sign/2" element={<Saving2 />} />
+						<Route path="deposit/sign/3" element={<Confirmation />} />
+						<Route path="deposit/sign/4" element={<Joinsuccess />} />
             <Route path="auto" element={<AutoTransfer />} />
             <Route path="transferView" element={<TransferView />} />
               
