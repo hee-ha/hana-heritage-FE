@@ -17,6 +17,9 @@ import {
   Identify,
   AutoTransfer,
   TransferView,
+=======
+  TransactionHistory,
+>>>>>>> 5477fd9 (feat: 거래내역조회페이지 개발(#14))
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
 import "./styles/globals.css";
@@ -40,6 +43,13 @@ function App() {
 						<Route path="deposit/sign/2" element={<DepositDetail />} />
 						<Route path="deposit/sign/3" element={<DepositDetail />} />
 						<Route path="deposit/sign/4" element={<DepositDetail />} />
+						<Route path="saving" element={<Saving />} />
+						<Route path="simple-transaction" element={<SimpleTransaction />} />
+						<Route
+						path="simple-transaction/TransactionHistory"
+						element={<TransactionHistory />}
+						/>
+						<Route path="inheritance" element={<Inheritance />} />
             <Route path="auto" element={<AutoTransfer />} />
             <Route path="transferView" element={<TransferView />} />
               
