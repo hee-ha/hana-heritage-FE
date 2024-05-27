@@ -12,6 +12,7 @@ import {
   SimpleTransaction,
   Register,
   SignUpFull,
+  Identify,
 } from "./pages";
 import Inheritance from "./pages/inheritance/Inheritance";
 import "./styles/globals.css";
@@ -29,6 +30,7 @@ function App() {
             <Route path="inheritance" element={<Inheritance />} />
             <Route path="register" element={<Register />} />
             <Route path="signupFull" element={<SignUpFull />} />
+            <Route path="register" element={<Register />} />
             <Route
               path="retirement-management"
               element={<RetirementManagement />}
