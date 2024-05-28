@@ -1,6 +1,6 @@
 import React from "react";
 
-function DepositDetail() {
+function SavingList() {
   const savingAccount = [
     {
       id: 1,
@@ -34,24 +34,24 @@ function DepositDetail() {
         111-1244-12432
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
-        <span className="text-hanaGreen ">상품명</span> &nbsp; 3ㆍ6ㆍ9 정기예금
+        <span className="text-hanaGreen ">상품명</span> &nbsp; 펫적금
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
-        <span className="text-hanaGreen">과목명</span> &nbsp; 정기예금
+        <span className="text-hanaGreen">과목명</span> &nbsp; 정기적금
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
-        <span className="text-hanaGreen">최초가입액</span> &nbsp; 300,000원
+        <span className="text-hanaGreen">잔액</span> &nbsp; 300,000원
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
         <span className="text-hanaGreen">신규일자</span> &nbsp; 2024-05-27
         <span className="text-hanaRed  ml-16">만기일자</span> &nbsp; 2025-05-27
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
-        <span className="text-hanaGreen">이자지급방식</span> &nbsp;{" "}
-        {account.installmentMethod === 1 ? "만기일시지급" : "기타"}
+        <span className="text-hanaGreen">적립형태</span> &nbsp;{" "}
+        {account.installmentMethod === 1 ? "정액적립식" : "기타"}
       </div>
       <div className="flex flex-row mt-12 font-hana2 font-semibold text-5xl">
-        <span className="text-hanaRed">적용이율(연)</span> &nbsp; 3.00%
+        <span className="text-hanaRed">적용이율(연)</span> &nbsp; 2.80%
       </div>
       <button
         type="submit"
@@ -63,4 +63,4 @@ function DepositDetail() {
   );
 }
 
-export default DepositDetail;
+export default SavingList;

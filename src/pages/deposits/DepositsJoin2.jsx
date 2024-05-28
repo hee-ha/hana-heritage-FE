@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { useNavigate } from "react-router-dom";
 
-function Saving() {
+function DepositsJoin2() {
   const [accountNumber, setAccountNumber] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -56,7 +56,7 @@ function Saving() {
       petName,
       insurance,
     };
-    navigate("/deposit/sign/3", { state: { formData } });
+    navigate("/deposits/join/3", { state: { formData } });
   };
 
   const addAmount = (amount, setAmount) => {
@@ -709,4 +709,4 @@ function Saving() {
   );
 }
 
-export default Saving;
+export default DepositsJoin2;

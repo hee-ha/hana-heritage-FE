@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-function Confirmation() {
+function DepositsJoin3() {
   const location = useLocation();
   const formData = location.state?.formData || {};
 
@@ -14,7 +14,7 @@ function Confirmation() {
     const formData = {
       
     };
-    navigate("/deposit/sign/4", { state: { formData } });
+    navigate("/deposits/join/4", { state: { formData } });
   };
 
   return (
@@ -176,4 +176,4 @@ function Confirmation() {
   );
 }
 
-export default Confirmation;
+export default DepositsJoin3;

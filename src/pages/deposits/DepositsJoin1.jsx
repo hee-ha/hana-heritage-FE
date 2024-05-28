@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion } from "flowbite-react";
 import { Link } from "react-router-dom";
 
-function DepositSign1() {
+function DepositsJoin1() {
 	return (
 		<div className="px-24 font-noto text-3xl">
 			<header>
@@ -531,12 +531,12 @@ function DepositSign1() {
 			</div>
 
 			<div className="flex justify-between">
-				<Link to="/deposit/sign/2" className="flex-grow">
+				<Link to="/deposits/join/2" className="flex-grow">
 					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
 						다음
 					</button>
 				</Link>
-				<Link to="/deposit" className="flex-grow ml-4">
+				<Link to="/deposits" className="flex-grow ml-4">
 					<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
 						취소
 					</button>
@@ -546,4 +546,4 @@ function DepositSign1() {
 	);
 }
 
-export default DepositSign1;
+export default DepositsJoin1;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function DepositDetail() {
+function DepositsDetail() {
 	return (
 		<div className="px-24 font-noto text-3xl">
 			<header>
@@ -103,12 +103,12 @@ function DepositDetail() {
 					</li>
 				</ul>
 
-				<Link to="/deposit/sign/1">
+				<Link to="/deposits/join/1">
 					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
 						가입하기
 					</button>
 				</Link>
-				<Link to="/deposit">
+				<Link to="/deposits">
 					<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
 						목록보기
 					</button>
@@ -118,4 +118,4 @@ function DepositDetail() {
 	);
 }
 
-export default DepositDetail;
+export default DepositsDetail;

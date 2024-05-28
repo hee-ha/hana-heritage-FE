@@ -4,24 +4,24 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import {
-  Deposit,
-  DepositDetail,
-  DepositSign1,
+  DepositsList,
+  DepositsDetail,
+  DepositsJoin1,
+  DepositsJoin2,
+  DepositsJoin3,
+  DepositsJoin4,
   Home,
   Login,
-  RetirementManagement,
-  Saving,
-  Saving2,
-  SimpleTransaction,
   Register,
-  SignUpFull,
   Identify,
+  Inheritance,
   AutoTransfer,
+  SimpleTransfer,
   TransferView,
+  AccountDetail,
+  AccountInquiry,
+  AccountInquiryCard,
 } from "./pages";
-import Inheritance from "./pages/inheritance/Inheritance";
-import Confirmation from "./pages/saving/Confirmation";
-import Joinsuccess from "./pages/saving/Joinsuccess";
 
 import "./styles/globals.css";
 import "./styles/transaction.css";
@@ -33,25 +33,31 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="deposit" element={<Deposit />} />
-            <Route path="savings" element={<Saving />} />
-            <Route path="simple-transaction" element={<SimpleTransaction />} />
-            <Route path="inheritance" element={<Inheritance />} />
+            
+            {/* 유저 */}
             <Route path="register" element={<Register />} />
-            <Route path="signupFull" element={<SignUpFull />} />
-            <Route path="deposit/detail" element={<DepositDetail />} />
-						<Route path="deposit/sign/1" element={<DepositDetail />} />
-						<Route path="deposit/sign/2" element={<Saving2 />} />
-						<Route path="deposit/sign/3" element={<Confirmation />} />
-						<Route path="deposit/sign/4" element={<Joinsuccess />} />
-            <Route path="auto" element={<AutoTransfer />} />
-            <Route path="transferView" element={<TransferView />} />
-              
-            <Route
-              path="retirement-management"
-              element={<RetirementManagement />}
-            />
             <Route path="login" element={<Login />} />
+            
+            {/* 이체 */}
+            <Route path="simple-transfer" element={<SimpleTransfer />} />
+            <Route path="auto-transfer" element={<AutoTransfer />} />
+            <Route path="transfer-view" element={<TransferView />} />
+            
+            {/* 상속 */}
+            <Route path="inheritance" element={<Inheritance />} />
+            
+            {/* 예적금 */}
+            <Route path="deposits" element={<DepositsList />} />
+            <Route path="deposits/detail" element={<DepositsDetail />} />
+						<Route path="deposits/join/1" element={<DepositsJoin1 />} />
+						<Route path="deposits/join/2" element={<DepositsJoin2 />} />
+						<Route path="deposits/join/3" element={<DepositsJoin3 />} />
+						<Route path="deposits/join/4" element={<DepositsJoin4 />} />
+            
+						<Route path="account" element={<AccountInquiry />} />
+						<Route path="account/detail" element={<AccountDetail />} />
+            
+              
           </Route>
         </Routes>
       </Router>

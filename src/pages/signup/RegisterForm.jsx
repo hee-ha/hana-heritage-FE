@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Signup() {
+function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -85,4 +85,4 @@ function Signup() {
     </div>
   );
 }
-export default Signup;
+export default RegisterForm;

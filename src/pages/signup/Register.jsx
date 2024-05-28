@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Identify from "./Identify";
-import Signup from "./Signup";
+import RegisterForm from "./RegisterForm";
 
 function Register() {
   const [isIdentified, setIsIdentified] = useState(false);
@@ -25,7 +25,7 @@ function Register() {
       ) : !isIdentified ? (
         <Identify onIdentifySuccess={handleIdentificationSuccess} />
       ) : (
-        <Signup />
+        <RegisterForm />
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import BankButtons from "./component/Bankbtn";
 import TransferAmount from "./component/TransferAmount";
 import { Link } from "react-router-dom";
 
-function SimpleTransaction() {
+function SimpleTransfer() {
   const [formData, setFormData] = useState({
     fromAccount: "",
     toAccount: "",
@@ -139,7 +139,7 @@ function SimpleTransaction() {
             className="w-full text-3xl font-noto border border-gray-300 rounded-md"
           />
         </div>
-        <Link to={{ pathname: "/transferView", state: { data: formData } }}>
+        <Link to={{ pathname: "/transfer-view", state: { data: formData } }}>
           <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             다음
           </button>
@@ -149,4 +149,4 @@ function SimpleTransaction() {
   );
 }
 
-export default SimpleTransaction;
+export default SimpleTransfer;

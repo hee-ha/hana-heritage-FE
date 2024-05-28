@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AccountCard from "./AccountCard";
+import AccountInquiryCard from "./AccountInquiryCard";
 
 const accounts = {
   예금: [
@@ -140,7 +140,7 @@ function AccountInquiry() {
           {showDeposit && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.예금.map((account) => (
-                <AccountCard key={account.id} account={account} />
+                <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
           )}
@@ -193,7 +193,7 @@ function AccountInquiry() {
           {showSavings && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.적금.map((account) => (
-                <AccountCard key={account.id} account={account} />
+                <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
           )}
@@ -246,7 +246,7 @@ function AccountInquiry() {
           {showChecking && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.입출금.map((account) => (
-                <AccountCard key={account.id} account={account} />
+                <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
           )}
