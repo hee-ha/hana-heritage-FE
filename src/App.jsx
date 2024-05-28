@@ -20,7 +20,7 @@ import {
   TransferView,
   AccountDetail,
   AccountInquiry,
-  AccountInquiryCard,
+  TransferHistory,
 } from "./pages";
 
 import "./styles/globals.css";
@@ -57,7 +57,8 @@ function App() {
 						<Route path="account" element={<AccountInquiry />} />
 						<Route path="account/detail" element={<AccountDetail />} />
             
-              
+						<Route path="transfer/history" element={<TransferHistory />} />
+            
           </Route>
         </Routes>
       </Router>

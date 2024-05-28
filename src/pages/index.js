@@ -18,3 +18,4 @@ export { default as Login } from "./login/Login";
 export { default as Home } from "./home/Home";
 export { default as Identify } from "./signup/Identify";
 export { default as Register } from "./signup/Register";
+export { default as TransferHistory } from "./transfer/TransferHistory";
