@@ -10,37 +10,7 @@ const Nav = () => {
 					className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
 					aria-current="page"
 				>
-					예·적금
-				</Link>
-			</div>
-
-			<div className="w-1/6 text-center">
-				<Link
-					to="/simple-transfer"
-					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
-					aria-current="page"
-				>
-					계좌이체
-				</Link>
-			</div>
-
-			<div className="w-1/6 text-center">
-				<Link
-					to="/auto-transfer"
-					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
-					aria-current="page"
-				>
-					자동이체
-				</Link>
-			</div>
-
-			<div className="w-1/6 text-center">
-				<Link
-					to="/account"
-					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
-					aria-current="page"
-				>
-					내계좌
+					예·적금가입
 				</Link>
 			</div>
 
@@ -51,6 +21,36 @@ const Nav = () => {
 					aria-current="page"
 				>
 					계좌개설
+				</Link>
+			</div>
+
+			<div className="w-1/6 text-center">
+				<Link
+					to="/transfer"
+					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
+					aria-current="page"
+				>
+					이체
+				</Link>
+			</div>
+
+			<div className="w-1/6 text-center">
+				<Link
+					to="/transfer/history"
+					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
+					aria-current="page"
+				>
+					이체내역
+				</Link>
+			</div>
+
+			<div className="w-1/6 text-center">
+				<Link
+					to="/account"
+					className=" text-hanaBlack hover:text-white hover:bg-hanaGreen  font-hana2 font-medium rounded-md px-3 py-2 text-3xl"
+					aria-current="page"
+				>
+					내계좌
 				</Link>
 			</div>
 

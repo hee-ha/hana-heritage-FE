@@ -4,23 +4,24 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import {
-  DepositsList,
+  AccountCreation,
+  AccountDetail,
+  AccountInquiry,
   DepositsDetail,
   DepositsJoin1,
   DepositsJoin2,
   DepositsJoin3,
   DepositsJoin4,
+  DepositsList,
   Home,
-  Login,
-  Register,
-  Identify,
   Inheritance,
   AutoTransfer,
   SimpleTransfer,
-  TransferView,
-  AccountDetail,
-  AccountInquiry,
   TransferHistory,
+  TransferHome,
+  TransferView,
+  Login,
+  Register,
 } from "./pages";
 
 import "./styles/globals.css";
@@ -39,9 +40,11 @@ function App() {
             <Route path="login" element={<Login />} />
             
             {/* 이체 */}
-            <Route path="simple-transfer" element={<SimpleTransfer />} />
-            <Route path="auto-transfer" element={<AutoTransfer />} />
-            <Route path="transfer-view" element={<TransferView />} />
+            <Route path="transfer" element={<TransferHome />} />
+            <Route path="transfer/simple" element={<SimpleTransfer />} />
+            <Route path="transfer/auto" element={<AutoTransfer />} />
+            <Route path="transfer/confirm" element={<TransferView />} />
+						<Route path="transfer/history" element={<TransferHistory />} />
             
             {/* 상속 */}
             <Route path="inheritance" element={<Inheritance />} />
@@ -54,10 +57,10 @@ function App() {
 						<Route path="deposits/join/3" element={<DepositsJoin3 />} />
 						<Route path="deposits/join/4" element={<DepositsJoin4 />} />
             
+            {/* 내 계좌 */}
 						<Route path="account" element={<AccountInquiry />} />
 						<Route path="account/detail" element={<AccountDetail />} />
-            
-						<Route path="transfer/history" element={<TransferHistory />} />
+						<Route path="account/creation" element={<AccountCreation />} />
             
           </Route>
         </Routes>
