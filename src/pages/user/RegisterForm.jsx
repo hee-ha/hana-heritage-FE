@@ -41,7 +41,7 @@ function RegisterForm() {
       <h2 className="font-hana font-bold text-5xl mb-6 text-center pt-10 pb-10">
         회원가입
       </h2>
-      <form className="space-y-10">
+      <form className="space-y-28">
         <div className="relative h-16 w-full min-w-[200px]">
           <input
             type="password"
@@ -50,7 +50,7 @@ function RegisterForm() {
             placeholder=""
             className="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 text-5xl font-hana2 text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
           />
-          <label className="text-2xl after:content[''] pointer-events-none absolute left-0 -top-10 flex h-full w-full select-none !overflow-visible truncate font-hana2 leading-tight text-gray-500 transition-all after:absolute after:-bottom-3 after:block after:w-full after:scale-x-0 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-4xl peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+          <label className="text-2xl after:content[''] pointer-events-none absolute left-0 -top-12 flex h-full w-full select-none !overflow-visible truncate font-hana2 leading-tight text-gray-500 transition-all after:absolute after:-bottom-3 after:block after:w-full after:scale-x-0 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-4xl peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
             비밀번호를 입력해주세요.
           </label>
         </div>
@@ -62,26 +62,26 @@ function RegisterForm() {
             placeholder=""
             className="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 text-5xl font-hana2 text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
           />
-          <label className="text-2xl after:content[''] pointer-events-none absolute left-0 -top-10 flex h-full w-full select-none !overflow-visible truncate font-hana2 leading-tight text-gray-500 transition-all after:absolute after:-bottom-3 after:block after:w-full after:scale-x-0 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-4xl peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+          <label className="text-2xl after:content[''] pointer-events-none absolute left-0 -top-12 flex h-full w-full select-none !overflow-visible truncate font-hana2 leading-tight text-gray-500 transition-all after:absolute after:-bottom-3 after:block after:w-full after:scale-x-0 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-4xl peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
             비밀번호를 한 번 더 입력해주세요.
           </label>
         </div>
-        <p
+        <span
           id="password-error"
-          className={`text-red-500 font-hana2 mt-1 text-3xl ${
+          className={`text-hanaRed font-hana2 relative top-4 text-4xl ${
             passwordError ? "" : "hidden"
           }`}
         >
           비밀번호가 일치하지 않습니다.
-        </p>
-        <p
+        </span>
+        <span
           id="password-check"
-          className={`text-green-500 font-hana2 mt-1 text-3xl ${
+          className={`text-hanaGreen font-hana2 relative top-4 text-4xl ${
             passwordMatch ? "" : "hidden"
           }`}
         >
           비밀번호가 일치합니다.
-        </p>
+        </span>
 
         <div className="flex justify-center items-center">
           <button

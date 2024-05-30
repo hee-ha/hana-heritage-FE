@@ -74,22 +74,30 @@ function AccountInquiry() {
   return (
     <div className="px-24">
       <section>
-        <header className="flex justify-between items-center pt-10 pb-10">
+        <header className="flex justify-between items-center pt-10 pb-10 border-b border-hanaGreen ">
           <h1 className="text-6xl font-hana2 font-medium">
-            계좌 조회 페이지 입니다.
+            <span className="text-hanaGreen">계좌 조회</span> 페이지 입니다.
           </h1>
         </header>
 
-        <div className="px-20 mb-8 mt-8 d-flex flex-column">
+        <div className="px-12 pt-8 mb-8 mt-8 flex flex-col border-b border-r border-hanaGreen shadow shadow-hanaGreen h-72">
           <div>
-            <h1 className="text-5xl font-hana2 mb-5">황혜림 고객님,</h1>
-            <h2 className="text-3xl font-hana2 mb-3 ">
+            <h1 className="text-5xl font-hana2 mb-5">
+              <span className="font-semibold text-hanaGreen">황혜림</span>{" "}
+              고객님,
+            </h1>
+            <h2 className="text-3xl font-hana2 mb-3">
               매일 매일 좋은일만 가득하세요.
             </h2>
           </div>
-          <div className="text-right">
+          <div className="flex-grow"></div>{" "}
+          {/* 자식 요소들 사이의 공간을 채우기 위한 요소 */}
+          <div className="text-right mb-4">
             <h2 className="text-4xl font-hana2">
-              총 잔액: {totalBalance.toFixed(2)}
+              총 잔액:{" "}
+              <span className="font-semibold text-hanaGreen">
+                {totalBalance.toFixed(0)} 원
+              </span>
             </h2>
           </div>
         </div>

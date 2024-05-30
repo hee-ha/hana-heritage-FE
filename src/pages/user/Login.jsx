@@ -25,11 +25,11 @@ function Login() {
           로그인 화면으로 이동합니다
         </h1>
       ) : (
-        <div className="container mx-auto p-10 mt-6 mb-6 bg-white rounded-xl shadow-xl">
+        <div className="container mx-auto p-8 mb-12 bg-white rounded-xl shadow-xl">
           <header className="text-center">
-            <h2 className="font-hana2 font-semibold text-6xl py-10 ">로그인</h2>
+            <h2 className="font-hana2 font-semibold text-6xl py-8 ">로그인</h2>
           </header>
-          <form className="space-y-12">
+          <form className="space-y-20 mt-12">
             <div className="relative h-16 w-full min-w-[200px]">
               <input
                 placeholder=""
