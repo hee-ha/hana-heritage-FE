@@ -44,7 +44,7 @@ function AutoTransfer() {
     <div className="px-24">
       <header className="sectionHead">
         <h2 className="font-hana2 font-semibold text-6xl z-10">
-          자동이체 등록
+          <span className="text-hanaGreen">자동이체</span>를 등록합니다.
         </h2>
         <hr />
       </header>
@@ -175,8 +175,8 @@ function AutoTransfer() {
           className="w-full text-3xl font-noto border border-gray-300 rounded-md"
         />
       </div>
-      <Link to={{ pathname: "/transfer-view", state: { data: formData } }}>
-        <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+      <Link to={{ pathname: "/transfer/confirm", state: { data: formData } }}>
+        <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
           다음
         </button>
       </Link>
