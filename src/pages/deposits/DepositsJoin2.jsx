@@ -181,16 +181,6 @@ function DepositsJoin2() {
               className="w-full p-2 border rounded mt-2"
             />
           </div>
-          {/* <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
-            <label>이메일주소</label>
-            <input
-              type="email"
-              placeholder="예시) he******@naver.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border rounded mt-2"
-            />
-          </div> */}
         </div>
 
         <div className="mb-6 rounded-lg overflow-hidden">
@@ -248,16 +238,107 @@ function DepositsJoin2() {
                 정정
               </button>
             </div>
-            {/* <input
-              type="text"
-              value={newAmount}
-              onChange={(e) => setNewAmount(e.target.value)}
-              className="w-full p-2 border rounded mt-2"
-            /> */}
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
             <label>가입기간</label>
             <div className="flex space-x-4 mt-2">
+              <ul className="grid w-full gap-6 md:grid-cols-3">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small"
+                    name="hosting"
+                    value="hosting-small"
+                    className="hidden peer"
+                    onChange={(e) => setSubscriptionPeriod(e.target.value)}
+                    required
+                  />
+                  <label
+                    for="hosting-small"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">1년</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-medium"
+                    name="hosting"
+                    value="hosting-medium"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-medium"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">2년</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big"
+                    name="hosting"
+                    value="hosting-big"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-big"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">3년</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            {/* <div className="flex space-x-4 mt-2">
               <button
                 type="button"
                 onClick={() => setSubscriptionPeriod("1년")}
@@ -303,7 +384,7 @@ function DepositsJoin2() {
               >
                 3년
               </button>
-            </div>
+            </div> */}
             {tooltip.visible && (
               <div
                 style={{
@@ -326,7 +407,70 @@ function DepositsJoin2() {
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
             <label>적립방법</label>
             <div className="flex space-x-4 mt-2">
-              <button
+              <ul className="grid w-full gap-6 md:grid-cols-2">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small2"
+                    name="hosting2"
+                    value="hosting-small2"
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    for="hosting-small2"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">정액적립식</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big2"
+                    name="hosting2"
+                    value="hosting-big2"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-big2"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">자유적립식</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
+              {/* <button
                 type="button"
                 onClick={() => setDepositMethod("정액적립식")}
                 className={`p-2 border rounded ${
@@ -347,10 +491,10 @@ function DepositsJoin2() {
                 }`}
               >
                 자유적립식
-              </button>
+              </button> */}
             </div>
           </div>
-          <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+          {/* <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
             <label htmlFor="autoTransferYes" className="cursor-pointer mr-4">
               <input
                 id="autoTransferYes"
@@ -373,6 +517,78 @@ function DepositsJoin2() {
               />
               자동이체 신청 안함
             </label>
+          </div> */}
+          <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+            <label>자동이체</label>
+            <div className="flex space-x-4 mt-2">
+              <ul className="grid w-full gap-6 md:grid-cols-2">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small3"
+                    name="hosting3"
+                    value="hosting-small3"
+                    className="hidden peer"
+                    onChange={() => setAutoTransfer(true)}
+                    checked={autoTransfer === true}
+                    required
+                  />
+                  <label
+                    for="hosting-small3"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">자동이체 신청</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big3"
+                    name="hosting3"
+                    value="hosting-big3"
+                    className="hidden peer"
+                    onChange={() => setAutoTransfer(false)}
+                    checked={autoTransfer === false}
+                  />
+                  <label
+                    for="hosting-big3"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">자동이체 신청안함</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {autoTransfer && (
@@ -464,7 +680,7 @@ function DepositsJoin2() {
                   className="w-full p-2 border rounded mt-2"
                 />
               </div>
-              <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+              {/* <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 지정일</label>
                 <div className="flex space-x-4 mt-2">
                   <button
@@ -501,11 +717,128 @@ function DepositsJoin2() {
                     20일
                   </button>
                 </div>
+              </div> */}
+              <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+                <label>자동이체 지정일</label>
+                <div className="flex space-x-4 mt-2">
+                  <ul className="grid w-full gap-6 md:grid-cols-3">
+                    <li>
+                      <input
+                        type="radio"
+                        id="hosting-small4"
+                        name="hosting4"
+                        value="hosting-small4"
+                        className="hidden peer"
+                        required
+                      />
+                      <label
+                        for="hosting-small4"
+                        className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                      >
+                        <div className="block">
+                          <div className="w-full">18일</div>
+                        </div>
+                        <svg
+                          className="h-8 w-8 rtl:rotate-180"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </label>
+                    </li>
+                    <li>
+                      <input
+                        type="radio"
+                        id="hosting-medium4"
+                        name="hosting4"
+                        value="hosting-medium4"
+                        className="hidden peer"
+                      />
+                      <label
+                        for="hosting-medium4"
+                        className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                      >
+                        <div className="block">
+                          <div className="w-full">19일</div>
+                        </div>
+                        <svg
+                          className="h-8 w-8 rtl:rotate-180"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </label>
+                    </li>
+                    <li>
+                      <input
+                        type="radio"
+                        id="hosting-big4"
+                        name="hosting4"
+                        value="hosting-big4"
+                        className="hidden peer"
+                      />
+                      <label
+                        for="hosting-big4"
+                        className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                      >
+                        <div className="block">
+                          <div className="w-full">20일</div>
+                        </div>
+                        <svg
+                          className="h-8 w-8 rtl:rotate-180"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+
+                {tooltip.visible && (
+                  <div
+                    style={{
+                      display: "inline-block",
+                      top: tooltip.y,
+                      left: tooltip.x,
+                      backgroundColor: "#B5B5B5",
+                      border: "1px solid #ccc",
+                      padding: "5px",
+                      borderRadius: "5px",
+                      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                      zIndex: 10,
+                    }}
+                  >
+                    {tooltip.text}
+                  </div>
+                )}
               </div>
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 간격</label>
-                <div className="flex space-x-4 mt-2">
-                  <button
+                <div className="flex space-x-4 mt-2 text-hanaGreen">
+                  <p>1 개월</p>
+                  {/* <button
                     type="button"
                     onClick={() => setAutoTransferInterval("1개월")}
                     className={`p-2 border rounded ${
@@ -526,12 +859,12 @@ function DepositsJoin2() {
                     }`}
                   >
                     2개월
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
           )}
-          <div className="p-4 mt-4 border-b border-gray-300 text-4xl font-hana2">
+          {/* <div className="p-4 mt-4 border-b border-gray-300 text-4xl font-hana2">
             <label>만기해지구분</label>
             <div className="flex space-x-4 mt-2">
               <button
@@ -557,8 +890,147 @@ function DepositsJoin2() {
                 만기시 자동해지
               </button>
             </div>
+          </div> */}
+
+          <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+            <label>만기해지구분</label>
+            <div className="flex space-x-4 mt-2">
+              <ul className="grid w-full gap-6 md:grid-cols-2">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small6"
+                    name="hosting6"
+                    value="hosting-small6"
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    for="hosting-small6"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">직접해지</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big6"
+                    name="hosting6"
+                    value="hosting-big6"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-big6"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">만기시 자동해지</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="p-4 mt-4 border-b border-gray-300 text-4xl font-hana2">
+
+          <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+            <label>자동해지시점</label>
+            <div className="flex space-x-4 mt-2">
+              <ul className="grid w-full gap-6 md:grid-cols-2">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small5"
+                    name="hosting5"
+                    value="hosting-small5"
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    for="hosting-small5"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">만기일</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big5"
+                    name="hosting5"
+                    value="hosting-big5"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-big5"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">이연만기일</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* <div className="p-4 mt-4 border-b border-gray-300 text-4xl font-hana2">
             <label>자동해지시점</label>
             <div className="flex space-x-4 mt-2">
               <button
@@ -584,8 +1056,9 @@ function DepositsJoin2() {
                 이연만기일
               </button>
             </div>
-          </div>
-          <div className="p-4 mt-4 text-4xl font-hana2">
+          </div> */}
+
+          {/* <div className="p-4 mt-4 text-4xl font-hana2">
             <label>예/적금 만기 SMS 통보</label>
             <div className="flex space-x-4 mt-2">
               <button
@@ -610,6 +1083,75 @@ function DepositsJoin2() {
               >
                 신청안함
               </button>
+            </div>
+          </div> */}
+
+          <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+            <label>예/적금 만기 SMS 통보</label>
+            <div className="flex space-x-4 mt-2">
+              <ul className="grid w-full gap-6 md:grid-cols-2">
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-small7"
+                    name="hosting7"
+                    value="hosting-small7"
+                    className="hidden peer"
+                    required
+                  />
+                  <label
+                    for="hosting-small7"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">신청함</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="hosting-big7"
+                    name="hosting7"
+                    value="hosting-big7"
+                    className="hidden peer"
+                  />
+                  <label
+                    for="hosting-big7"
+                    className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                  >
+                    <div className="block">
+                      <div className="w-full">신청안함</div>
+                    </div>
+                    <svg
+                      className="h-8 w-8 rtl:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </label>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
