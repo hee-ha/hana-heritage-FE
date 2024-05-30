@@ -74,32 +74,34 @@ function AccountInquiry() {
   return (
     <div className="px-24">
       <section>
-        <header className="flex justify-between items-center pt-10">
-          <h1 className="text-5xl font-hana2 font-medium">계좌 조회</h1>
+        <header className="flex justify-between items-center pt-10 pb-10">
+          <h1 className="text-6xl font-hana2 font-medium">
+            계좌 조회 페이지 입니다.
+          </h1>
         </header>
 
         <div className="px-20 mb-8 mt-8 d-flex flex-column">
           <div>
-            <h1 className="text-3xl font-hana2 mb-5">김할배 고객님,</h1>
-            <h2 className="text-2xl font-hana2 mb-3 ">
+            <h1 className="text-5xl font-hana2 mb-5">황혜림 고객님,</h1>
+            <h2 className="text-3xl font-hana2 mb-3 ">
               매일 매일 좋은일만 가득하세요.
             </h2>
           </div>
           <div className="text-right">
-            <h2 className="text-3xl font-bold font-hana2">
+            <h2 className="text-4xl font-hana2">
               총 잔액: {totalBalance.toFixed(2)}
             </h2>
           </div>
         </div>
       </section>
-      <section className="my-4">
+      <section className="my-4 py-4">
         <div className="mb-8">
           <div className="flex justify-between items-center">
-            <h2 className="text-3xl font-semibold pb-5">
+            <h2 className="text-5xl font-semibold pb-5">
               예금({accounts.예금.length})
             </h2>
             <button
-              className="bg-hanaGreen px-4 py-2 rounded"
+              className="bg-hanaRed px-4 py-2 rounded"
               onClick={() => setShowDeposit(!showDeposit)}
             >
               {showDeposit ? (
@@ -148,11 +150,11 @@ function AccountInquiry() {
 
         <div className="mb-8">
           <div className="flex justify-between items-center">
-            <h2 className="text-3xl font-semibold pb-5">
+            <h2 className="text-5xl font-semibold pb-5">
               적금({accounts.적금.length})
             </h2>
             <button
-              className="bg-hanaGreen px-4 py-2 rounded"
+              className="bg-hanaRed px-4 py-2 rounded"
               onClick={() => setShowSavings(!showSavings)}
             >
               {showSavings ? (
@@ -201,11 +203,11 @@ function AccountInquiry() {
 
         <div className="mb-8">
           <div className="flex justify-between items-center">
-            <h2 className="text-3xl font-semibold pb-5">
+            <h2 className="text-5xl font-semibold pb-5">
               입출금({accounts.입출금.length})
             </h2>
             <button
-              className="bg-hanaGreen px-4 py-2 rounded"
+              className="bg-hanaRed px-4 py-2 rounded"
               onClick={() => setShowChecking(!showChecking)}
             >
               {showChecking ? (
