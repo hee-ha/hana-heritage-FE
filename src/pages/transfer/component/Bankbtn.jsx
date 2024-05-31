@@ -98,9 +98,9 @@ function BankButtons() {
         {banks.slice(0, 4).map((bank, index) => (
           <button
             key={index}
-            className={`font-hana2 hover:border-hanaGreen flex-1 text-3xl text-black bg-white p-2 rounded-md border mx-1 ${
+            className={`font-hana2 hover:border-hanaRed flex-1 text-3xl text-black bg-white p-2 rounded-md border-2 mx-1 ${
               selectedBank === bank.name
-                ? "border-hanaGreen"
+                ? "border-2 border-hanaRed"
                 : "border-gray-300"
             }`}
             onClick={() => handleBankClick(bank)}
@@ -120,9 +120,9 @@ function BankButtons() {
           {banks.slice(4).map((bank, index) => (
             <button
               key={index}
-              className={`font-hana2 flex-1 hover:border-hanaGreen text-3xl text-black bg-white p-2 rounded-md border mx-1 ${
+              className={`font-hana2 flex-1 hover:border-hanaRed text-3xl text-black bg-white p-2 rounded-md border-2 mx-1 ${
                 selectedBank === bank.name
-                  ? "border-hanaGreen"
+                  ? "border-2 border-hanaRed"
                   : "border-gray-300"
               }`}
               onClick={() => handleBankClick(bank)}
@@ -142,7 +142,7 @@ function BankButtons() {
         className="transferbtn bg-hanaGreen active:border-hanaGreen w-full font-hana2 text-3xl text-white text-500 mt-6"
         onClick={() => setShowMoreBanks(!showMoreBanks)}
       >
-        은행 더보기 {showMoreBanks ? "▲" : "▼"}
+        은행 더보기{showMoreBanks ? "▲" : "▼"}
       </button>
     </>
   );

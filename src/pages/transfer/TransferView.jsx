@@ -1,11 +1,13 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function TransferView() {
   return (
     <div className="px-24">
       <header className="sectionHead">
-        <h2 className="font-hana2 font-semibold text-6xl z-10">돈 보내기</h2>
+        <h2 className="font-hana2 font-semibold text-6xl z-10">
+          작성하신 이체 정보입니다.
+        </h2>
         <hr />
       </header>
       <main className="flex flex-col items-center flex-grow p-4">
@@ -48,7 +50,7 @@ function TransferView() {
             </div>
           </div>
         </div>
-        <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaGreen py-3 px-8 z-10 mt-6 transition-transform transform hover:animate-bubbly rounded-lg">
+        <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
           김하나님께 이체
         </button>
       </main>
