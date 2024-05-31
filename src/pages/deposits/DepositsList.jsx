@@ -104,7 +104,7 @@ function DepositsList() {
 							<button
 								onClick={navigateToPurchase}
 								type="submit"
-								className="w-1/5 text-white font-hana2 font-semibold text-3xl bg-hanaGreen py-3 px-8 z-10 transition-transform transform hover:animate-bubbly rounded-lg ml-4 mt-3"
+								className="w-1/5 text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
 							>
 								가입하기
 							</button>
