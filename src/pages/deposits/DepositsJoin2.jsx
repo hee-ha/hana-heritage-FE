@@ -1310,22 +1310,20 @@ function DepositsJoin2() {
           </button>
         </div> */}
 
-        <div className="flex justify-between space-x-5">
-          
-          <button
-            onClick={() => navigate("/deposits/join/1")}
-            className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
-          >
-            뒤로
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
-          >
-            다음
-          </button>
-          
-        </div>
+        
+
+			<div className="flex justify-between">
+				<Link to={"/deposits/join/3"} className="flex-grow">
+					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						다음
+					</button>
+				</Link>
+				<Link to={"/deposits"} className="flex-grow ml-4">
+					<button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+						취소
+					</button>
+				</Link>
+			</div>
       </form>
     </div>
   );
