@@ -26,7 +26,7 @@ const Button = ({
     "font-semibold z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg",
     {
       "cursor-not-allowed": isDisabled,
-    }
+    },
   );
 
   return (

@@ -1311,7 +1311,6 @@ function DepositsJoin2() {
         </div> */}
 
         <div className="flex justify-between space-x-5">
-          
           <button
             onClick={() => navigate("/deposits/join/1")}
             className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
@@ -1324,7 +1323,6 @@ function DepositsJoin2() {
           >
             다음
           </button>
-          
         </div>
       </form>
     </div>
