@@ -117,3 +117,23 @@ code {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* 검은 마스크, 불투명도 50% */
 }
+
+.bg-landing2 {
+  position: relative;
+  min-height: 100vh;
+  background-image: url("../../public/images/senior2.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 0 !important;
+}
+
+.bg-landing2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 검은 마스크, 불투명도 50% */
+}

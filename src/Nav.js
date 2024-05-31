@@ -16,7 +16,7 @@ const Nav = () => {
       </div>
       <div className="text-center">
         <Link
-          to="/account/creation"
+          to="/account/creation/1"
           className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-bold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
           aria-current="page"
         >
