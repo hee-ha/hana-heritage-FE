@@ -1,22 +1,19 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 
 function DepositsJoin3() {
   const location = useLocation();
   const formData = location.state?.formData || {};
-
+  console.log(location);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {
-      
-    };
+    const formData = {};
     navigate("/deposits/join/4", { state: { formData } });
   };
-
+  console.log(formData);
   return (
     <div className="mx-auto px-24 rounded-lg border-2 border-gray-300 p-4">
       <h1 className="text-2xl font-bold text-center mb-4">
@@ -151,7 +148,7 @@ function DepositsJoin3() {
         <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
           <label>예/적금 만기 SMS 통보: {formData.smsNotification}</label>
         </div>
-        {formData.petDoc && (
+        {/* {formData.petDoc && (
           <>
             <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
               <label>반려동물 이름: {formData.petName}</label>
@@ -162,16 +159,38 @@ function DepositsJoin3() {
               </label>
             </div>
           </>
-        )}
+        )} */}
+        <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+          <label>반려동물 이름: {formData.petName}</label>
+        </div>
+        <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+          <label>반려동물 배상책임보험서비스 가입: {formData.insurance}</label>
+        </div>
       </div>
-      <form className="flex justify-center" onSubmit={handleSubmit}>
+      {/* <form className="flex justify-center" onSubmit={handleSubmit}>
         <button
           type="submit"
           className="p-3 bg-[#008485] text-white font-hana2 rounded hover:bg-[#007373]"
         >
           확인
         </button>
-      </form>
+      </form> */}
+
+      <div className="flex justify-between space-x-5">
+        
+      <button
+            onClick={() => navigate("/deposits/join/2")}
+            className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
+            뒤로
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
+            다음
+          </button>
+      </div>
     </div>
   );
 }
