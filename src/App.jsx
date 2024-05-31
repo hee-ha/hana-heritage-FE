@@ -26,11 +26,13 @@ import {
 
 import "./styles/globals.css";
 import "./styles/transaction.css";
+import ScrollToTop from "./components/common/route/ScrollToTop";
 
 function App() {
   return (
     <RecoilRoot>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
