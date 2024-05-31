@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function DepositsJoin2() {
   const [accountNumber, setAccountNumber] = useState("");
@@ -48,7 +48,7 @@ function DepositsJoin2() {
       autoTransferAmount,
       autoTransferStartDate,
       autoTransferDay,
-      autoTransferInterval,
+      // autoTransferInterval,
       expiryHandling,
       autoTermination,
       smsNotification,
@@ -56,6 +56,7 @@ function DepositsJoin2() {
       petName,
       insurance,
     };
+
     navigate("/deposits/join/3", { state: { formData } });
   };
 
@@ -248,9 +249,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-small"
                     name="hosting"
-                    value="hosting-small"
+                    value={subscriptionPeriod}
                     className="hidden peer"
-                    onChange={(e) => setSubscriptionPeriod(e.target.value)}
+                    onChange={(e) => setSubscriptionPeriod("1년")}
                     required
                   />
                   <label
@@ -280,8 +281,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-medium"
                     name="hosting"
-                    value="hosting-medium"
+                    value={subscriptionPeriod}
                     className="hidden peer"
+                    onChange={(e) => setSubscriptionPeriod("2년")}
                   />
                   <label
                     for="hosting-medium"
@@ -310,8 +312,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-big"
                     name="hosting"
-                    value="hosting-big"
+                    value={subscriptionPeriod}
                     className="hidden peer"
+                    onChange={(e) => setSubscriptionPeriod("3년")}
                   />
                   <label
                     for="hosting-big"
@@ -413,8 +416,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-small2"
                     name="hosting2"
-                    value="hosting-small2"
+                    value={depositMethod}
                     className="hidden peer"
+                    onChange={(e) => setDepositMethod("정액적립식")}
                     required
                   />
                   <label
@@ -444,8 +448,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-big2"
                     name="hosting2"
-                    value="hosting-big2"
+                    value={depositMethod}
                     className="hidden peer"
+                    onChange={(e) => setDepositMethod("자유적립식")}
                   />
                   <label
                     for="hosting-big2"
@@ -609,7 +614,7 @@ function DepositsJoin2() {
                 <input
                   type="password"
                   value={autoTransferPassword}
-                  onChange={(e) => setAutoTransferPassword(e.target.value)}
+                  // onChange={(e) => setAutoTransferPassword(e.target.value)}
                   className="w-full p-2 border rounded mt-2"
                 />
               </div>
@@ -676,7 +681,7 @@ function DepositsJoin2() {
                 <input
                   type="text"
                   value={autoTransferStartDate}
-                  onChange={(e) => setAutoTransferStartDate(e.target.value)}
+                  onChange={(e) => setAutoTransferStartDate(e.target.value)} //자동이체 테이블에 저장?
                   className="w-full p-2 border rounded mt-2"
                 />
               </div>
@@ -718,8 +723,9 @@ function DepositsJoin2() {
                   </button>
                 </div>
               </div> */}
-              <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+              {/* <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 지정일</label>
+                자동이체 테이블에 저장?
                 <div className="flex space-x-4 mt-2">
                   <ul className="grid w-full gap-6 md:grid-cols-3">
                     <li>
@@ -729,6 +735,7 @@ function DepositsJoin2() {
                         name="hosting4"
                         value="hosting-small4"
                         className="hidden peer"
+                        onChange={(e) => setAutoTransferDay(e.target.value)} //자동이체 테이블에 저장?
                         required
                       />
                       <label
@@ -760,6 +767,7 @@ function DepositsJoin2() {
                         name="hosting4"
                         value="hosting-medium4"
                         className="hidden peer"
+                        onChange={(e) => setAutoTransferDay(e.target.value)}
                       />
                       <label
                         for="hosting-medium4"
@@ -790,6 +798,7 @@ function DepositsJoin2() {
                         name="hosting4"
                         value="hosting-big4"
                         className="hidden peer"
+                        onChange={(e) => setAutoTransferDay(e.target.value)}
                       />
                       <label
                         for="hosting-big4"
@@ -833,7 +842,7 @@ function DepositsJoin2() {
                     {tooltip.text}
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 간격</label>
                 <div className="flex space-x-4 mt-2 text-hanaGreen">
@@ -901,8 +910,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-small6"
                     name="hosting6"
-                    value="hosting-small6"
+                    value={expiryHandling}
                     className="hidden peer"
+                    onChange={(e) => setExpiryHandling("직접해지")}
                     required
                   />
                   <label
@@ -932,8 +942,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-big6"
                     name="hosting6"
-                    value="hosting-big6"
+                    value={expiryHandling}
                     className="hidden peer"
+                    onChange={(e) => setExpiryHandling("만기시 자동해지")}
                   />
                   <label
                     for="hosting-big6"
@@ -970,8 +981,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-small5"
                     name="hosting5"
-                    value="hosting-small5"
+                    value={autoTermination}
                     className="hidden peer"
+                    onChange={(e) => setAutoTermination("만기일")}
                     required
                   />
                   <label
@@ -1001,8 +1013,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-big5"
                     name="hosting5"
-                    value="hosting-big5"
+                    value={autoTermination}
                     className="hidden peer"
+                    onChange={(e) => setAutoTermination("이연만기일")}
                   />
                   <label
                     for="hosting-big5"
@@ -1095,8 +1108,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-small7"
                     name="hosting7"
-                    value="hosting-small7"
+                    value={smsNotification}
                     className="hidden peer"
+                    onChange={(e) => setSmsNotification("신청함")}
                     required
                   />
                   <label
@@ -1126,8 +1140,9 @@ function DepositsJoin2() {
                     type="radio"
                     id="hosting-big7"
                     name="hosting7"
-                    value="hosting-big7"
+                    value={smsNotification}
                     className="hidden peer"
+                    onChange={(e) => setSmsNotification("신청안함")}
                   />
                   <label
                     for="hosting-big7"
@@ -1166,7 +1181,7 @@ function DepositsJoin2() {
           />
           <label
             htmlFor="petDocument"
-            className={`cursor-pointer inline-block px-6 py-2 text-center rounded border-2 bg-[#AD9A5F] focus:outline-none focus:ring-2 focus:ring-[#008485] focus:border-[#008485]`}
+            className={`cursor-pointer inline-block px-6 py-6 text-center rounded border-2 bg-[#AD9A5F] focus:outline-none focus:ring-2 focus:ring-[#008485] focus:border-[#008485]`}
             onClick={() => setShowModal(true)}
             style={{ outline: "none" }}
             tabIndex={0}
@@ -1175,10 +1190,10 @@ function DepositsJoin2() {
           </label>
 
           {showModal && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
               <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full max-h-[80vh] overflow-auto">
                 <h2 className="text-2xl font-bold mb-4">펫사랑 서약서</h2>
-                <div className="mt-4">
+                <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                   <label className="block mb-2">반려동물 이름 작성하기</label>
                   <input
                     type="text"
@@ -1187,7 +1202,77 @@ function DepositsJoin2() {
                     className="w-full p-2 border rounded"
                   />
                 </div>
-                <div className="mt-4">
+                <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+                  <label>반려동물 배상책임보험서비스 가입</label>
+                  <div className="flex space-x-4 mt-2">
+                    <ul className="grid w-full gap-6 md:grid-cols-2">
+                      <li>
+                        <input
+                          type="radio"
+                          id="hosting-small8"
+                          name="hosting8"
+                          value={insurance}
+                          className="hidden peer"
+                          onChange={(e) => setInsurance("신청함")}
+                          required
+                        />
+                        <label
+                          for="hosting-small8"
+                          className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                        >
+                          <div className="block">
+                            <div className="w-full">신청함</div>
+                          </div>
+                          <svg
+                            className="h-8 w-8 rtl:rotate-180"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </label>
+                      </li>
+                      <li>
+                        <input
+                          type="radio"
+                          id="hosting-big8"
+                          name="hosting8"
+                          value={insurance}
+                          className="hidden peer"
+                          onChange={(e) => setInsurance("신청안함")}
+                        />
+                        <label
+                          for="hosting-big8"
+                          className="inline-flex items-center justify-between w-full p-5 text-hanaRed bg-white border-2 border-hanaRed rounded-lg cursor-pointer peer-checked:bg-hanaRed peer-checked:text-white hover:bg-gray-100"
+                        >
+                          <div className="block">
+                            <div className="w-full">신청안함</div>
+                          </div>
+                          <svg
+                            className="h-8 w-8 rtl:rotate-180"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* <div className="mt-4">
                   <label className="block mb-2">
                     반려동물 배상책임보험서비스 가입
                   </label>
@@ -1215,7 +1300,8 @@ function DepositsJoin2() {
                       신청안함
                     </button>
                   </div>
-                </div>
+                  
+                </div> */}
                 <div className="mt-4 flex justify-end">
                   <button
                     onClick={() => {
@@ -1224,7 +1310,7 @@ function DepositsJoin2() {
                     }}
                     className="p-2 bg-gray-500 text-white rounded hover:bg-gray-600"
                   >
-                    닫기
+                    확인
                   </button>
                 </div>
               </div>
@@ -1232,7 +1318,7 @@ function DepositsJoin2() {
           )}
         </div>
 
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <button
             type="submit"
             className="p-3 bg-[#008485] text-white font-hana2 rounded hover:bg-[#007373]"
@@ -1245,6 +1331,26 @@ function DepositsJoin2() {
           >
             취소
           </button>
+        </div> */}
+
+        <div className="flex justify-between">
+          {/* <Link to="/deposits/join/3" className="flex-grow"> */}
+          
+          {/* </Link> */}
+          {/* <Link to="/deposits/join/1" className="flex-grow ml-4"> */}
+          <button
+            onClick={() => navigate("/deposits/join/1")}
+            className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
+            뒤로
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
+            다음
+          </button>
+          {/* </Link> */}
         </div>
       </form>
     </div>
