@@ -18,8 +18,8 @@ function Register() {
     <div>
       {showMessage ? (
         <div className="flex items-center justify-center h-screen">
-          <h1 className="text-4xl font-hana2 font-semibold">
-            본인확인 되었습니다
+          <h1 className="text-6xl font-hana2 font-semibold">
+            본인확인 되었습니다.
           </h1>
         </div>
       ) : !isIdentified ? (
