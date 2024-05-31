@@ -14,7 +14,7 @@ const Dropdown = (props) => {
       setRepeat(
         setTimeout(() => {
           setVisibilityAnimation(false);
-        }, 300) // 변경된 duration 값 반영
+        }, 300), // 변경된 duration 값 반영
       );
     }
   }, [props.visibility]);

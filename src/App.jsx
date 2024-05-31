@@ -29,15 +29,16 @@ import {
 
 import "./styles/globals.css";
 import "./styles/transaction.css";
+import ScrollToTop from "./components/common/route/ScrollToTop";
 
 function App() {
-	return (
-		<RecoilRoot>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<Home />} />
-
+  return (
+    <RecoilRoot>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
 						{/* 유저 */}
 						<Route path="register" element={<Register />} />
 						<Route path="login" element={<Login />} />

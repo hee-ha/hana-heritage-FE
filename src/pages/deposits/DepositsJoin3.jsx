@@ -175,7 +175,6 @@ function DepositsJoin3() {
           확인
         </button>
       </form> */}
-
 			<div className="flex justify-between">
 				<Link to={"/deposits/join/4"} className="flex-grow">
 					<button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
