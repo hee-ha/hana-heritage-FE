@@ -176,18 +176,20 @@ function DepositsJoin3() {
         </button>
       </form> */}
 
-      <div className="flex justify-between">
+      <div className="flex justify-between space-x-5">
         
-        <Link to="/deposits/join/2" className="flex-grow ml-4">
-          <button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+      <button
+            onClick={() => navigate("/deposits/join/2")}
+            className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
             뒤로
           </button>
-        </Link>
-        <Link to="/deposits/join/4" className="flex-grow">
-          <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
             다음
           </button>
-        </Link>
       </div>
     </div>
   );

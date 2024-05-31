@@ -9,7 +9,7 @@ function DepositsJoin2() {
   const [newAmount, setNewAmount] = useState("");
   const [subscriptionPeriod, setSubscriptionPeriod] = useState("1년");
   const [depositMethod, setDepositMethod] = useState("정액적립식");
-  const [autoTransfer, setAutoTransfer] = useState(false);
+  const [autoTransfer, setAutoTransfer] = useState(true);
   const [autoTransferAccount, setAutoTransferAccount] = useState("");
   const [autoTransferPassword, setAutoTransferPassword] = useState("");
   const [autoTransferAmount, setAutoTransferAmount] = useState("");
@@ -160,8 +160,8 @@ function DepositsJoin2() {
       </ol>
 
       <form className="rounded-lg" onSubmit={handleSubmit}>
-        <div className="mb-6 rounded-lg overflow-hidden">
-          <div className="bg-[#AD9A5F] p-4 text-4xl h-16 rounded-t-lg font-hana2">
+        <div className="space-y-10 mb-10 rounded-lg overflow-hidden">
+          <div className="bg-hanaGold text-white p-5 text-5xl rounded-t-lg font-hana2">
             기본정보
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
@@ -170,7 +170,7 @@ function DepositsJoin2() {
               type="text"
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
-              className="w-full p-2 border rounded mt-2"
+              className="w-full p-5 border rounded mt-2"
             />
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
@@ -179,65 +179,54 @@ function DepositsJoin2() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border rounded mt-2"
+              className="w-full p-5 border rounded mt-2"
             />
           </div>
         </div>
 
-        <div className="mb-6 rounded-lg overflow-hidden">
-          <div className="bg-[#AD9A5F] p-4 text-4xl h-16 rounded-t-lg font-hana2">
+        <div className="space-y-10 mb-6 rounded-lg overflow-hidden">
+          <div className="bg-hanaGold text-white p-5 text-5xl rounded-t-lg font-hana2">
             상품정보
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
             <label className="text-4xl">신규금액</label>
-            <div className="flex items-center space-x-4">
-              <div className="relative w-full">
+            <div className="grid w-full gap-6 grid-cols-2">
+              <div className="relative ">
                 <input
                   type="text"
                   value={newAmount}
                   onChange={(e) => setNewAmount(e.target.value)}
-                  className="w-full p-2 border rounded text-right pr-16"
+                  className="w-full p-5 border rounded text-right pr-16"
                   placeholder="10만원 이상~50만원 이하"
                 />
                 <span className="absolute right-4 top-1/2 transform -translate-y-1/2">
                   원
                 </span>
               </div>
-              <button
-                type="button"
-                onClick={() => addAmount(500000, setNewAmount)}
-                className="p-2 border rounded bg-yellow-200"
-              >
-                +50만원
-              </button>
-              <button
-                type="button"
-                onClick={() => addAmount(100000, setNewAmount)}
-                className="p-2 border rounded bg-yellow-200"
-              >
-                +10만원
-              </button>
-              <button
-                type="button"
-                onClick={() => addAmount(50000, setNewAmount)}
-                className="p-2 border rounded bg-yellow-200"
-              >
-                +5만원
-              </button>
-              <button
-                type="button"
-                onClick={() => addAmount(10000, setNewAmount)}
-                className="p-2 border rounded bg-yellow-200"
-              >
-                +1만원
-              </button>
-              <button
-                type="button"
-                onClick={() => setNewAmount("")}
-                className="p-2 border rounded bg-yellow-200"
-              >
-                정정
-              </button>
+              <div className="grid w-full gap-6 grid-cols-3">
+                <button
+                  type="button"
+                  onClick={() => addAmount(100000, setNewAmount)}
+                  className="p-2 border rounded bg-hanaGreen text-white C"
+                >
+                  +10만원
+                </button>
+                <button
+                  type="button"
+                  onClick={() => addAmount(50000, setNewAmount)}
+                  className="p-2 border rounded bg-hanaGreen text-white right"
+                >
+                  +5만원
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setNewAmount("")}
+                  className="p-2 border rounded bg-hanaGreen text-white right"
+                >
+                  지우기
+                </button>
+              </div>
             </div>
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
@@ -620,7 +609,7 @@ function DepositsJoin2() {
               </div>
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 금액</label>
-                <div className="flex items-center space-x-4">
+                <div className="grid w-full gap-6 grid-cols-2">
                   <div className="relative w-full">
                     <input
                       type="text"
@@ -633,41 +622,30 @@ function DepositsJoin2() {
                       원
                     </span>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => addAmount(500000, setAutoTransferAmount)}
-                    className="p-2 border rounded bg-yellow-200"
-                  >
-                    +50만원
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => addAmount(100000, setAutoTransferAmount)}
-                    className="p-2 border rounded bg-yellow-200"
-                  >
-                    +10만원
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => addAmount(50000, setAutoTransferAmount)}
-                    className="p-2 border rounded bg-yellow-200"
-                  >
-                    +5만원
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => addAmount(10000, setAutoTransferAmount)}
-                    className="p-2 border rounded bg-yellow-200"
-                  >
-                    +1만원
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAutoTransferAmount("")}
-                    className="p-2 border rounded bg-yellow-200"
-                  >
-                    정정
-                  </button>
+                  <div class="grid w-full gap-6 grid-cols-3">
+                    <button
+                      type="button"
+                      onClick={() => addAmount(100000, setAutoTransferAmount)}
+                      className="p-2 border rounded bg-hanaGreen text-white"
+                    >
+                      +10만원
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => addAmount(50000, setAutoTransferAmount)}
+                      className="p-2 border rounded bg-hanaGreen text-white"
+                    >
+                      +5만원
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setAutoTransferAmount("")}
+                      className="p-2 border rounded bg-hanaGreen text-white"
+                    >
+                      지우기
+                    </button>
+                  </div>
                 </div>
                 {/* <input
                   type="text"
@@ -1181,9 +1159,8 @@ function DepositsJoin2() {
           />
           <label
             htmlFor="petDocument"
-            className={`cursor-pointer inline-block px-6 py-6 text-center rounded border-2 bg-[#AD9A5F] focus:outline-none focus:ring-2 focus:ring-[#008485] focus:border-[#008485]`}
+            className="text-white text-5xl w-full cursor-pointer inline-block p-5 text-center rounded border-2 bg-hanaGold focus:outline-none "
             onClick={() => setShowModal(true)}
-            style={{ outline: "none" }}
             tabIndex={0}
           >
             펫사랑 서약서 작성하기
@@ -1333,11 +1310,8 @@ function DepositsJoin2() {
           </button>
         </div> */}
 
-        <div className="flex justify-between">
-          {/* <Link to="/deposits/join/3" className="flex-grow"> */}
+        <div className="flex justify-between space-x-5">
           
-          {/* </Link> */}
-          {/* <Link to="/deposits/join/1" className="flex-grow ml-4"> */}
           <button
             onClick={() => navigate("/deposits/join/1")}
             className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
@@ -1350,7 +1324,7 @@ function DepositsJoin2() {
           >
             다음
           </button>
-          {/* </Link> */}
+          
         </div>
       </form>
     </div>
