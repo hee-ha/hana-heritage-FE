@@ -75,12 +75,12 @@ function AccountInquiry() {
     <div className="px-24">
       <section>
         <header className="flex justify-between items-center pt-10 pb-10 border-b border-hanaGreen ">
-          <h1 className="text-6xl font-hana2 font-medium">
+          <h1 className="text-6xl font-hana2 font-semibold">
             <span className="text-hanaGreen">계좌 조회</span> 페이지 입니다.
           </h1>
         </header>
 
-        <div className="px-12 pt-8 mb-8 mt-8 flex flex-col border-b border-r border-hanaGreen shadow shadow-hanaGreen h-72">
+        <div className="px-12 pt-8 mb-8 mt-8 flex flex-col  border border-2 rounded border-hanaGreen h-72">
           <div>
             <h1 className="text-5xl font-hana2 mb-5">
               <span className="font-semibold text-hanaGreen">황혜림</span>{" "}
