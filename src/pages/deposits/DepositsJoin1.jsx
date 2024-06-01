@@ -1,8 +1,10 @@
-import {React, useState, useEffect} from "react";
+import {React, useState} from "react";
 import { Accordion } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 function DepositsJoin1() {
+  const navigate = useNavigate();
+  
 	// 1. 수집‧이용에 관한 사항
 	const [agreeForCollection, setAgreeForCollection] = useState(false);
 	const [agreeForReceiveAdvertising, setAgreeForReceiveAdvertising] = useState(null);
@@ -57,6 +59,19 @@ function DepositsJoin1() {
         setAgreeForReceiveAdvertising(false);
       }
       
+    }
+  };
+  
+  // 모두 동의했을 때 다음 페이지로 이동
+  const goNextPage = () => {
+    if (agreeForCollection === false) {
+      alert("개인(신용)정보 수집·이용에 동의 시만 가입 가능합니다.")
+    } else if (agreeForReceiveAdvertising === null) {
+      alert("전자적 전송매체를 통한 광고성 정보의 수신의 동의 여부를 선택해주세요.")
+    } else if (agreeForProvision === false) {
+      alert("개인(신용)정보 제공에 동의 시만 가입 가능합니다.")
+    } else {
+      navigate("/deposits/join/2" );
     }
   };
 	
@@ -607,11 +622,11 @@ function DepositsJoin1() {
       </div>
 
       <div className="flex justify-between">
-        <Link to={"/deposits/join/2"} className="flex-grow">
-          <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+        <div className="flex-grow">
+          <button onClick={goNextPage} className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             다음
           </button>
-        </Link>
+        </div>
         <Link to={"/deposits"} className="flex-grow ml-4">
           <button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             취소
