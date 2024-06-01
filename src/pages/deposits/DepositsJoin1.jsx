@@ -251,7 +251,7 @@ function DepositsJoin1() {
         <p className="leading-snug mt-10 mb-5">
           (1) 위 개인(신용)정보 수집·이용에 동의하십니까?
         </p>
-        <input value={agreeForCollection}/>
+        {/* <input value={agreeForCollection}/> */}
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
@@ -336,7 +336,7 @@ function DepositsJoin1() {
               checked={checkboxes.sms}
               onChange={handleCheckboxChange}
             />
-            <input value={checkboxes.sms}/>
+            {/* <input value={checkboxes.sms}/> */}
             <label
               for="sms"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
@@ -359,7 +359,7 @@ function DepositsJoin1() {
               checked={checkboxes.phone}
               onChange={handleCheckboxChange}
             />
-            <input value={checkboxes.phone}/>
+            {/* <input value={checkboxes.phone}/> */}
             <label
               for="phone"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
@@ -378,7 +378,7 @@ function DepositsJoin1() {
               checked={checkboxes.mail}
               onChange={handleCheckboxChange}
             />
-            <input value={checkboxes.mail}/>
+            {/* <input value={checkboxes.mail}/> */}
             <label
               for="mail"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
@@ -401,7 +401,7 @@ function DepositsJoin1() {
               checked={checkboxes.post}
               onChange={handleCheckboxChange}
             />
-            <input value={checkboxes.post}/>
+            {/* <input value={checkboxes.post}/> */}
             <label
               for="post"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
@@ -412,7 +412,7 @@ function DepositsJoin1() {
             </label>
           </li>
         </ul>
-        <input value={agreeForReceiveAdvertising}/>
+        {/* <input value={agreeForReceiveAdvertising}/> */}
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
@@ -535,7 +535,7 @@ function DepositsJoin1() {
         <p className="leading-snug mt-10 mb-5">
           (1) 위 개인(신용)정보 제공에 동의하십니까?
         </p>
-        <input value={agreeForProvision}/>
+        {/* <input value={agreeForProvision}/> */}
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
