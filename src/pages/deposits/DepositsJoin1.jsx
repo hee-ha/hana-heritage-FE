@@ -1,8 +1,65 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { Accordion } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 function DepositsJoin1() {
+	// 1. 수집‧이용에 관한 사항
+	const [agreeForCollection, setAgreeForCollection] = useState(false);
+	const [agreeForReceiveAdvertising, setAgreeForReceiveAdvertising] = useState(null);
+	const [checkboxes, setCheckboxes] = useState({
+      sms: false,
+      phone: false,
+      mail: false,
+      post: false,
+  });
+
+	// 2. 제공에 관한 사항
+	const [agreeForProvision, setAgreeForProvision] = useState(false);
+  
+  // 광고 동의 X 버튼을 클릭했다면
+  const setAdvertisingFalse = () => {
+    setAgreeForReceiveAdvertising(false);
+    setCheckboxes({ 
+      sms: false,
+      phone: false,
+      mail: false,
+      post: false, 
+    });
+  };
+  
+  // 광고 동의 O 버튼을 클릭했다면
+  const setAdvertisingTrue  = () => {
+    setAgreeForReceiveAdvertising(true);
+    setCheckboxes({ 
+      sms: true,
+      phone: true,
+      mail: true,
+      post: true, 
+    });
+  };
+  
+  // 문자, 전화, 메일, 우편 중 하나라도 클릭된다면
+  const handleCheckboxChange = (event) => {
+    const { id, checked } = event.target;
+    setCheckboxes((prevState) => ({ ...prevState, [id]: checked }));
+    
+    // 동의로 클릭된거라면
+    if(checked === true){
+      setAgreeForReceiveAdvertising(true);
+    } 
+    
+    // 비동의로 클릭된거라면
+    if(checked === false){
+      const allFalse = Object.entries(checkboxes)
+        .filter(([key]) => key !== id)
+        .every(([key, value]) => value === false);
+      if(allFalse){
+        setAgreeForReceiveAdvertising(false);
+      }
+      
+    }
+  };
+	
   return (
     <div className="px-24 font-noto text-3xl">
       <header>
@@ -179,6 +236,7 @@ function DepositsJoin1() {
         <p className="leading-snug mt-10 mb-5">
           (1) 위 개인(신용)정보 수집·이용에 동의하십니까?
         </p>
+        <input value={agreeForCollection}/>
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
@@ -187,6 +245,7 @@ function DepositsJoin1() {
               name="hosting"
               value="hosting-small"
               className="hidden peer"
+							onChange={(e) => setAgreeForCollection(true)}
               required
             />
             <label
@@ -217,6 +276,7 @@ function DepositsJoin1() {
               id="hosting-big"
               name="hosting"
               value="hosting-big"
+							onChange={(e) => setAgreeForCollection(false)}
               className="hidden peer"
             />
             <label
@@ -255,13 +315,15 @@ function DepositsJoin1() {
           <li>
             <input
               type="checkbox"
-              id="react-option"
+              id="sms"
               value=""
               className="hidden peer"
-              required=""
+              checked={checkboxes.sms}
+              onChange={handleCheckboxChange}
             />
+            <input value={checkboxes.sms}/>
             <label
-              for="react-option"
+              for="sms"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
             >
               <div className="block">
@@ -276,13 +338,15 @@ function DepositsJoin1() {
           <li>
             <input
               type="checkbox"
-              id="react-option2"
+              id="phone"
               value=""
               className="hidden peer"
-              required=""
+              checked={checkboxes.phone}
+              onChange={handleCheckboxChange}
             />
+            <input value={checkboxes.phone}/>
             <label
-              for="react-option2"
+              for="phone"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
             >
               <div className="block">
@@ -293,13 +357,15 @@ function DepositsJoin1() {
           <li>
             <input
               type="checkbox"
-              id="react-option3"
+              id="mail"
               value=""
               className="hidden peer"
-              required=""
+              checked={checkboxes.mail}
+              onChange={handleCheckboxChange}
             />
+            <input value={checkboxes.mail}/>
             <label
-              for="react-option3"
+              for="mail"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
             >
               <div className="block">
@@ -314,13 +380,15 @@ function DepositsJoin1() {
           <li>
             <input
               type="checkbox"
-              id="react-option4"
+              id="post"
               value=""
               className="hidden peer"
-              required=""
+              checked={checkboxes.post}
+              onChange={handleCheckboxChange}
             />
+            <input value={checkboxes.post}/>
             <label
-              for="react-option4"
+              for="post"
               className="inline-flex items-center justify-between w-full h-full p-5 text-hanaSilver bg-white border-2 rounded-lg cursor-pointer peer-checked:border-hanaRed   peer-checked:text-hanaRed hover:bg-gray-50"
             >
               <div className="block">
@@ -329,6 +397,7 @@ function DepositsJoin1() {
             </label>
           </li>
         </ul>
+        <input value={agreeForReceiveAdvertising}/>
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
@@ -337,6 +406,8 @@ function DepositsJoin1() {
               name="hosting2"
               value="hosting-small2"
               className="hidden peer"
+              checked={agreeForReceiveAdvertising}
+							onChange={(e) => setAdvertisingTrue()}
               required
             />
             <label
@@ -368,6 +439,8 @@ function DepositsJoin1() {
               name="hosting2"
               value="hosting-big2"
               className="hidden peer"
+              checked={agreeForReceiveAdvertising === false}
+							onChange={(e) => setAdvertisingFalse()}
             />
             <label
               for="hosting-big2"
@@ -447,6 +520,7 @@ function DepositsJoin1() {
         <p className="leading-snug mt-10 mb-5">
           (1) 위 개인(신용)정보 제공에 동의하십니까?
         </p>
+        <input value={agreeForProvision}/>
         <ul className="grid w-full gap-6 md:grid-cols-2">
           <li>
             <input
@@ -455,6 +529,7 @@ function DepositsJoin1() {
               name="hosting3"
               value="hosting-small3"
               className="hidden peer"
+							onChange={(e) => setAgreeForProvision(true)}
               required
             />
             <label
@@ -486,6 +561,7 @@ function DepositsJoin1() {
               name="hosting3"
               value="hosting-big3"
               className="hidden peer"
+							onChange={(e) => setAgreeForProvision(false)}
             />
             <label
               for="hosting-big3"
