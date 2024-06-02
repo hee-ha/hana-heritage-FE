@@ -4,20 +4,13 @@ import { Accordion } from "flowbite-react";
 import axios from "axios";
 
 function DepositsDetail() {
-  // 상담 신청 폼
-	const [showModal, setShowModal] = useState(false);
-	const [agreement, setAgreement] = useState(false);
-	const [phoneNumber, setPhoneNumber] = useState("");
-  
   // 예적금 상품 상세 정보
   const [depositsDetail, setDepositsDetail] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get("id"));
   
   useEffect(() => {
     // TODO : url, token 모듈에서 사용하도록 하드코딩 제거
     let url = "http://127.0.0.1:80/api/v1/deposits-products/detail?id="+searchParams.get("id");
-    console.log(url);
 
     axios
       .get(url, {headers: {
@@ -32,24 +25,63 @@ function DepositsDetail() {
       });
   }, []);
   
+  
+  // 상담 신청 폼
+	const [showModal, setShowModal] = useState(false);
+	const [agreement, setAgreement] = useState(false);
+	const [workTypeName, setWorkTypeName] = useState("예적금");
+	const [phoneNumber, setPhoneNumber] = useState(null);
+	const [reservationDatetime, setReservationDatetime] = useState(null);
+  
+  const confirmForm = () => {
+    if (agreement === false) {
+      alert("개인(신용)정보 수집·이용에 동의 시만 가입 가능합니다.")
+    } else if (phoneNumber === null) {
+      alert("연락처를 입력해주세요.")
+    } else if (reservationDatetime === null) {
+      alert("상담 예약일시를 선택해주세요.")
+    } else {
+      const url = "http://127.0.0.1:80/api/v1/consulting/reservation";
+      const requestBody = {
+        "workTypeName": workTypeName,
+        "phoneNumber": phoneNumber,
+        "reservationDatetime": reservationDatetime,
+      };
+      
+      axios
+        .post(url, requestBody, {headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImlkIjoxLCJpYXQiOjE3MTczNDE2MzUsImV4cCI6MTcxNzQyODAzNX0.Q78FMHH0YQazLrK_29Lpu94xjms2gk2E2Ngp6zUqNT0`
+        }})
+        .then((res) => {
+          console.log("받아온 데이터: ", res.data.result);
+          setDepositsDetail(res.data.result);
+        })
+        .catch((error) => {
+          console.log("에러: ", error);
+        });
+      alert("예약이 완료되었습니다!");
+      setShowModal(false);
+    }
+  };
+  
   return (
     <div className="px-24 font-noto text-3xl">
       <header>
         <h2 className="font-hana2 font-semibold text-6xl py-10">
-          선택하신 <span className="text-hanaGreen">{depositsDetail.finPrdtNm}</span>{" "}
+          선택하신 <span className="text-hanaGreen">{(depositsDetail.finPrdtNm||"")}</span>{" "}
           안내드립니다.
         </h2>
         <hr />
       </header>
       <div className="py-10">
-        <p className="font-hana2 font-semibold text-5xl pb-5">{depositsDetail.finPrdtNm}</p>
-        <p className="font-hana2">{depositsDetail.finPrdtNm}으로 목돈 모아보세요!</p>
+        <p className="font-hana2 font-semibold text-5xl pb-5">{depositsDetail.finPrdtNm||""}</p>
+        <p className="font-hana2">{depositsDetail.finPrdtNm||""}으로 목돈 모아보세요!</p>
 
         <div className="grid grid-cols-2 gap-5 my-10">
           <div className="bg-hanaGold rounded-lg p-10 text-white">
             <p className="mb-5 font-hana2">종류</p>
             <p className="text-5xl font-bold mb-5 leading-snug">
-              {depositsDetail.type}
+              {depositsDetail.type||""}
             </p>
           </div>
           <div className="bg-hanaGold rounded-lg p-10 text-white">
@@ -66,13 +98,13 @@ function DepositsDetail() {
           <div className="bg-hanaGold rounded-lg p-10 text-white">
             <p className="mb-5 font-hana2">가입 제한</p>
             <p className="text-5xl font-bold mb-5 leading-snug">
-              {depositsDetail.joinDeny}개까지 가입 가능
+              {depositsDetail.joinDeny||""}개까지 가입 가능
             </p>
           </div>
           <div className="bg-hanaGold rounded-lg p-10 text-white">
             <p className="mb-5 font-hana2">최고 한도</p>
             <p className="text-5xl font-bold mb-5 leading-snug">
-              {depositsDetail.maxLimit}만원
+              {depositsDetail.maxLimit||""}만원
             </p>
           </div>
         </div>
@@ -162,14 +194,16 @@ function DepositsDetail() {
 								<select
 									id="country"
 									name="country"
+                  placeholder="dd"
 									autocomplete="country-name"
 									className="w-full p-2 border rounded mt-2 text-5xl"
+                  onChange={(e) => setWorkTypeName(e.target.value)}
 								>
-									<option>예적금</option>
+									<option>예·적금</option>
 									<option>대출</option>
 									<option>외환</option>
-									<option>펀드, 보험, 연금, 일임형 ISA</option>
-									<option>폰, 모바일, 인터넷뱅킹</option>
+									<option>펀드·보험·연금·일임형ISA</option>
+									<option>폰·모바일·인터넷뱅킹</option>
 									<option>기업뱅킹</option>
 									<option>퇴직연금</option>
 								</select>
@@ -191,8 +225,9 @@ function DepositsDetail() {
 								</label>
 								<input
 									type="text"
-									placeholder="010-1234-5678"
+									placeholder="01012345678"
 									className="w-full p-2 border rounded mt-2 text-5xl"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
 								/>
 							</div>
 							<div>
@@ -200,9 +235,10 @@ function DepositsDetail() {
 									상담예약일시
 								</label>
 								<input
-									type="text"
+									type="date"
 									placeholder="상담예약일시"
 									className="w-full p-2 border rounded mt-2 text-5xl"
+                  onChange={(e) => setReservationDatetime(e.target.value)}
 								/>
 							</div>
 						</div>
@@ -270,7 +306,7 @@ function DepositsDetail() {
 										name="hosting3"
 										value="hosting-small3"
 										className="hidden peer"
-										required
+                    onChange={(e) => setAgreement(true)}
 									/>
 									<label
 										for="hosting-small3"
@@ -301,6 +337,7 @@ function DepositsDetail() {
 										name="hosting3"
 										value="hosting-big3"
 										className="hidden peer"
+                    onChange={(e) => setAgreement(false)}
 									/>
 									<label
 										for="hosting-big3"
@@ -330,7 +367,7 @@ function DepositsDetail() {
 						<div className="space-x-5 mt-4 flex justify-end">
 							<button
 								onClick={() => {
-									setShowModal(false);
+                  confirmForm();
 								}}
 								className="p-5 bg-hanaGreen text-white rounded"
 							>
