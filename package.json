@@ -17,8 +17,10 @@
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "flowbite-react": "^0.9.0",
+    "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
@@ -53,5 +55,6 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.3"
-  }
+  },
+  "proxy": "http://127.0.0.1:80"
 }
