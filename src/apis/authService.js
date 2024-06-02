@@ -6,9 +6,9 @@ export const postLogin = async ({ phoneNumber, password }) => {
       phoneNumber,
       password,
     });
-    if (response.data.accessToken && response.data.refreshToken) {
-      localStorage.setItem("jwtToken", response.data.accessToken);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
+    if (response.data.result.accessToken && response.data.result.refreshToken) {
+      localStorage.setItem("jwtToken", response.data.result.accessToken);
+      localStorage.setItem("refreshToken", response.data.result.refreshToken);
     }
     return response.data;
   } catch (error) {

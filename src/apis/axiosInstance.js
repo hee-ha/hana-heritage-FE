@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use(
     const token = localStorage.getItem("jwtToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log(config.headers.Authorization); //TODO: 지우기
+      console.log("Authorization header:", config.headers.Authorization); // 확인용 로그
     }
     return config;
   },
