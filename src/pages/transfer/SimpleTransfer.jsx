@@ -3,13 +3,13 @@ import BankButtons from "./component/Bankbtn";
 import TransferAmount from "./component/TransferAmount";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getMyAccount } from "../../apis/account/getMyAccount";
 
 function SimpleTransfer() {
   const [formData, setFormData] = useState({
     amount: "",
     recipientBank: "",
     recipientAccountNumber: "",
-    sender: "이하나",
     recipientRemarks: "",
     senderRemarks: "",
     password: "",
@@ -29,31 +29,30 @@ function SimpleTransfer() {
   };
 
   useEffect(() => {
-    let url = "http://localhost/api/v1/account/my";
-    console.log(url);
-
-    axios
-      .get(url)
-      .then((res) => {
-        setAccounts(res.data.result);
-        if (res.data.result.length > 0) {
-          setFormData((prevFormData) => ({
-            ...prevFormData,
-            accountId: res.data.result[0].id,
-          }));
-          setSelectedAccountNumber(res.data.result[0].accountNumber);
-          setFirstAccountName(res.data.result[0].name);
-          setFirstAccountValue(
-            res.data.result[0].balance
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("에러: ", error);
-      });
+    doAccounts();
   }, []);
+
+  const doAccounts = async () => {
+    try {
+      const res = await getMyAccount();
+      setAccounts(res.result);
+      if (res.result.length > 0) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          accountId: res.result[0].id,
+        }));
+        setSelectedAccountNumber(res.result[0].accountNumber);
+        setFirstAccountName(res.result[0].name);
+        setFirstAccountValue(
+          res.result[0].balance
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
   const [firstAccountName, setFirstAccountName] = useState("No name available");
   const [firstAccountValue, setFirstAccountValue] = useState(
@@ -152,7 +151,7 @@ function SimpleTransfer() {
         </label>
         <input
           type="text"
-          name="recipientNumber"
+          name="recipientAccountNumber"
           value={formData.recipientAccountNumber}
           onChange={handleChange}
           placeholder="은행/계좌번호 입력"
