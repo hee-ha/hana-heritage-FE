@@ -7,6 +7,14 @@ export { default as AccountDetail } from "./account/AccountDetail";
 export { default as AccountInquiry } from "./account/AccountInquiry";
 export { default as AccountInquiryCard } from "./account/AccountInquiryCard";
 
+// Admin
+export { default as AdminHome } from "./admin/AdminHome";
+export { default as ConsultingRevew } from "./admin/ConsultingReview";
+export { default as DepositsPreference } from "./admin/DepositsPreference";
+export { default as InheritanceReview } from "./admin/InheritanceReview";
+export { default as Mail } from "./admin/Mail";
+export { default as Settlement } from "./admin/Settlement";
+
 // Deposits (예적금)
 export { default as DepositsDetail } from "./deposits/DepositsDetail";
 export { default as DepositsJoin1 } from "./deposits/DepositsJoin1";
