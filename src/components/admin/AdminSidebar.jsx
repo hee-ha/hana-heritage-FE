@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 const AdminSidebar = () => {
   return (
     <Sidebar>
+      <Sidebar.Logo img="/png/Hana_Bank.png" imgAlt="Hana logo" className="mt-2 ms-2 mb-4">
+      </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <div className="flex flex-col items-center p-4 ">
