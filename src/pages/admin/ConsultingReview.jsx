@@ -1,6 +1,5 @@
 import React from "react";
 import { Avatar, Badge, Button } from "flowbite-react";
-import { HiCheck, HiClock } from "react-icons/hi";
 
 const ConsultingReview = () => {
   return (
