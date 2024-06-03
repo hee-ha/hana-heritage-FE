@@ -150,7 +150,7 @@ function AccountInquiry() {
           {showDeposit && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.예금.map((account) => (
-                <AccountInquiryCard key={account.id} account={account} />
+                <AccountInquiryCard key={account.id} accountId = {account.id} account={account} />
               ))}
             </div>
           )}
@@ -203,7 +203,7 @@ function AccountInquiry() {
           {showSavings && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.적금.map((account) => (
-                <AccountInquiryCard key={account.id} account={account} />
+                <AccountInquiryCard key={account.id} accountId = {account.id} account={account} />
               ))}
             </div>
           )}

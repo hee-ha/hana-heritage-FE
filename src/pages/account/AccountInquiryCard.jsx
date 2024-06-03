@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function AccountInquiryCard({ account }) {
+function AccountInquiryCard({ account, accountId }) {
   const navigate = useNavigate();
 
   const navigateToPurchase = () => {
-    navigate("/account/detail");
+    navigate("/account/detail", { state: { accountId: accountId } });
   };
 
   return (
@@ -25,7 +25,7 @@ function AccountInquiryCard({ account }) {
       </div>
       <div className="flex justify-center space-x-4 pb-4">
         <button
-          onClick={navigateToPurchase}
+          onClick={() => navigateToPurchase(accountId)}
           className="flex-1 mt-4 mb-2 px-4 py-2 text-4xl font-hana2 text-center text-white bg-hanaRed rounded-lg"
         >
           조회
