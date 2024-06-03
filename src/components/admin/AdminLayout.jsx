@@ -9,8 +9,8 @@ const AdminLayout = () => {
         <nav aria-label="Default sidebar example">
           <AdminSidebar />
         </nav>
-        <main className="flex-grow h-full flex flex-col space-y-5">
-          <div className="h-full w-full px-4 py-6 sm:flex sm:items-center sm:justify-between">
+        <main className="h-full flex flex-col flex-grow space-y-5">
+          <div className="p-4 h-full w-full sm:flex sm:items-start sm:justify-start">
             <Outlet />
           </div>
           <AdminFooter />
