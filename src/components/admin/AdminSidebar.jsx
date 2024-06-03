@@ -48,6 +48,7 @@ const AdminSidebar = () => {
             icon={HiPresentationChartBar}
             label="Pro"
             labelColor="dark"
+            className="my-4"
           >
             정산
           </Sidebar.Item>
@@ -57,6 +58,7 @@ const AdminSidebar = () => {
             icon={HiEmojiHappy}
             label="3"
             labelColor="red"
+            className="my-4"
           >
             상품 선호도
           </Sidebar.Item>
@@ -64,6 +66,7 @@ const AdminSidebar = () => {
             as={Link}
             to="/admin/inheritance-review"
             icon={HiClipboard}
+            className="my-4"
           >
             상속 계약 검토 목록
           </Sidebar.Item>
@@ -71,10 +74,16 @@ const AdminSidebar = () => {
             as={Link}
             to="/admin/consulting-review"
             icon={HiChatAlt}
+            className="my-4"
           >
             상담 대기 목록
           </Sidebar.Item>
-          <Sidebar.Item as={Link} to="/admin/mail" icon={HiMail}>
+          <Sidebar.Item
+            as={Link}
+            to="/admin/mail"
+            icon={HiMail}
+            className="my-4"
+          >
             메일 발송
           </Sidebar.Item>
         </Sidebar.ItemGroup>
