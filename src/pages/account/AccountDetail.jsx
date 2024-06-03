@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { getAccountDetail } from "../../apis/account/getAccountDetail.js";
+import { getSavingAccountDetail } from "../../apis/account/getDepositsAccountDetail.js";
+import { getDepositAccountDetail } from "../../apis/account/getDepositsAccountDetail.js";
 
 function calculateMaturityDate(startDate, contractMonths) {
   const date = new Date(startDate);
@@ -19,6 +20,7 @@ function SavingList() {
   const location = useLocation();
 
   const accountId = location.state.accountId;
+  const type = location.state.type;
 
   const navigateToPurchase = () => {
     navigate("/account");
@@ -26,9 +28,19 @@ function SavingList() {
 
   const [accountDetail, setAccountDetail] = useState([]);
 
-  const doGetAccountDetail = async () => {
+  const doGetSavingAccountDetail = async () => {
     try {
-      const response = await getAccountDetail(accountId);
+      const response = await getSavingAccountDetail(accountId);
+      console.log(response);
+      setAccountDetail(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const doGetDepositAccountDetail = async () => {
+    try {
+      const response = await getDepositAccountDetail(accountId);
       console.log(response);
       setAccountDetail(response.result);
     } catch (error) {
@@ -37,21 +49,13 @@ function SavingList() {
   };
 
   useEffect(() => {
-    let url = `http://localhost/api/v1/accountinfo/${accountId}`;
-    console.log(url);
-
-    axios
-      .post(url, {
-        id: 1,
-      })
-      .then((res) => {
-        console.log("받아온 데이터: ", res.data.result);
-        setAccountDetail(res.data.result);
-      })
-      .catch((error) => {
-        console.log("에러: ", error);
-      });
-  }, []); // id를 의존성 배열에 추가
+    console.log(type);
+    if (type === "saving") {
+      doGetSavingAccountDetail();
+    } else {
+      doGetDepositAccountDetail();
+    }
+  }, [type, accountId]);
 
   const formattedDate = new Date(accountDetail.creatdAt).toLocaleDateString(
     "ko-KR",
@@ -101,7 +105,7 @@ function SavingList() {
           <li className="justify-between gap-x-6 py-5">
             <p className="my-5 font-hana2 font-bold text-hanaGreen">과목명</p>
             <p className="text-5xl mb-5 leading-snug">
-              {accountDetail.type === "SAVING" ? "적금" : "예금"}
+              {accountDetail.type === "SAVING" ? "예금" : "적금"}
             </p>
           </li>
 

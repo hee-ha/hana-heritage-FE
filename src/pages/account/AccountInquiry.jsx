@@ -10,7 +10,7 @@ const accounts = {
       balance: 10000.0,
     },
     {
-      id: 2,
+      id: 6,
       name: "Investment Account",
       number: "1234-5678-9101",
       balance: 15200.0,
@@ -18,7 +18,7 @@ const accounts = {
   ],
   적금: [
     {
-      id: 3,
+      id: 2,
       name: "Savings Account",
       number: "2345-6789-0123",
       balance: 4800.0,
@@ -150,7 +150,12 @@ function AccountInquiry() {
           {showDeposit && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.예금.map((account) => (
-                <AccountInquiryCard key={account.id} accountId = {account.id} account={account} />
+                <AccountInquiryCard
+                  key={account.id}
+                  accountId={account.id}
+                  account={account}
+                  type="saving"
+                />
               ))}
             </div>
           )}
@@ -203,7 +208,12 @@ function AccountInquiry() {
           {showSavings && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {accounts.적금.map((account) => (
-                <AccountInquiryCard key={account.id} accountId = {account.id} account={account} />
+                <AccountInquiryCard
+                  key={account.id}
+                  accountId={account.id}
+                  account={account}
+                  type="deposit"
+                />
               ))}
             </div>
           )}

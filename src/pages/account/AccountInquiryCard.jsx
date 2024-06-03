@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function AccountInquiryCard({ account, accountId }) {
+function AccountInquiryCard({ account, accountId, type }) {
   const navigate = useNavigate();
 
   const navigateToPurchase = () => {
-    navigate("/account/detail", { state: { accountId: accountId } });
+    navigate("/account/detail", { state: { accountId: accountId, type: type} } );
   };
 
   return (
