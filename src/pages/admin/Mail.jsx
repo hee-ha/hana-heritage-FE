@@ -13,7 +13,7 @@ const Mail = () => {
   ];
 
   return (
-    <div className="w-full space-y-16">
+    <div className="w-full space-y-10">
       <div className="space-y-2">
         <h1 className="text-1xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-4xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">

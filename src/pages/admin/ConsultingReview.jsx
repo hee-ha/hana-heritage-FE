@@ -1,18 +1,21 @@
 import React from "react";
 import { Avatar, Badge, Button } from "flowbite-react";
+import GradientButton from "../../components/common/Button/GradientButton";
 
 const ConsultingReview = () => {
   return (
     <div className="w-full space-y-10">
       <div className="space-y-2">
         <h1 className="text-1xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-4xl">
-          오늘의 <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+          오늘의{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             상담 대기
           </span>{" "}
           목록입니다.
         </h1>
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-          바로 오늘, 상담을 기다리고 있는 손님 목록입니다. 전화를 걸어 상담을 진행해주세요. 😇
+          바로 오늘, 상담을 기다리고 있는 손님 목록입니다. 전화를 걸어 상담을
+          진행해주세요. 😇
         </p>
       </div>
 
@@ -48,8 +51,7 @@ const ConsultingReview = () => {
             <td className="px-6 py-4">대출</td>
             <td className="px-6 py-4">
               <div className="flex items-center">
-                14:02 완료
-              </div>
+              <GradientButton label="완료 처리하기" width="w-32" /></div>
             </td>
           </tr>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -66,9 +68,12 @@ const ConsultingReview = () => {
             <td className="px-6 py-4">대출</td>
             <td className="px-6 py-4">
               <div className="flex items-center">
-                <Button size="sm" gradientDuoTone="greenToBlue">
-                  완료 처리하기
-                </Button>
+                
+                <GradientButton
+                  isDisabled="true"
+                  label="완료됨"
+                  width="w-32"
+                />
               </div>
             </td>
           </tr>
