@@ -4,7 +4,7 @@ import GradientButton from "../../components/common/Button/GradientButton";
 
 const ConsultingReview = () => {
   return (
-    <div className="w-full space-y-10">
+    <div className="w-full space-y-6">
       <div className="space-y-2">
         <h1 className="text-1xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-4xl">
           오늘의{" "}
