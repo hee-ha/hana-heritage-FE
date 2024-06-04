@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { register } from "../../apis/customer/getMyInfo";
+import { useNavigate } from "react-router-dom";
 
-function RegisterForm() {
+function RegisterForm({ props }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -13,7 +16,6 @@ function RegisterForm() {
     setConfirmPassword(e.target.value);
     validatePasswords(password, e.target.value);
   };
-
   const validatePasswords = (password, confirmPassword) => {
     if (password && confirmPassword) {
       if (password === confirmPassword) {
@@ -26,6 +28,26 @@ function RegisterForm() {
     } else {
       setPasswordError(false);
       setPasswordMatch(false);
+    }
+  };
+
+  const handleRegisterButton = () => {
+    let data = { ...props, password: password };
+
+    doRegister(data);
+  };
+
+  const doRegister = async (data) => {
+    try {
+      const response = await register(data);
+      console.log(response);
+      if (response.isSuccess) {
+        alert("회원가입 되었습니다.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+      navigate("/login");
     }
   };
 
@@ -86,6 +108,7 @@ function RegisterForm() {
         <div className="flex justify-center items-center">
           <button
             type="button"
+            onClick={handleRegisterButton}
             className="col w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
           >
             회원가입하기

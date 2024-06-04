@@ -5,13 +5,21 @@ import RegisterForm from "./RegisterForm";
 function Register() {
   const [isIdentified, setIsIdentified] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [registerInfo, setRegisterInfo] = useState(null);
 
-  const handleIdentificationSuccess = () => {
+  const handleIdentificationSuccess = (info) => {
+    console.log(info);
+    const data = {
+      name: info.name,
+      phoneNumber: info.phoneNumber,
+      identificationNumber: info.identificationNumber,
+    };
+    setRegisterInfo(data);
     setShowMessage(true);
     setTimeout(() => {
       setShowMessage(false);
       setIsIdentified(true);
-    }, 1000); // 3초 후에 Signup 컴포넌트로 전환
+    }, 2000); // 3초 후에 Signup 컴포넌트로 전환
   };
 
   return (
@@ -25,7 +33,7 @@ function Register() {
       ) : !isIdentified ? (
         <Identify onIdentifySuccess={handleIdentificationSuccess} />
       ) : (
-        <RegisterForm />
+        <RegisterForm props={registerInfo} />
       )}
     </div>
   );
