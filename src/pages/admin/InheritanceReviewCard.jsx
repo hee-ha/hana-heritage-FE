@@ -1,14 +1,15 @@
 import { Card, Button, Badge } from "flowbite-react";
-import { HiCheck, HiClock } from "react-icons/hi";
+import GradientButton from "../../components/common/Button/GradientButton";
+import GreenBadge from "../../components/common/Badge/GreenBadge";
 
 export function InheritanceReviewCard() {
   return (
     <Card>
       <div className="flex flex-col items-center font-noto">
         <div className="flex flex-col items-center font-noto">
-          <Badge color="success" size="sm" className="p-1 mb-5">
-            승인됨
-          </Badge>
+        <div class="mb-4 w-full flex justify-start"> 
+            <GreenBadge label="승인됨" className="px-3 py-2 text-xl font-bold" />
+          </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -30,10 +31,7 @@ export function InheritanceReviewCard() {
             2024.04.12에 신청됨
           </span>
           <div className="mt-4 flex space-x-3 lg:mt-6">
-            <Button size="sm" gradientDuoTone="greenToBlue">
-              서류 검토하기
-            </Button>
-
+            <GradientButton label="서류 검토하기" />
             <a
               href="#"
               className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
