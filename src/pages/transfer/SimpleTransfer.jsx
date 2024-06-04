@@ -16,7 +16,6 @@ function SimpleTransfer() {
 
   useEffect(() => {
     let url = "http://localhost/api/v1/transfer/get";
-    console.log(url);
 
     axios
       .post(url, {

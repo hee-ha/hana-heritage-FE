@@ -1,8 +1,17 @@
 import React from "react";
 import Nav from "../Nav";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../context/authContext";
+import { useLogout } from "../hooks/useAuth";
 
 const Header = () => {
+  const { auth } = useAuthContext();
+  const logoutMutation = useLogout();
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
+
   return (
     <header className="bg-white shadow shadow-hanaGreen">
       <div className="mx-auto flex justify-between items-center px-24 py-6">
@@ -16,15 +25,16 @@ const Header = () => {
           </Link>
           <Nav />
         </div>
-        <div>
-          <Link
-            to="/logout"
-            className="text-white bg-hanaRed font-hana2 font-semibold rounded-md px-3 py-2 text-4xl"
-            aria-current="page"
-          >
-            로그아웃
-          </Link>
-        </div>
+        {auth && (
+          <div>
+            <button
+              onClick={handleLogout}
+              className="text-white bg-hanaRed font-hana2 font-semibold rounded-md px-3 py-2 text-4xl"
+            >
+              로그아웃
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

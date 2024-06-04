@@ -43,7 +43,7 @@ export const certificate = async (certInfo) => {
 };
 
 export const logout = async () => {
-  await axiosInstance.post("/logout");
+  await axiosInstance.post("/api/v1/auth/logout");
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("refreshToken");
 };
