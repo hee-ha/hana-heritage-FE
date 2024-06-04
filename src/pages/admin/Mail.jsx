@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Textarea, Datepicker } from "flowbite-react";
+import DatePicker from "../../components/common/DatePicker/DatePicker";
+import GradientButton from "../../components/common/Button/GradientButton";
 
 const Mail = () => {
   const customerList = [
@@ -29,23 +31,26 @@ const Mail = () => {
 
       <div className="grid grid-cols-2 gap-10">
         <div className="relative rounded-lg">
-          <h1 className="mb-8 text-2xl font-semibold font-sans leading-none tracking-tight text-gray-700  dark:text-white">
-            ➊ 메일 수신 동의한{" "}
-            <mark className="px-2 text-white bg-sky-400 rounded">
-              손님 목록
-            </mark>{" "}
-            선택
-          </h1>
+          <div className="mb-5">
+            <p class="mb-2 text-lg leading-6 font-semibold text-gray-500 dark:text-sky-400">
+              #1
+            </p>
+            <div class="flex items-center">
+              <h1 class="inline-block text-xl sm:text-2xl font-extrabold text-emerald-500 tracking-tight dark:text-slate-200">
+                발송 대상 선택
+              </h1>
+            </div>
+          </div>
 
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="p-4">
                   <div className="flex items-center">
                     <input
                       id="checkbox-all-search"
                       type="checkbox"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label for="checkbox-all-search" className="sr-only">
                       checkbox
@@ -71,7 +76,7 @@ const Mail = () => {
                       <input
                         id={`checkbox-table-search-${customer.id}`}
                         type="checkbox"
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       />
                       <label
                         htmlFor={`checkbox-table-search-${customer.id}`}
@@ -94,25 +99,41 @@ const Mail = () => {
           </table>
         </div>
         <div>
-          <h1 className="mb-8 text-2xl font-semibold font-sans leading-none tracking-tight text-gray-700  dark:text-white">
-            ➋ 선택한 손님에게 발송할{" "}
-            <mark className="px-2 text-white bg-emerald-600 rounded">
-              내용 작성 후 예약
-            </mark>
-          </h1>
-          <div className="max-w-md">
-            <Textarea
-              id="comment"
-              className="resize-none font-noto mb-4"
-              placeholder="Leave a comment..."
-              required
-              rows={15}
-            />
-            <Datepicker title="메일 발송 예약일" />
+          <div className="mb-5">
+            <p class="mb-2 text-lg leading-6 font-semibold text-gray-500 dark:text-sky-400">
+              #2
+            </p>
+            <div class="flex items-center">
+              <h1 class="inline-block text-xl sm:text-2xl font-extrabold text-emerald-500 tracking-tight dark:text-slate-200">
+                메일 작성 후 예약 발송
+              </h1>
+            </div>
+          </div>
+          <div className="w-full">
+            <label
+              for="message"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              이메일 내용
+            </label>
+            <textarea
+              id="message"
+              rows="10"
+              class="resize-none font-noto text-base block p-2.5 w-full  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Write your thoughts here..."
+            ></textarea>
 
-            <Button type="submit" className="w-full mt-4 bg-emerald-600">
-              예약전송
-            </Button>
+            <label
+              for="message"
+              class="mt-4 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              예약일
+            </label>
+
+            <div class="w-full mb-4">
+              <DatePicker />
+            </div>
+            <GradientButton label="예약전송" width="w-full" />
           </div>
         </div>
       </div>
