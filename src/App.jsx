@@ -3,6 +3,7 @@ import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";
+import AdminLayout from "./components/admin/AdminLayout";
 import {
   AccountCreation1,
   AccountCreation2,
@@ -10,6 +11,12 @@ import {
   AccountCreation4,
   AccountDetail,
   AccountInquiry,
+  AdminHome,
+  ConsultingRevew,
+  DepositsPreference,
+  InheritanceReview,
+  Mail,
+  Settlement,
   DepositsDetail,
   DepositsJoin1,
   DepositsJoin2,
@@ -48,6 +55,19 @@ function App() {
         <Router>
           <ScrollToTop />
           <Routes>
+            {/* 어드민 */}
+            <Route path="/admin/" element={<AdminLayout />}>
+              <Route index element={<AdminHome />} />
+              <Route path="settlement" element={<Settlement />} />
+              <Route
+                path="deposits-preference"
+                element={<DepositsPreference />}
+              />
+              <Route path="inheritance-review" element={<InheritanceReview />} />
+              <Route path="consulting-review" element={<ConsultingRevew />} />
+              <Route path="mail" element={<Mail />} />
+            </Route>
+    
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               {/* 유저 */}
