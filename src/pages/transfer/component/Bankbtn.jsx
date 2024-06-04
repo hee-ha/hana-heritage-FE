@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function BankButtons({handleChange}) {
+function BankButtons({ handleChange }) {
   const [showMoreBanks, setShowMoreBanks] = useState(false);
 
   const [selectedBank, setSelectedBank] = useState(null);
@@ -97,7 +97,7 @@ function BankButtons({handleChange}) {
       <div className="grid grid-cols-4 gap-4">
         {banks.slice(0, 4).map((bank, index) => (
           <button
-          type="button"
+            type="button"
             key={index}
             className={`font-hana2 hover:border-hanaRed flex-1 text-3xl text-black bg-white p-2 rounded-md border-2 mx-1 ${
               selectedBank === bank.name
@@ -120,7 +120,7 @@ function BankButtons({handleChange}) {
         <div className="grid grid-cols-4 gap-4 mt-4">
           {banks.slice(4).map((bank, index) => (
             <button
-            type="button"
+              type="button"
               key={index}
               className={`font-hana2 flex-1 hover:border-hanaRed text-3xl text-black bg-white p-2 rounded-md border-2 mx-1 ${
                 selectedBank === bank.name
@@ -141,7 +141,7 @@ function BankButtons({handleChange}) {
       )}
 
       <button
-      type="button"
+        type="button"
         className="transferbtn bg-hanaGreen active:border-hanaGreen w-full font-hana2 text-3xl text-white text-500 mt-6"
         onClick={() => setShowMoreBanks(!showMoreBanks)}
       >
