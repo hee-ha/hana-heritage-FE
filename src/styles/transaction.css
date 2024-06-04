@@ -53,3 +53,6 @@
   margin-right: 1rem;
   width: 42px;
 }
+.custom-tab-title button {
+  font-size: 36px !important; /* 원하는 폰트 크기로 변경 */
+}
