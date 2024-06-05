@@ -1,86 +1,108 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getDepositsList } from "../../apis/depositsList/getDepositsList.js";
+import { searchDepositsList } from "../../apis/depositsList/searchDepositsList.js";
+import { getMyInfo } from "../../apis/customer/getMyInfo";
+
+
 
 function DepositsList() {
+  
   const navigate = useNavigate();
 
-  const navigateToPurchase = () => {
-    navigate("/deposits/detail");
+  const navigateToPurchase = (id) => {
+    navigate(`/deposits/detail?id=${id}`);
   };
 
-  // 배열 초기화
-  const savingslist = [
-    {
-      id: 1,
-      savingName: "펫적금",
-      savingDetail: "우리 가족 댕냥이의 두근두근 첫 재테크 !!",
-      period: "연(세전, 1년)",
-      interest: "2.30%~2.80%",
-    },
-    {
-      id: 2,
-      savingName: "급여하나 월복리 적금",
-      savingDetail: "급여 하나로 우대금리 OK! 월복리로 이자에 이자가 OK!",
-      period: "연(세전, 1년)",
-      interest: "3.55%~5.85%",
-    },
-    {
-      id: 3,
-      savingName: "(내맘) 적금",
-      savingDetail:
-        "저축금액, 만기일, 자동이체 구간까지 내맘대로 디자인하는 DIY 적금",
-      period: "연(세전, 5년)",
-      interest: "3.65%~4.15%",
-    },
-    {
-      id: 4,
-      savingName: "펫적금",
-      savingDetail: "우리 가족 댕냥이의 두근두근 첫 재테크 !!",
-      period: "연(세전, 1년)",
-      interest: "2.30%~2.80%",
-    },
-    {
-      id: 5,
-      savingName: "급여하나 월복리 적금",
-      savingDetail: "급여 하나로 우대금리 OK! 월복리로 이자에 이자가 OK!",
-      period: "연(세전, 1년)",
-      interest: "3.55%~5.85%",
-    },
-    {
-      id: 6,
-      savingName: "(내맘) 적금",
-      savingDetail:
-        "저축금액, 만기일, 자동이체 구간까지 내맘대로 디자인하는 DIY 적금",
-      period: "연(세전, 5년)",
-      interest: "3.65%~4.15%",
-    },
-  ];
+  
+  const doGetDepositsList = async () => {
+    try {
+      const response = await getDepositsList();
+      console.log(response);
+      setDepositsList(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const [depositsList, setDepositsList] = useState([]);
+  const [searchWord, setSearchWord] = useState("");
+  const [name, setName] = useState("");
+
+  const doSearchDepositsList = async () => {
+    try {
+      if (searchWord) {
+        const response = await searchDepositsList(searchWord);
+        console.log(response);
+        setDepositsList(response.result);
+      } else {
+        navigate("/deposits");
+      }
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const doMyInfo = async () => {
+    try {
+      const response = await getMyInfo();
+      setName(response.result.name);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const renderJoinMember = (joinMember) => {
+    return joinMember
+      .split(".")
+      .map((line, index) => <div key={index}>{line}</div>);
+  };
+
+
+  const formatCurrency = (number) => {
+    if (number === null) {
+      return "없음";
+    }
+    let formatted = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formatted;
+  };
+
+  useEffect(() => {
+    doGetDepositsList();
+    doSearchDepositsList();
+    doMyInfo();
+  }, []);
 
   return (
     <div className="px-24 mb-24">
       <div className="flex flex-col mt-20 font-hana2 font-semibold text-6xl">
-        황혜림님이 가입 가능한
+        {name} 고객님이 가입 가능한
       </div>
       <div className="flex flex-row mt-5 font-hana2 font-semibold text-6xl">
         <span className="text-hanaGreen">예·적금 상품 목록</span> &nbsp; 입니다.
       </div>
-      <input
-        type="text"
-        id="success"
-        className="mt-12 border font-hana2 placeholder-Gray dark:placeholder-green-500 rounded-lg focus:ring-green-500 focus:border-green-500 block w-1/2 p-3 dark:bg-gray-700 dark:border-green-500 shadow-md hover:shadow-lg duration-300 ease-in-out text-3xl"
-        placeholder="검색"
-      />
-      {/* <div style={{ textAlign: "left" }}> */}
-      {/* <div class="rounded-lg bg-hanaGreen w-1/6 text-white text-center font-semibold text-3xl mt-5">
-          <TiThumbsUp className="w-9 h-9 inline-block" />
-          금리가 높아요!
-        </div> */}
+      <div className="flex items-center mt-12">
+        <input
+          type="text"
+          id="success"
+          className="border font-hana2 placeholder-Gray dark:placeholder-green-500 rounded-lg focus:ring-green-500 focus:border-green-500 block w-1/2 p-3 dark:bg-gray-700 dark:border-green-500 shadow-md hover:shadow-lg duration-300 ease-in-out text-3xl"
+          placeholder="검색"
+          value={searchWord}
+          onChange={(e) => setSearchWord(e.target.value)}
+        />
+        <button
+          className="ml-4 w-1/5 text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10  transition-transform transform hover:animate-bubbly rounded-lg"
+          onClick={doSearchDepositsList}
+        >
+          검색하기
+        </button>
+      </div>
       <ol>
-        {savingslist.map((saving) => (
-          <li key={saving.id}>
+        {depositsList.map((depositslist) => (
+          <li key={depositslist.id}>
             <hr className="mt-12 mb-12"></hr>
             <span className="text-center font-semibold font-hana2 text-5xl mb-5">
-              {saving.savingName}
+              {depositslist.fin_prdt_nm} <br />
               <br />
             </span>
             <span
@@ -91,18 +113,21 @@ function DepositsList() {
               }}
               className="font-hana2 text-3xl"
             >
-              {saving.period}
+              가입대상
               <br />
             </span>
             <div className="flex justify-between w-full">
-              <span className="font-hana2 text-3xl">{saving.savingDetail}</span>
+              <span className="font-hana2 text-3xl">
+                최고한도: {formatCurrency(depositslist.max_limit) === "없음"? "없음"
+                : formatCurrency(depositslist.max_limit)+"원"}
+              </span>
               <span className="font-hana2 text-5xl font-bold text-hanaRed">
-                {saving.interest}
+                {renderJoinMember(depositslist.join_member)}
               </span>
             </div>
             <span className="text-3xl font-hana2 flex items-center justify-end w-full">
               <button
-                onClick={navigateToPurchase}
+                onClick={() => navigateToPurchase(depositslist.id)}
                 type="submit"
                 className="w-1/5 text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
               >
@@ -113,7 +138,6 @@ function DepositsList() {
         ))}
       </ol>
     </div>
-    // </div>
   );
 }
 
