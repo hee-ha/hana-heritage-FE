@@ -1,89 +1,107 @@
 import React, { useState, useEffect } from "react";
 import AccountInquiryCard from "./AccountInquiryCard";
+import { getMyAccount } from "../../apis/account/getMyAccount";
+import { getMyInfo } from "../../apis/customer/getMyInfo";
 
-const accounts = {
-  예금: [
-    {
-      id: 1,
-      name: "Fixed Deposit",
-      number: "9012-3456-7890",
-      balance: 10000.0,
-    },
-    {
-      id: 2,
-      name: "Investment Account",
-      number: "1234-5678-9101",
-      balance: 15200.0,
-    },
-  ],
-  적금: [
-    {
-      id: 3,
-      name: "Savings Account",
-      number: "2345-6789-0123",
-      balance: 4800.0,
-    },
-  ],
-  입출금: [
-    {
-      id: 4,
-      name: "Checking Account",
-      number: "3456-7890-1234",
-      balance: 1200.0,
-    },
-    {
-      id: 5,
-      name: "Daily Expense Account",
-      number: "4567-8901-2345",
-      balance: 2500.0,
-    },
-  ],
+const formatCurrency = (number) => {
+  // 입력값을 문자열로 변환
+  let str = number.toString();
+
+  // 정규식을 사용하여 콤마를 추가
+  let formatted = str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  return formatted;
 };
 
 const calculateTotalBalance = (accounts) => {
-  return Object.values(accounts)
-    .flat()
-    .reduce((acc, account) => acc + account.balance, 0);
+  let totalBalance = 0;
+  for (var key in accounts) {
+    totalBalance += accounts[key].balance;
+  }
+  return formatCurrency(totalBalance);
+};
+
+const extractNormal = (accounts) => {
+  let normal = [];
+  for (var key in accounts) {
+    if (accounts[key].productType === "03") {
+      normal.push(accounts[key]);
+    }
+  }
+  return normal;
+};
+
+const extractSaving = (accounts) => {
+  let saving = [];
+  for (var key in accounts) {
+    if (accounts[key].productType === "01") {
+      saving.push(accounts[key]);
+    }
+  }
+  return saving;
+};
+
+const extractDeposit = (accounts) => {
+  let deposit = [];
+  for (var key in accounts) {
+    if (accounts[key].productType === "02") {
+      deposit.push(accounts[key]);
+    }
+  }
+  return deposit;
 };
 
 function AccountInquiry() {
-  const totalBalance = calculateTotalBalance(accounts);
   const [showDeposit, setShowDeposit] = useState(true);
   const [showSavings, setShowSavings] = useState(true);
   const [showChecking, setShowChecking] = useState(true);
-  /**
-   * 
-    ----- API 생성 후 연결하는 코드 ------
-    const [accounts, setAccounts] = useState(null);
+  const [totalBalance, setTotalBalance] = useState(0);
+  const [accounts, setAccounts] = useState({});
+  const [saving, setSaving] = useState([]);
+  const [deposit, setDeposit] = useState([]);
+  const [normal, setNormal] = useState([]);
+  const [name, setName] = useState("");
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch("url");
-          const data = await response.json();
-          setAccounts(data);
-        } catch (error) {
-          alert(error.message);
-        }
-      };
+  const doMyInfo = async () => {
+    try {
+      const response = await getMyInfo();
+      setName(response.result.name);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
-      fetchData();
-    }, []);
+  const doAccounts = async () => {
+    try {
+      const response = await getMyAccount();
+      setAccounts(response.result);
+      setTotalBalance(calculateTotalBalance(response.result));
+      setNormal(extractNormal(response.result));
+      setSaving(extractSaving(response.result));
+      setDeposit(extractDeposit(response.result));
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
-    */
+  useEffect(() => {
+    doAccounts();
+    doMyInfo();
+  }, []);
+
   return (
     <div className="px-24">
       <section>
         <header className="flex justify-between items-center pt-10 pb-10 border-b border-hanaGreen ">
-          <h1 className="text-6xl font-hana2 font-medium">
+          <h1 className="text-6xl font-hana2 font-semibold">
             <span className="text-hanaGreen">계좌 조회</span> 페이지 입니다.
           </h1>
         </header>
 
-        <div className="px-12 pt-8 mb-8 mt-8 flex flex-col border-b border-r border-hanaGreen shadow shadow-hanaGreen h-72">
+        <div className="px-12 pt-8 mb-8 mt-8 flex flex-col  border border-2 rounded border-hanaGreen h-72">
           <div>
             <h1 className="text-5xl font-hana2 mb-5">
-              <span className="font-semibold text-hanaGreen">황혜림</span>{" "}
+              <span className="font-semibold text-hanaGreen">{name}</span>{" "}
               고객님,
             </h1>
             <h2 className="text-3xl font-hana2 mb-3">
@@ -96,7 +114,7 @@ function AccountInquiry() {
             <h2 className="text-4xl font-hana2">
               총 잔액:{" "}
               <span className="font-semibold text-hanaGreen">
-                {totalBalance.toFixed(0)} 원
+                {totalBalance} 원
               </span>
             </h2>
           </div>
@@ -106,7 +124,7 @@ function AccountInquiry() {
         <div className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-5xl font-semibold pb-5">
-              예금({accounts.예금.length})
+              예금({saving?.length})
             </h2>
             <button
               className="bg-hanaRed px-4 py-2 rounded"
@@ -149,7 +167,7 @@ function AccountInquiry() {
           </div>
           {showDeposit && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {accounts.예금.map((account) => (
+              {saving?.map((account) => (
                 <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
@@ -159,7 +177,7 @@ function AccountInquiry() {
         <div className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-5xl font-semibold pb-5">
-              적금({accounts.적금.length})
+              적금({deposit?.length})
             </h2>
             <button
               className="bg-hanaRed px-4 py-2 rounded"
@@ -202,7 +220,7 @@ function AccountInquiry() {
           </div>
           {showSavings && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {accounts.적금.map((account) => (
+              {deposit?.map((account) => (
                 <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
@@ -212,7 +230,7 @@ function AccountInquiry() {
         <div className="mb-8">
           <div className="flex justify-between items-center">
             <h2 className="text-5xl font-semibold pb-5">
-              입출금({accounts.입출금.length})
+              입출금({normal?.length})
             </h2>
             <button
               className="bg-hanaRed px-4 py-2 rounded"
@@ -255,7 +273,7 @@ function AccountInquiry() {
           </div>
           {showChecking && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {accounts.입출금.map((account) => (
+              {normal?.map((account) => (
                 <AccountInquiryCard key={account.id} account={account} />
               ))}
             </div>
