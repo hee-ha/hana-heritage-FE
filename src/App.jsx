@@ -87,7 +87,6 @@ function App() {
 
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
-              <Route path="property" element={<Property />} />
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />

@@ -6,6 +6,7 @@ import { Tabs } from "flowbite-react";
 import { ListCard } from "../../../components/inheritance/card";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { getMyProperty } from "../../../apis/inheritance/getMyProperty";
+import { getChartData } from "../../../apis/inheritance/getChartData";
 
 function Property() {
   const [properties, setProperties] = useState({
@@ -15,11 +16,13 @@ function Property() {
     realty: [],
   });
 
+  const [chartData, setChartData] = useState([]);
+
   const data = {
-    labels: ["현금", "부동산", "주식", "자동차"],
+    labels: ["금전", "유가증권", "채권", "부동산"],
     datasets: [
       {
-        data: [55, 25, 10, 10],
+        data: chartData,
         backgroundColor: ["#FFCDD2", "#C5CAE9", "#B2DFDB", "#FFF9C4"],
         hoverBackgroundColor: ["#FF8A80", "#7986CB", "#4DB6AC", "#FFF176"],
       },
@@ -42,10 +45,38 @@ function Property() {
       },
     },
   };
+  const barOptions = {
+    maintainAspectRatio: false,
+    plugins: {
+      datalabels: {
+        color: "#000000",
+        font: {
+          family: "Hana2",
+          weight: "bold",
+          size: 16,
+        },
+        formatter: (value, context) => {
+          return context.chart.data.labels[context.dataIndex];
+        },
+      },
+      legend: {
+        display: false, // Hide legend for bar chart
+      },
+    },
+  };
   const doProperty = async () => {
     try {
-      const response = await getMyProperty(1);
+      const response = await getMyProperty(2);
       setProperties(response.result);
+      console.log(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+  const doGetChartData = async () => {
+    try {
+      const response = await getChartData(2);
+      setChartData(response.result);
       console.log(response.result);
     } catch (error) {
       console.error("Failed to fetch response:", error);
@@ -54,94 +85,14 @@ function Property() {
 
   useEffect(() => {
     doProperty();
+    doGetChartData();
   }, []);
-
-  // const customerData1 = [
-  //   {
-  //     icon: "hi",
-  //     name: "Neil Sims",
-  //     email: "email@windster.com",
-  //     amount: "$320",
-  //   },
-  //   {
-  //     icon: "hi",
-  //     name: "Bonnie Green",
-  //     email: "email@windster.com",
-  //     amount: "$3467",
-  //   },
-  //   {
-  //     icon: "hi",
-  //     name: "Michael Gough",
-  //     email: "email@windster.com",
-  //     amount: "$67",
-  //   },
-  //   {
-  //     icon: "hi",
-  //     name: "Thomes Lean",
-  //     email: "email@windster.com",
-  //     amount: "$2367",
-  //   },
-  // ];
-
-  // const customerData2 = [
-  //   {
-  //     avatar: "hello",
-  //     fullname: "Jane Doe",
-  //     contact: "jane@windster.com",
-  //     balance: "$120",
-  //   },
-  //   {
-  //     avatar: "hello",
-  //     fullname: "John Smith",
-  //     contact: "john@windster.com",
-  //     balance: "$1467",
-  //   },
-  //   {
-  //     avatar: "hello",
-  //     fullname: "Chris Johnson",
-  //     contact: "chris@windster.com",
-  //     balance: "$200",
-  //   },
-  //   {
-  //     avatar: "hello",
-  //     fullname: "Emma Wilson",
-  //     contact: "emma@windster.com",
-  //     balance: "$3167",
-  //   },
-  // ];
-
-  // const customerData3 = [
-  //   {
-  //     picture: "hi",
-  //     firstName: "Alice",
-  //     emailAddress: "alice@windster.com",
-  //     total: "$220",
-  //   },
-  //   {
-  //     picture: "hi",
-  //     firstName: "Bob",
-  //     emailAddress: "bob@windster.com",
-  //     total: "$467",
-  //   },
-  //   {
-  //     picture: "hi",
-  //     firstName: "Charlie",
-  //     emailAddress: "charlie@windster.com",
-  //     total: "$500",
-  //   },
-  //   {
-  //     picture: "hi",
-  //     firstName: "David",
-  //     emailAddress: "david@windster.com",
-  //     total: "$3167",
-  //   },
-  // ];
 
   return (
     <>
       <div className="flex flex-row">
         <section className="mr-14 w-3/5">
-          <div className="flex bg-gray-100 mt-6 p-2 rounded-t-lg font-noto text-3xl">
+          <div className="flex bg-gray-100 mt-6 p-2 rounded-t-lg font-noto">
             <div className="mr-4">
               <ListCard title="금전" data={properties.cash} />
             </div>
@@ -156,18 +107,6 @@ function Property() {
             <div>
               <ListCard title="유가증권" data={properties.security} />
             </div>
-            {/* <div className="w-80">
-                    <ListCard
-                      title="Returning Customers"
-                      customers={customerData3}
-                      keyMapping={{
-                        icon: "picture",
-                        name: "firstName",
-                        email: "emailAddress",
-                        amount: "total",
-                      }}
-                    />
-                  </div> */}
           </div>
         </section>
         <div
@@ -182,7 +121,11 @@ function Property() {
               <Pie data={data} options={options} plugins={[ChartDataLabels]} />
             </div>
             <div className="h-1/2 w-full">
-              <Bar data={data} options={options} plugins={[ChartDataLabels]} />
+              <Bar
+                data={data}
+                options={barOptions}
+                plugins={[ChartDataLabels]}
+              />
             </div>
           </div>
         </div>
