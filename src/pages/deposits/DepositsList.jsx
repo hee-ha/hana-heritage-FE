@@ -42,59 +42,10 @@ function DepositsList() {
     }
   };
 
-  
   useEffect(() => {
     doSearchDepositsList();
   }, []);
 
-  /* 배열 초기화
-  const savingslist = [
-    {
-      id: 1,
-      savingName: "펫적금",
-      savingDetail: "우리 가족 댕냥이의 두근두근 첫 재테크 !!",
-      period: "연(세전, 1년)",
-      interest: "2.30%~2.80%",
-    },
-    {
-      id: 2,
-      savingName: "급여하나 월복리 적금",
-      savingDetail: "급여 하나로 우대금리 OK! 월복리로 이자에 이자가 OK!",
-      period: "연(세전, 1년)",
-      interest: "3.55%~5.85%",
-    },
-    {
-      id: 3,
-      savingName: "(내맘) 적금",
-      savingDetail:
-        "저축금액, 만기일, 자동이체 구간까지 내맘대로 디자인하는 DIY 적금",
-      period: "연(세전, 5년)",
-      interest: "3.65%~4.15%",
-    },
-    {
-      id: 4,
-      savingName: "펫적금",
-      savingDetail: "우리 가족 댕냥이의 두근두근 첫 재테크 !!",
-      period: "연(세전, 1년)",
-      interest: "2.30%~2.80%",
-    },
-    {
-      id: 5,
-      savingName: "급여하나 월복리 적금",
-      savingDetail: "급여 하나로 우대금리 OK! 월복리로 이자에 이자가 OK!",
-      period: "연(세전, 1년)",
-      interest: "3.55%~5.85%",
-    },
-    {
-      id: 6,
-      savingName: "(내맘) 적금",
-      savingDetail:
-        "저축금액, 만기일, 자동이체 구간까지 내맘대로 디자인하는 DIY 적금",
-      period: "연(세전, 5년)",
-      interest: "3.65%~4.15%",
-    },
-  ];
-*/
   return (
     <div className="px-24 mb-24">
       <div className="flex flex-col mt-20 font-hana2 font-semibold text-6xl">
@@ -113,23 +64,18 @@ function DepositsList() {
           onChange={(e) => setSearchWord(e.target.value)}
         />
         <button
-          className="ml-4 w-1/5 text-white font-hana2 font-semibold text-3xl bg-hanaRed py-3 px-8 z-10  transition-transform transform hover:animate-bubbly rounded-lg"
+          className="ml-4 w-1/5 text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10  transition-transform transform hover:animate-bubbly rounded-lg"
           onClick={doSearchDepositsList}
         >
           검색하기
         </button>
       </div>
-      {/* <div style={{ textAlign: "left" }}> */}
-      {/* <div class="rounded-lg bg-hanaGreen w-1/6 text-white text-center font-semibold text-3xl mt-5">
-          <TiThumbsUp className="w-9 h-9 inline-block" />
-          금리가 높아요!
-        </div> */}
       <ol>
         {depositsList.map((depositslist) => (
           <li key={depositslist.id}>
             <hr className="mt-12 mb-12"></hr>
             <span className="text-center font-semibold font-hana2 text-5xl mb-5">
-              {depositslist.fin_prdt_nm}
+              {depositslist.fin_prdt_nm} <br />
               <br />
             </span>
             <span
@@ -140,15 +86,13 @@ function DepositsList() {
               }}
               className="font-hana2 text-3xl"
             >
-              {depositslist.period}
+              가입대상
               <br />
             </span>
             <div className="flex justify-between w-full">
-              <span className="font-hana2 text-3xl">
-                {depositslist.promotional_text}
-              </span>
+              <span className="font-hana2 text-3xl"></span>
               <span className="font-hana2 text-5xl font-bold text-hanaRed">
-                {depositslist.spcl_cnd}
+                {depositslist.join_member}
               </span>
             </div>
             <span className="text-3xl font-hana2 flex items-center justify-end w-full">
