@@ -7,7 +7,6 @@ function BankButtons() {
   const handleBankClick = (bank) => {
     setSelectedBank(bank.name);
     // 선택된 은행 이름 가져오기
-    console.log(bank.name);
   };
   const banks = [
     {

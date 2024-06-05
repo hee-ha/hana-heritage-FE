@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { getDepositsList } from "../../apis/depositsList/getDepositsList.js";
 import { searchDepositsList } from "../../apis/depositsList/searchDepositsList.js";
+import { getMyInfo } from "../../apis/customer/getMyInfo";
+
+
 
 function DepositsList() {
+  
+  const navigate = useNavigate();
+
+  const navigateToPurchase = (id) => {
+    navigate(`/deposits/detail?id=${id}`);
+  };
+
+  
   const doGetDepositsList = async () => {
     try {
       const response = await getDepositsList();
@@ -15,18 +25,9 @@ function DepositsList() {
     }
   };
 
-  const navigate = useNavigate();
-
-  const navigateToPurchase = (id) => {
-    navigate(`/deposits/detail?id=${id}`);
-  };
-
   const [depositsList, setDepositsList] = useState([]);
   const [searchWord, setSearchWord] = useState("");
-
-  useEffect(() => {
-    doGetDepositsList();
-  }, []);
+  const [name, setName] = useState("");
 
   const doSearchDepositsList = async () => {
     try {
@@ -42,14 +43,40 @@ function DepositsList() {
     }
   };
 
+  const doMyInfo = async () => {
+    try {
+      const response = await getMyInfo();
+      setName(response.result.name);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const renderJoinMember = (joinMember) => {
+    return joinMember
+      .split(".")
+      .map((line, index) => <div key={index}>{line}</div>);
+  };
+
+
+  const formatCurrency = (number) => {
+    if (number === null) {
+      return "없음";
+    }
+    let formatted = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formatted;
+  };
+
   useEffect(() => {
+    doGetDepositsList();
     doSearchDepositsList();
+    doMyInfo();
   }, []);
 
   return (
     <div className="px-24 mb-24">
       <div className="flex flex-col mt-20 font-hana2 font-semibold text-6xl">
-        황혜림님이 가입 가능한
+        {name} 고객님이 가입 가능한
       </div>
       <div className="flex flex-row mt-5 font-hana2 font-semibold text-6xl">
         <span className="text-hanaGreen">예·적금 상품 목록</span> &nbsp; 입니다.
@@ -90,9 +117,12 @@ function DepositsList() {
               <br />
             </span>
             <div className="flex justify-between w-full">
-              <span className="font-hana2 text-3xl"></span>
+              <span className="font-hana2 text-3xl">
+                최고한도: {formatCurrency(depositslist.max_limit) === "없음"? "없음"
+                : formatCurrency(depositslist.max_limit)+"원"}
+              </span>
               <span className="font-hana2 text-5xl font-bold text-hanaRed">
-                {depositslist.join_member}
+                {renderJoinMember(depositslist.join_member)}
               </span>
             </div>
             <span className="text-3xl font-hana2 flex items-center justify-end w-full">
@@ -108,7 +138,6 @@ function DepositsList() {
         ))}
       </ol>
     </div>
-    // </div>
   );
 }
 
