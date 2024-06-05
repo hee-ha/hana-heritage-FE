@@ -38,6 +38,7 @@ import "./styles/transaction.css";
 import ScrollToTop from "./components/common/route/ScrollToTop";
 import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
+import Property from "./pages/inheritance/component/Property";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
@@ -63,11 +64,14 @@ function App() {
                 path="deposits-preference"
                 element={<DepositsPreference />}
               />
-              <Route path="inheritance-review" element={<InheritanceReview />} />
+              <Route
+                path="inheritance-review"
+                element={<InheritanceReview />}
+              />
               <Route path="consulting-review" element={<ConsultingRevew />} />
               <Route path="mail" element={<Mail />} />
             </Route>
-    
+
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               {/* 유저 */}
@@ -83,6 +87,7 @@ function App() {
 
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
+              <Route path="property" element={<Property />} />
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
