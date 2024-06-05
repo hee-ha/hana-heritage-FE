@@ -2,9 +2,9 @@ import { Card } from "flowbite-react";
 
 export function ListCard({ title, customers = [], keyMapping }) {
   return (
-    <Card className="w-sm">
+    <Card style={{ width: "380px", height: "450px" }}>
       <div className="mb-4 flex items-center justify-between">
-        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+        <h5 className="text-4xl font-bold leading-none text-gray-900 dark:text-white">
           {title}
         </h5>
         <a

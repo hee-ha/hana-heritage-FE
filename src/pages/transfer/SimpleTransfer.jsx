@@ -49,6 +49,10 @@ function SimpleTransfer() {
             .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
         );
       }
+      // } else {
+      //   alert("계좌가 없습니다. 계좌를 먼저 생성해주세요");
+      //   window.location.href = "account/creation/1";
+      // }
     } catch (error) {
       console.error("Failed to fetch response:", error);
     }
