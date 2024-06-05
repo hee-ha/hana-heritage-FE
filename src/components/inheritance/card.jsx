@@ -1,6 +1,6 @@
 import { Card } from "flowbite-react";
 
-export function ListCard({ title, customers = [], keyMapping }) {
+export function ListCard({ title, data = [] }) {
   return (
     <Card style={{ width: "380px", height: "450px" }}>
       <div className="mb-4 flex items-center justify-between">
@@ -16,23 +16,23 @@ export function ListCard({ title, customers = [], keyMapping }) {
       </div>
       <div className="flow-root">
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {customers.map((customer, index) => (
+          {data.map((prop, index) => (
             <li key={index} className="py-3 sm:py-4">
               <div className="flex items-center space-x-4">
                 <div className="shrink-0">
-                  <span>{customer[keyMapping.icon]}</span>
+                  <span>{prop.amount}</span>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                    {customer[keyMapping.name]}
+                    {prop.location}
                   </p>
                   <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                    {customer[keyMapping.email]}
+                    {prop.quantity}
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                {/* <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                   {customer[keyMapping.amount]}
-                </div>
+                </div> */}
               </div>
             </li>
           ))}

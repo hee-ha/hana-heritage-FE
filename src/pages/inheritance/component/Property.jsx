@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Tabs } from "flowbite-react";
 import { ListCard } from "../../../components/inheritance/card";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
+import { getMyProperty } from "../../../apis/inheritance/getMyProperty";
 
 function Property() {
+  const [properties, setProperties] = useState({
+    cash: [],
+    security: [],
+    bond: [],
+    realty: [],
+  });
+
   const data = {
     labels: ["현금", "부동산", "주식", "자동차"],
     datasets: [
@@ -34,87 +42,100 @@ function Property() {
       },
     },
   };
+  const doProperty = async () => {
+    try {
+      const response = await getMyProperty(1);
+      setProperties(response.result);
+      console.log(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
-  const customerData1 = [
-    {
-      icon: "hi",
-      name: "Neil Sims",
-      email: "email@windster.com",
-      amount: "$320",
-    },
-    {
-      icon: "hi",
-      name: "Bonnie Green",
-      email: "email@windster.com",
-      amount: "$3467",
-    },
-    {
-      icon: "hi",
-      name: "Michael Gough",
-      email: "email@windster.com",
-      amount: "$67",
-    },
-    {
-      icon: "hi",
-      name: "Thomes Lean",
-      email: "email@windster.com",
-      amount: "$2367",
-    },
-  ];
+  useEffect(() => {
+    doProperty();
+  }, []);
 
-  const customerData2 = [
-    {
-      avatar: "hello",
-      fullname: "Jane Doe",
-      contact: "jane@windster.com",
-      balance: "$120",
-    },
-    {
-      avatar: "hello",
-      fullname: "John Smith",
-      contact: "john@windster.com",
-      balance: "$1467",
-    },
-    {
-      avatar: "hello",
-      fullname: "Chris Johnson",
-      contact: "chris@windster.com",
-      balance: "$200",
-    },
-    {
-      avatar: "hello",
-      fullname: "Emma Wilson",
-      contact: "emma@windster.com",
-      balance: "$3167",
-    },
-  ];
+  // const customerData1 = [
+  //   {
+  //     icon: "hi",
+  //     name: "Neil Sims",
+  //     email: "email@windster.com",
+  //     amount: "$320",
+  //   },
+  //   {
+  //     icon: "hi",
+  //     name: "Bonnie Green",
+  //     email: "email@windster.com",
+  //     amount: "$3467",
+  //   },
+  //   {
+  //     icon: "hi",
+  //     name: "Michael Gough",
+  //     email: "email@windster.com",
+  //     amount: "$67",
+  //   },
+  //   {
+  //     icon: "hi",
+  //     name: "Thomes Lean",
+  //     email: "email@windster.com",
+  //     amount: "$2367",
+  //   },
+  // ];
 
-  const customerData3 = [
-    {
-      picture: "hi",
-      firstName: "Alice",
-      emailAddress: "alice@windster.com",
-      total: "$220",
-    },
-    {
-      picture: "hi",
-      firstName: "Bob",
-      emailAddress: "bob@windster.com",
-      total: "$467",
-    },
-    {
-      picture: "hi",
-      firstName: "Charlie",
-      emailAddress: "charlie@windster.com",
-      total: "$500",
-    },
-    {
-      picture: "hi",
-      firstName: "David",
-      emailAddress: "david@windster.com",
-      total: "$3167",
-    },
-  ];
+  // const customerData2 = [
+  //   {
+  //     avatar: "hello",
+  //     fullname: "Jane Doe",
+  //     contact: "jane@windster.com",
+  //     balance: "$120",
+  //   },
+  //   {
+  //     avatar: "hello",
+  //     fullname: "John Smith",
+  //     contact: "john@windster.com",
+  //     balance: "$1467",
+  //   },
+  //   {
+  //     avatar: "hello",
+  //     fullname: "Chris Johnson",
+  //     contact: "chris@windster.com",
+  //     balance: "$200",
+  //   },
+  //   {
+  //     avatar: "hello",
+  //     fullname: "Emma Wilson",
+  //     contact: "emma@windster.com",
+  //     balance: "$3167",
+  //   },
+  // ];
+
+  // const customerData3 = [
+  //   {
+  //     picture: "hi",
+  //     firstName: "Alice",
+  //     emailAddress: "alice@windster.com",
+  //     total: "$220",
+  //   },
+  //   {
+  //     picture: "hi",
+  //     firstName: "Bob",
+  //     emailAddress: "bob@windster.com",
+  //     total: "$467",
+  //   },
+  //   {
+  //     picture: "hi",
+  //     firstName: "Charlie",
+  //     emailAddress: "charlie@windster.com",
+  //     total: "$500",
+  //   },
+  //   {
+  //     picture: "hi",
+  //     firstName: "David",
+  //     emailAddress: "david@windster.com",
+  //     total: "$3167",
+  //   },
+  // ];
 
   return (
     <>
@@ -122,54 +143,18 @@ function Property() {
         <section className="mr-14 w-3/5">
           <div className="flex bg-gray-100 mt-6 p-2 rounded-t-lg font-noto text-3xl">
             <div className="mr-4">
-              <ListCard
-                title="현금"
-                customers={customerData1}
-                keyMapping={{
-                  icon: "icon",
-                  name: "name",
-                  email: "email",
-                  amount: "amount",
-                }}
-              />
+              <ListCard title="금전" data={properties.cash} />
             </div>
             <div>
-              <ListCard
-                title="부동산"
-                customers={customerData2}
-                keyMapping={{
-                  icon: "avatar",
-                  name: "fullname",
-                  email: "contact",
-                  amount: "balance",
-                }}
-              />
+              <ListCard title="부동산" data={properties.realty} />
             </div>
           </div>
           <div className="flex bg-gray-100 p-2 rounded-b-lg font-noto text-3xl">
             <div className="mr-4">
-              <ListCard
-                title="주식"
-                customers={customerData1}
-                keyMapping={{
-                  icon: "icon",
-                  name: "name",
-                  email: "email",
-                  amount: "amount",
-                }}
-              />
+              <ListCard title="채권" data={properties.bond} />
             </div>
             <div>
-              <ListCard
-                title="자동차"
-                customers={customerData2}
-                keyMapping={{
-                  icon: "avatar",
-                  name: "fullname",
-                  email: "contact",
-                  amount: "balance",
-                }}
-              />
+              <ListCard title="유가증권" data={properties.security} />
             </div>
             {/* <div className="w-80">
                     <ListCard
