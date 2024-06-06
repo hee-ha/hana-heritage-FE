@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../apis/axiosInstance";
 
 const OcrAuthentication = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [ocrResult, setOcrResult] = useState("");
+  const [ocrResult, setOcrResult] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -21,23 +21,18 @@ const OcrAuthentication = () => {
     formData.append("image", selectedFile);
 
     try {
-      const response = await axios.post(
-        "https://naveropenapi.apigw.ntruss.com/vision/v1/ocr",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "X-NCP-APIGW-API-KEY-ID": "CLIENT_ID",
-            "X-NCP-APIGW-API-KEY": "CLIENT_SECRET",
-          },
+      const response = await axiosInstance.post("/api/ocr", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-      );
+      });
 
-      setOcrResult(
-        response.data.images[0].fields
-          .map((field) => field.inferText)
-          .join(" "),
-      );
+      if (response.data.isSuccess) {
+        setOcrResult(response.data.result.images[0]);
+      } else {
+        console.error("OCR 요청 실패:", response.data.message);
+        alert("OCR 요청에 실패했습니다.");
+      }
     } catch (error) {
       console.error("OCR 요청 실패:", error);
       alert("OCR 요청에 실패했습니다.");
@@ -73,7 +68,10 @@ const OcrAuthentication = () => {
       {ocrResult && (
         <div className="bg-gray-100 p-4 rounded mt-4">
           <h3 className="text-2xl font-bold mb-2">OCR 결과</h3>
-          <p className="text-3xl">{ocrResult}</p>
+          <pre className="text-3xl">이름: {ocrResult.fields[0]?.inferText}</pre>
+          <pre className="text-3xl">
+            주민등록 번호: {ocrResult.fields[1]?.inferText}
+          </pre>
         </div>
       )}
     </div>
