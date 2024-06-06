@@ -32,9 +32,14 @@ function AccountInquiryCard({ account }) {
     return formatted;
   };
   const navigateToPurchase = () => {
-    navigate("/account/detail",{state : {accountId: account.id, type: account.productType}});
+    navigate("/account/detail", {
+      state: { accountId: account.id, type: account.productType },
+    });
   };
 
+  const navigateToTransfer = () => {
+    navigate("/transfer/simple");
+  };
   return (
     <div className="d-flex flex-column w-auto px-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div className="text-center">
@@ -57,7 +62,10 @@ function AccountInquiryCard({ account }) {
         >
           조회
         </button>
-        <button className="flex-1 mt-4 mb-2 px-4 py-2 text-4xl font-hana2 text-center text-white bg-hanaRed rounded-lg">
+        <button
+          onClick={navigateToTransfer}
+          className="flex-1 mt-4 mb-2 px-4 py-2 text-4xl font-hana2 text-center text-white bg-hanaRed rounded-lg"
+        >
           이체
         </button>
       </div>

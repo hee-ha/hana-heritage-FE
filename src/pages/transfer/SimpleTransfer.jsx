@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BankButtons from "./component/Bankbtn";
 import TransferAmount from "./component/TransferAmount";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { getMyAccount } from "../../apis/account/getMyAccount";
 
 function SimpleTransfer() {
@@ -121,7 +120,7 @@ function SimpleTransfer() {
         >
           {accounts.map((account) => (
             <option key={account.id} value={account.id}>
-              {account.accountNumber}
+              {account.accountNumber}({account.name})
             </option>
           ))}
         </select>
