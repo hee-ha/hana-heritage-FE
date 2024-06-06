@@ -1,21 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TransferHome = () => {
+const AccountHome = () => {
   return (
     <div className="bg-landing flex flex-row items-center justify-center space-x-10">
-      <Link to="/transfer/simple">
+      <Link to="/deposits">
         <button className="text-white font-hana2 font-semibold text-6xl bg-hanaGreen p-20 transition-transform transform hover:animate-bubbly rounded-lg">
-          계좌이체
+          예·적금가입
         </button>
       </Link>
-      <Link to="/transfer/auto">
+      <Link to="/account/creation/1">
         <button className="text-white font-hana2 font-semibold text-6xl bg-hanaGreen p-20 transition-transform transform hover:animate-bubbly rounded-lg">
-          자동이체
+          입·출금통장
         </button>
       </Link>
     </div>
   );
 };
 
-export default TransferHome;
+export default AccountHome;

@@ -32,6 +32,7 @@ import {
   TransferView,
   Login,
   Register,
+  AccountHome,
 } from "./pages";
 import "./styles/globals.css";
 import "./styles/transaction.css";
@@ -105,6 +106,7 @@ function App() {
               <Route path="account/detail" element={<AccountDetail />} />
 
               {/* 계좌 개설 */}
+              <Route path="account/home" element={<AccountHome />} />
               <Route path="account/creation/1" element={<AccountCreation1 />} />
               <Route path="account/creation/2" element={<AccountCreation2 />} />
               <Route path="account/creation/3" element={<AccountCreation3 />} />
