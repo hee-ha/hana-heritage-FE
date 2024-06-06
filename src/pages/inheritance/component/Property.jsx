@@ -94,18 +94,18 @@ function Property() {
         <section className="mr-14 w-3/5">
           <div className="flex bg-gray-100 mt-6 p-2 rounded-t-lg font-noto">
             <div className="mr-4">
-              <ListCard title="금전" data={properties.cash} />
+              <ListCard title="금전" data={properties?.cash} />
             </div>
             <div>
-              <ListCard title="부동산" data={properties.realty} />
+              <ListCard title="부동산" data={properties?.realty} />
             </div>
           </div>
           <div className="flex bg-gray-100 p-2 rounded-b-lg font-noto text-3xl">
             <div className="mr-4">
-              <ListCard title="채권" data={properties.bond} />
+              <ListCard title="채권" data={properties?.bond} />
             </div>
             <div>
-              <ListCard title="유가증권" data={properties.security} />
+              <ListCard title="유가증권" data={properties?.security} />
             </div>
           </div>
         </section>
