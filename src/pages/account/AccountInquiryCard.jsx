@@ -32,7 +32,7 @@ function AccountInquiryCard({ account }) {
     return formatted;
   };
   const navigateToPurchase = () => {
-    navigate("/account/detail");
+    navigate("/account/detail",{state : {accountId: account.id, type: account.productType}});
   };
 
   return (
