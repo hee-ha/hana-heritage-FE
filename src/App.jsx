@@ -41,7 +41,6 @@ import "./styles/transaction.css";
 import ScrollToTop from "./components/common/route/ScrollToTop";
 import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
-import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import Property from "./pages/inheritance/component/Property";
 import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import OcrAuthentication from "./pages/inheritance/OcrAuthentication";
