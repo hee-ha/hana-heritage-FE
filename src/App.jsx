@@ -39,6 +39,8 @@ import ScrollToTop from "./components/common/route/ScrollToTop";
 import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
 import Property from "./pages/inheritance/component/Property";
+import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
+import OcrAuthentication from "./pages/inheritance/OcrAuthentication";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
@@ -87,6 +89,8 @@ function App() {
 
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
+              <Route path="inheritance/join" element={<InheritanceJoin />} />
+              <Route path="inheritance/ocr" element={<OcrAuthentication />} />
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
