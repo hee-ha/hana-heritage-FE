@@ -6,7 +6,7 @@ export { default as AccountCreation4 } from "./account/AccountCreation4";
 export { default as AccountDetail } from "./account/AccountDetail";
 export { default as AccountInquiry } from "./account/AccountInquiry";
 export { default as AccountInquiryCard } from "./account/AccountInquiryCard";
-
+export { default as AccountHome } from "./account/AccountHome";
 // Admin
 export { default as AdminHome } from "./admin/AdminHome";
 export { default as ConsultingRevew } from "./admin/ConsultingReview";
