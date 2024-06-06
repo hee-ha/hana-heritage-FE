@@ -20,5 +20,5 @@ export const unformatPhoneNumber = (formattedPhoneNumber) => {
 
 // 세 자리마다 ,을 찍어주는 포매터
 export const formatNumberWithCommas = (number) => {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+  return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 };

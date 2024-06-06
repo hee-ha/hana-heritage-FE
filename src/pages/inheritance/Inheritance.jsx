@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Property from "./component/Property";
 import Contract from "./component/Contract";
 
 function Inheritance() {
+  const [activeTab, setActiveTab] = useState(0);
+
   const renderContent = () => {
     switch (activeTab) {
       case 0:
