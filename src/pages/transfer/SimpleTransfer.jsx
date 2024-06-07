@@ -1,61 +1,87 @@
 import React, { useEffect, useState } from "react";
 import BankButtons from "./component/Bankbtn";
 import TransferAmount from "./component/TransferAmount";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { getMyAccount } from "../../apis/account/getMyAccount";
 
 function SimpleTransfer() {
   const [formData, setFormData] = useState({
-    fromAccount: "",
-    toAccount: "",
     amount: "",
-    memo: "",
+    recipientBank: "",
+    recipientAccountNumber: "",
+    recipientRemarks: "",
+    senderRemarks: "",
+    password: "",
+    accountId: "",
   });
+  const navigate = useNavigate();
 
   const [accounts, setAccounts] = useState([]);
+  const handleFormdata = () => {
+    navigate("/transfer/confirm", {
+      state: {
+        formData,
+        type: "simple",
+        selectedAccount: selectedAccountNumber,
+      },
+    });
+  };
 
   useEffect(() => {
-    let url = "http://localhost/api/v1/transfer/get";
+    doAccounts();
+  }, []);
 
-    axios
-      .post(url, {
-        id: 1,
-      })
-      .then((res) => {
-        console.log("받아온 데이터: ", res.data.result);
-        setAccounts(res.data.result);
-      })
-      .catch((error) => {
-        console.log("에러: ", error);
-      });
-  }, []); // id를 의존성 배열에 추가
+  const doAccounts = async () => {
+    try {
+      const res = await getMyAccount();
+      setAccounts(res.result);
+      if (res.result.length > 0) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          accountId: res.result[0].id,
+        }));
+        setSelectedAccountNumber(res.result[0].accountNumber);
+        setFirstAccountName(res.result[0].name);
+        setFirstAccountValue(
+          res.result[0].balance
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+        );
+      }
+      // } else {
+      //   alert("계좌가 없습니다. 계좌를 먼저 생성해주세요");
+      //   window.location.href = "account/creation/1";
+      // }
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
-  // const accounts = [
-  //   {
-  //     id: 1,
-  //     name: "Young 하나통장",
-  //     number: "하나 111-111111-111111",
-  //     balance: "1원",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Savings Account",
-  //     number: "국민 222-222222-222222",
-  //     balance: "500,000원",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Business Account",
-  //     number: "신한 333-333333-333333",
-  //     balance: "1,000,000원",
-  //   },
-  // ];
-  const firstAccountName =
-    accounts.length > 0 ? accounts[0].name : "No name available";
-  const firstAccountValue =
-    accounts.length > 0
-      ? accounts[0].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-      : "No balance available";
+  const [firstAccountName, setFirstAccountName] = useState("No name available");
+  const [firstAccountValue, setFirstAccountValue] = useState(
+    "No balance available",
+  );
+  const [selectedAccountNumber, setSelectedAccountNumber] = useState("");
+
+  const accountChange = (e) => {
+    const selectedAccountId = e.target.value;
+    setFormData({ ...formData, [e.target.name]: selectedAccountId });
+    console.log(selectedAccountId);
+    // 선택한 계좌의 정보 가져오기
+    const selectedAccount = accounts.find(
+      (account) => account.id == selectedAccountId,
+    );
+    console.log(selectedAccount);
+    if (selectedAccount) {
+      setFirstAccountName(selectedAccount.name);
+      setFirstAccountValue(
+        selectedAccount.balance
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      ); // 또는 적절한 계좌 정보로 업데이트
+      setSelectedAccountNumber(selectedAccount.accountNumber);
+    }
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -68,108 +94,116 @@ function SimpleTransfer() {
         </h2>
         <hr />
       </header>
-      <div>
-        <div className="form-group mt-6 mb-6">
-          <label
-            htmlFor="fromAccount"
-            className="font-hana2 font-semibold text-5xl block mb-12"
-          >
-            어디서 보낼까요?
-          </label>
-          <div className="font-hana2 text-4xl">
-            <h4 className="mb-6">
-              <img
-                className="finImg"
-                src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_HANA_Profile.png"
-              />
-              {firstAccountName}
-            </h4>
-          </div>
-          <select
-            id="fromAccount"
-            name="fromAccount"
-            value={formData.fromAccount}
-            onChange={handleChange}
-            className="w-full border border-gray-300 text-3xl rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-          >
-            {accounts.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.account_number}
-              </option>
-            ))}
-          </select>
-          <div className="balance font-hana2 mt-4">
-            <span className="text-3xl mr-4">통장 잔액 </span>
-            <span className="text-3xl"> {firstAccountValue}원</span>
-          </div>
-        </div>
-        <div className="form-group mb-6">
-          <label
-            htmlFor="toAccount"
-            className="font-hana2 font-semibold text-5xl block mb-12"
-          >
-            누구에게 보낼까요?
-          </label>
-          <input
-            type="text"
-            name="toAccount"
-            value={formData.toAccount}
-            onChange={handleChange}
-            placeholder="은행/계좌번호 입력"
-            className="w-full font-noto text-3xl border border-gray-300 rounded-md mb-6"
-          />
-          <BankButtons />
-        </div>
 
-        <div className="form-group mb-6">
-          <label
-            htmlFor="amount"
-            className="font-hana2 font-semibold text-5xl block mb-12"
-          >
-            얼마를 보낼까요?
-          </label>
-          <TransferAmount
-            formData={formData}
-            setFormData={setFormData}
-            handleChange={handleChange}
-          />
+      <div className="form-group mt-6 mb-6">
+        <label
+          htmlFor="fromAccount"
+          className="font-hana2 font-semibold text-5xl block mb-12"
+        >
+          어디서 보낼까요?
+        </label>
+        <div className="font-hana2 text-4xl">
+          <h4 className="mb-6">
+            <img
+              className="finImg"
+              src="https://financial.pstatic.net/pie/common-bi/0.11.0/images/BK_HANA_Profile.png"
+            />
+            {firstAccountName}
+          </h4>
         </div>
-
-        <div className="form-group memo mb-6">
-          <label className="font-hana2 font-semibold text-5xl block mb-12">
-            통장에 표기할 내용 입력하기
-          </label>
-          <input
-            type="text"
-            name="memoToRecipient"
-            value={formData.memoToRecipient}
-            onChange={handleChange}
-            placeholder="받는 분에게 표기"
-            className="w-full text-3xl font-noto border border-gray-300 rounded-md mb-2"
-          />
-          <input
-            type="text"
-            name="memoToSelf"
-            value={formData.memoToSelf}
-            onChange={handleChange}
-            placeholder="나에게 표기"
-            className="w-full text-3xl font-noto border border-gray-300 rounded-md mb-2"
-          />
-          <input
-            type="text"
-            name="memo"
-            value={formData.memo}
-            onChange={handleChange}
-            placeholder="메모"
-            className="w-full text-3xl font-noto border border-gray-300 rounded-md"
-          />
+        <select
+          id="accountId"
+          name="accountId"
+          value={formData.accountId}
+          onChange={accountChange}
+          className="w-full border border-gray-300 text-3xl rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+        >
+          {accounts.map((account) => (
+            <option key={account.id} value={account.id}>
+              {account.accountNumber}({account.name})
+            </option>
+          ))}
+        </select>
+        <div className="balance font-hana2 mt-4">
+          <span className="text-3xl mr-4">통장 잔액 </span>
+          <span className="text-3xl"> {firstAccountValue}원</span>
         </div>
-        <Link to={{ pathname: "/transfer/confirm", state: { data: formData } }}>
-          <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            다음
-          </button>
-        </Link>
       </div>
+      <div className="form-group mb-6">
+        <label
+          htmlFor="password"
+          className="font-hana2 font-semibold text-5xl block mb-12"
+        >
+          출금 계좌 비밀번호를 입력하세요
+        </label>
+        <input
+          type="text"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="계좌 비밀번호 4자리 입력"
+          className="w-full font-noto text-3xl border border-gray-300 rounded-md mb-6"
+        />
+      </div>
+      <div className="form-group mb-6">
+        <label
+          htmlFor="recipient"
+          className="font-hana2 font-semibold text-5xl block mb-12"
+        >
+          누구에게 보낼까요?
+        </label>
+        <input
+          type="text"
+          name="recipientAccountNumber"
+          value={formData.recipientAccountNumber}
+          onChange={handleChange}
+          placeholder="은행/계좌번호 입력"
+          className="w-full font-noto text-3xl border border-gray-300 rounded-md mb-6"
+        />
+        <BankButtons handleChange={handleChange} />
+      </div>
+
+      <div className="form-group mb-6">
+        <label
+          htmlFor="amount"
+          className="font-hana2 font-semibold text-5xl block mb-12"
+        >
+          얼마를 보낼까요?
+        </label>
+        <TransferAmount
+          formData={formData}
+          setFormData={setFormData}
+          handleChange={handleChange}
+        />
+      </div>
+
+      <div className="form-group memo mb-6">
+        <label className="font-hana2 font-semibold text-5xl block mb-12">
+          통장에 표기할 내용 입력하기
+        </label>
+        <input
+          type="text"
+          name="recipientRemarks"
+          value={formData.recipientRemarks}
+          onChange={handleChange}
+          placeholder="받는 분에게 표기"
+          className="w-full text-3xl font-noto border border-gray-300 rounded-md mb-2"
+        />
+        <input
+          type="text"
+          name="senderRemarks"
+          value={formData.senderRemarks}
+          onChange={handleChange}
+          placeholder="나에게 표기"
+          className="w-full text-3xl font-noto border border-gray-300 rounded-md mb-2"
+        />
+      </div>
+      <button
+        onClick={handleFormdata}
+        className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+      >
+        다음
+      </button>
     </div>
   );
 }

@@ -17,8 +17,8 @@ function TransferAmount({ formData, setFormData, handleChange }) {
   };
 
   const stripCommas = (value) => {
-    if (value === "") return "";
-    return value.replace(/,/g, "");
+    if (value === "" || typeof value === "undefined") return "";
+    return value.toString().replace(/,/g, "");
   };
 
   const handleAmountChange = (e) => {
@@ -64,24 +64,28 @@ function TransferAmount({ formData, setFormData, handleChange }) {
       />
       <div className="flex text-3xl justify-between mb-4">
         <button
+        type="button"
           onClick={() => addAmount(10000)}
           className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1"
         >
           +1만
         </button>
         <button
+        type="button"
           onClick={() => addAmount(50000)}
           className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1"
         >
           +5만
         </button>
         <button
+        type="button"
           onClick={() => addAmount(100000)}
           className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1"
         >
           +10만
         </button>
         <button
+        type="button"
           onClick={() => addAmount(1000000)}
           className="flex-1 bg-white p-2 rounded-md border border-gray-300 mx-1"
         >
