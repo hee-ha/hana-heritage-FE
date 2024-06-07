@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BarChart from "../../components/common/Chart/BarChart";
 import CountingCard from "../../components/common/Card/CountingCard";
+import { calculateSettlement } from "../../apis/admin/calculateSettlement";
+
 
 const Settlement = () => {
+  const [settlementDetail, setSettlementDetail] = useState([]);
+
+  const doCalculateSettlement = async () => {
+    try {
+      const response = await calculateSettlement();
+      console.log(response);
+      setSettlementDetail(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const totalAmount =
+    settlementDetail.depositTotalCount +
+    settlementDetail.withdrawalTotalCount;
+
+  useEffect(() => {
+    doCalculateSettlement();
+  }, []);
+
+
   return (
     <div className="w-full space-y-6">
       <div className="space-y-2">
@@ -49,15 +72,20 @@ const Settlement = () => {
                 </svg>
 
                 <span className="text-sm font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-                  2024.06.03 ~ 2024.06.09
+                  {settlementDetail.startDate} ~ {settlementDetail.endDate}
                 </span>
               </li>
             </ul>
           </div>
-          <CountingCard title="전체 거래" count="14252" />
-          <CountingCard title="입금 이체" count="14252" />
-          <CountingCard title="출금 이체" count="1356" />
-          <CountingCard title="자동 이체 등록" count="263" />
+          <CountingCard title="전체 거래" count={totalAmount} />
+          <CountingCard
+            title="입금 이체"
+            count={settlementDetail.depositTotalCount}
+          />
+          <CountingCard
+            title="출금 이체"
+            count={settlementDetail.withdrawalTotalCount}
+          />
         </div>
       </div>
     </div>
