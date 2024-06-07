@@ -28,6 +28,10 @@ export { default as Home } from "./home/Home";
 
 // Inheritance (상속)
 export { default as Inheritance } from "./inheritance/Inheritance";
+export { default as InheritanceJoin2 } from "./inheritance/InheritanceJoin2";
+export { default as InheritancePrepList } from "./inheritance/InheritancePrepList";
+
+
 
 // Transfer (이체)
 export { default as AutoTransfer } from "./transfer/AutoTransfer";

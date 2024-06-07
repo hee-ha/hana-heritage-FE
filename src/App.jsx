@@ -27,6 +27,8 @@ import {
   DepositsList,
   Home,
   Inheritance,
+  InheritanceJoin2,
+  InheritancePrepList,
   AutoTransfer,
   SimpleTransfer,
   TransferHistory,
@@ -99,8 +101,12 @@ function App() {
 
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
+              <Route path="inheritance/join/2" element={<InheritanceJoin2 />} />
+              <Route path="inheritance/preplist" element={<InheritancePrepList />} />
               <Route path="inheritance/join" element={<InheritanceJoin />} />
+                
               <Route path="inheritance/ocr" element={<OcrAuthentication />} />
+                
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
