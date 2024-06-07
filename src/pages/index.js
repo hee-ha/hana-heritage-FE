@@ -6,7 +6,7 @@ export { default as AccountCreation4 } from "./account/AccountCreation4";
 export { default as AccountDetail } from "./account/AccountDetail";
 export { default as AccountInquiry } from "./account/AccountInquiry";
 export { default as AccountInquiryCard } from "./account/AccountInquiryCard";
-
+export { default as AccountHome } from "./account/AccountHome";
 // Admin
 export { default as AdminHome } from "./admin/AdminHome";
 export { default as ConsultingRevew } from "./admin/ConsultingReview";
@@ -28,7 +28,6 @@ export { default as Home } from "./home/Home";
 
 // Inheritance (상속)
 export { default as Inheritance } from "./inheritance/Inheritance";
-export { default as Property } from "./inheritance/component/Property";
 
 // Transfer (이체)
 export { default as AutoTransfer } from "./transfer/AutoTransfer";

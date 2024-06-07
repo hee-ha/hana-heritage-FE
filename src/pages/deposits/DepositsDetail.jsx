@@ -1,30 +1,31 @@
 import { React, useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Accordion } from "flowbite-react";
 import axios from "axios";
 import { getDepositsDetail } from "../../apis/depositsDetail/getDepositsDetail.js";
 import { addConsultingReservation } from "../../apis/consulting/addConsultingReservation.js";
 
 function DepositsDetail() {
-	const doDepositsDetail = async () => {
-	  try {
-		const response = await getDepositsDetail(searchParams.get("id"));
-		console.log(response);
-		setDepositsDetail(response.result);
-	  } catch (error) {
-		console.error("Failed to fetch response:", error);
-	  }
-	};
-	
-	const doAddConsultingReservation = async (requestBody) => {
-	  try {
-		const response = await addConsultingReservation(requestBody);
-		console.log(response);
-		setDepositsDetail(response.result);
-	  } catch (error) {
-		console.error("Failed to fetch response:", error);
-	  }
-	};
+  const navigate = useNavigate();
+  const doDepositsDetail = async () => {
+    try {
+      const response = await getDepositsDetail(searchParams.get("id"));
+      console.log(response);
+      setDepositsDetail(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const doAddConsultingReservation = async (requestBody) => {
+    try {
+      const response = await addConsultingReservation(requestBody);
+      console.log(response);
+      setDepositsDetail(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
   // 예적금 상품 상세 정보
   const [depositsDetail, setDepositsDetail] = useState([]);
@@ -54,12 +55,16 @@ function DepositsDetail() {
         phoneNumber: phoneNumber,
         reservationDatetime: reservationDatetime,
       };
-	  doAddConsultingReservation(requestBody);
+      doAddConsultingReservation(requestBody);
       alert("예약이 완료되었습니다!");
       setShowModal(false);
     }
   };
 
+  const handleRegisterButton = (e) => {
+    e.preventDefault();
+    navigate("/deposits/join/1", { state: { product: depositsDetail } });
+  };
   return (
     <div className="px-24 font-noto text-3xl">
       <header>
@@ -114,8 +119,11 @@ function DepositsDetail() {
           </div>
         </div>
 
-        <Link to="/deposits/join/1">
-          <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+        <Link>
+          <button
+            onClick={handleRegisterButton}
+            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
             가입하기
           </button>
         </Link>
@@ -169,8 +177,11 @@ function DepositsDetail() {
           </li>
         </ul>
 
-        <Link to="/deposits/join/1">
-          <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
+        <Link>
+          <button
+            onClick={handleRegisterButton}
+            className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+          >
             가입하기
           </button>
         </Link>

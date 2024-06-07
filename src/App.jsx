@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "aos/dist/aos.css"; // AOS CSS 파일 가져오기
+import AOS from "aos";
 
 import Layout from "./components/Layout";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -32,13 +34,16 @@ import {
   TransferView,
   Login,
   Register,
+  AccountHome,
 } from "./pages";
 import "./styles/globals.css";
 import "./styles/transaction.css";
 import ScrollToTop from "./components/common/route/ScrollToTop";
 import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
+import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import Property from "./pages/inheritance/component/Property";
+import OcrAuthentication from "./pages/inheritance/OcrAuthentication";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
@@ -48,6 +53,13 @@ function App() {
     if (storedAuth) {
       setAuth(storedAuth);
     }
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // 애니메이션 지속 시간 (밀리초)
+      once: true, // 애니메이션이 한 번만 실행되도록 설정
+    });
   }, []);
 
   return (
@@ -87,7 +99,8 @@ function App() {
 
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
-              <Route path="property" element={<Property />} />
+              <Route path="inheritance/join" element={<InheritanceJoin />} />
+              <Route path="inheritance/ocr" element={<OcrAuthentication />} />
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
@@ -102,6 +115,7 @@ function App() {
               <Route path="account/detail" element={<AccountDetail />} />
 
               {/* 계좌 개설 */}
+              <Route path="account/home" element={<AccountHome />} />
               <Route path="account/creation/1" element={<AccountCreation1 />} />
               <Route path="account/creation/2" element={<AccountCreation2 />} />
               <Route path="account/creation/3" element={<AccountCreation3 />} />

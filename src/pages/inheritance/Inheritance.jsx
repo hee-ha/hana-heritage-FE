@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Property from "./component/Property";
 import Contract from "./component/Contract";
 
@@ -18,6 +19,22 @@ function Inheritance() {
 
   return (
     <div className="px-24">
+      <div className="text-center mt-10">
+        <Link
+          to="/inheritance/join"
+          className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+          aria-current="page"
+        >
+          상속 홈페이지 바로가기(임시)
+        </Link>
+        <Link
+          to="/inheritance/ocr"
+          className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+          aria-current="page"
+        >
+          ocr 바로가기(임시)
+        </Link>
+      </div>
       <div className="flex justify-center mt-10">
         <div
           className={`px-6 py-2 mx-2 text-3xl font-hana2 cursor-pointer rounded-t-lg ${
