@@ -7,14 +7,18 @@ import {
   HiEmojiHappy,
   HiChatAlt,
   HiMail,
+  HiMailOpen,
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
     <Sidebar>
-      <Sidebar.Logo img="/png/Hana_Bank.png" imgAlt="Hana logo" className="mt-2 ms-2 mb-4">
-      </Sidebar.Logo>
+      <Sidebar.Logo
+        img="/png/Hana_Bank.png"
+        imgAlt="Hana logo"
+        className="mt-2 ms-2 mb-4"
+      ></Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <div className="flex flex-col items-center p-4 ">
@@ -48,7 +52,6 @@ const AdminSidebar = () => {
             as={Link}
             to="/admin/settlement"
             icon={HiPresentationChartBar}
-            label="Pro"
             labelColor="dark"
             className="my-4"
           >
@@ -58,7 +61,6 @@ const AdminSidebar = () => {
             as={Link}
             to="/admin/deposits-preference"
             icon={HiEmojiHappy}
-            label="3"
             labelColor="red"
             className="my-4"
           >
@@ -82,11 +84,19 @@ const AdminSidebar = () => {
           </Sidebar.Item>
           <Sidebar.Item
             as={Link}
-            to="/admin/mail"
+            to="/admin/sms-reservation"
             icon={HiMail}
             className="my-4"
           >
-            메일 발송
+            문자 예약 발송
+          </Sidebar.Item>
+          <Sidebar.Item
+            as={Link}
+            to="/admin/sms-reservation/result"
+            icon={HiMailOpen}
+            className="my-4"
+          >
+            문자 예약 결과
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
