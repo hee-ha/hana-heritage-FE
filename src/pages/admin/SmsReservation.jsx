@@ -3,7 +3,7 @@ import { Button, Textarea, Datepicker } from "flowbite-react";
 import DatePicker from "../../components/common/DatePicker/DatePicker";
 import GradientButton from "../../components/common/Button/GradientButton";
 
-const Mail = () => {
+const SmsReservation = () => {
   const customerList = [
     { id: 1, name: "황유진", email: "youjin@naver.com" },
     { id: 2, name: "정찬수", email: "ccss112@naver.com" },
@@ -19,12 +19,12 @@ const Mail = () => {
       <div className="space-y-2">
         <h1 className="text-1xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-4xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-            메일 발송 예약
+            문자 예약 발송
           </span>{" "}
           화면입니다.
         </h1>
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-          메일 수신 동의한 손님 목록에서, 메일을 발송할 손님을 선택하고
+          광고 수신 동의한 손님 목록에서, 문자를 발송할 손님을 선택하고
           예약하세요. 💌
         </p>
       </div>
@@ -61,7 +61,7 @@ const Mail = () => {
                   고객 성함
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  이메일
+                  전화번호
                 </th>
               </tr>
             </thead>
@@ -105,7 +105,7 @@ const Mail = () => {
             </p>
             <div class="flex items-center">
               <h1 class="inline-block text-xl sm:text-2xl font-extrabold text-emerald-500 tracking-tight dark:text-slate-200">
-                메일 작성 후 예약 발송
+                문자 작성 후 예약 발송
               </h1>
             </div>
           </div>
@@ -114,7 +114,7 @@ const Mail = () => {
               for="message"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              이메일 내용
+              문자 내용
             </label>
             <textarea
               id="message"
@@ -141,4 +141,4 @@ const Mail = () => {
   );
 };
 
-export default Mail;
+export default SmsReservation;
