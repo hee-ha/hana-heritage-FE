@@ -18,6 +18,7 @@ import {
   DepositsPreference,
   InheritanceReview,
   SmsReservation,
+  SmsReservationResult,
   Settlement,
   DepositsDetail,
   DepositsJoin1,
@@ -79,6 +80,7 @@ function App() {
               <Route path="inheritance-review" element={<InheritanceReview />}/>
               <Route path="consulting-review" element={<ConsultingRevew />} />
               <Route path="sms-reservation" element={<SmsReservation />} />
+              <Route path="sms-reservation/result" element={<SmsReservationResult />} />
             </Route>
 
             <Route path="/" element={<Layout />}>

@@ -14,6 +14,7 @@ export { default as ConsultingRevew } from "./admin/ConsultingReview";
 export { default as DepositsPreference } from "./admin/DepositsPreference";
 export { default as InheritanceReview } from "./admin/InheritanceReview";
 export { default as SmsReservation } from "./admin/SmsReservation";
+export { default as SmsReservationResult } from "./admin/SmsReservationResult";
 export { default as Settlement } from "./admin/Settlement";
 
 // Deposits (예적금)
