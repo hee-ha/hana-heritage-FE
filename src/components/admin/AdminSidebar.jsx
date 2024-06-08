@@ -1,5 +1,4 @@
-"use client";
-
+import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import {
   HiPresentationChartBar,
@@ -11,14 +10,30 @@ import {
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useAuth";
+import { getMyInfo } from "../../apis/customer/getMyInfo";
 
 
 const AdminSidebar = () => {
+  const [name, setName] = useState("");
   const logoutMutation = useLogout();
+  
+  const doMyInfo = async () => {
+    try {
+      const response = await getMyInfo();
+      setName(response.result.name);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
 
   const handleLogout = () => {
     logoutMutation.mutate();
   };
+  
+  useEffect(() => {
+    doMyInfo();
+  }, []);
+  
   return (
     <Sidebar>
       <Sidebar.Logo
@@ -44,7 +59,7 @@ const AdminSidebar = () => {
               </svg>
             </div>
             <h3 className="font-noto text-hanaGreen text-2xl">
-              <span className="font-bold">황혜림</span>님
+              <span className="font-bold">{name}</span>님
             </h3>
             <p className="font-noto text-gray-500">리빙트러스트 소속</p>
             <button
