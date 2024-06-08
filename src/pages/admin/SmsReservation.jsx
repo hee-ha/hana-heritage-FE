@@ -1,18 +1,80 @@
-import React from "react";
-import { Button, Textarea, Datepicker } from "flowbite-react";
+import { React, useEffect, useState } from "react";
 import DatePicker from "../../components/common/DatePicker/DatePicker";
 import GradientButton from "../../components/common/Button/GradientButton";
+import { getCustomerContact } from "../../apis/customer/getCustomerContact";
+import { reserveSms } from "../../apis/sms/reserveSms";
 
 const SmsReservation = () => {
-  const customerList = [
-    { id: 1, name: "황유진", email: "youjin@naver.com" },
-    { id: 2, name: "정찬수", email: "ccss112@naver.com" },
-    { id: 3, name: "이지후", email: "lee1212@naver.com" },
-    { id: 4, name: "변정흠", email: "hhheum@naver.com" },
-    { id: 5, name: "유민아", email: "ouou144@naver.com" },
-    { id: 6, name: "황혜림", email: "hyerm@google.com" },
-    { id: 7, name: "김똥꾸", email: "a134a@google.com" },
-  ];
+  const [customerContactList, setCustomerContactList] = useState([]);
+  const [allChecked, setAllChecked] = useState(false);
+  const [checkedCustomers, setCheckedCustomers] = useState({});
+  const [reservationDate, setReservationDate] = useState("");
+  const [message, setMessage] = useState(""); // 새로운 상태 추가
+
+  const doGetCustomerContact = async () => {
+    try {
+      const response = await getCustomerContact();
+      setCustomerContactList(response.result);
+      const newCheckedCustomers = {};
+      response.result.forEach((customer) => {
+        newCheckedCustomers[customer.id] = false;
+      });
+      setCheckedCustomers(newCheckedCustomers);
+      console.log(newCheckedCustomers); // 상태가 업데이트된 이후의 값을 출력합니다.
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  useEffect(() => {
+    doGetCustomerContact();
+  }, []);
+
+  const handleAllCheckChange = (e) => {
+    const isChecked = e.target.checked;
+    setAllChecked(isChecked);
+    setCheckedCustomers((prevCheckedCustomers) => {
+      const newCheckedCustomers = {};
+      customerContactList.forEach((customer) => {
+        newCheckedCustomers[customer.id] = isChecked;
+      });
+      console.log(newCheckedCustomers); // 상태가 업데이트된 이후의 값을 출력합니다.
+      return newCheckedCustomers;
+    });
+  };
+
+  const handleIndividualCheckChange = (e, customerId) => {
+    const isChecked = e.target.checked;
+    setCheckedCustomers((prevCheckedCustomers) => {
+      const newCheckedCustomers = {
+        ...prevCheckedCustomers,
+        [customerId]: isChecked,
+      };
+      setAllChecked(Object.values(newCheckedCustomers).every(Boolean));
+      console.log(newCheckedCustomers); // 상태가 업데이트된 이후의 값을 출력합니다.
+      return newCheckedCustomers;
+    });
+  };
+
+  const handleSubmitReservation = async () => {
+    const selectedCustomers = Object.entries(checkedCustomers)
+      .filter(([customerId, isChecked]) => isChecked)
+      .map(([customerId]) => Number(customerId));
+
+    const requestBody = {
+      customerIdList: selectedCustomers,
+      sendingDate: reservationDate,
+      content: message,
+    };
+    console.log(requestBody);
+
+    try {
+      console.log("Request Body:", requestBody);
+      await reserveSms(requestBody);
+    } catch (error) {
+      console.error("Failed to submit reservation:", error);
+    }
+  };
 
   return (
     <div className="w-full space-y-10">
@@ -51,6 +113,8 @@ const SmsReservation = () => {
                       id="checkbox-all-search"
                       type="checkbox"
                       className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      checked={allChecked}
+                      onChange={handleAllCheckChange}
                     />
                     <label for="checkbox-all-search" className="sr-only">
                       checkbox
@@ -66,35 +130,40 @@ const SmsReservation = () => {
               </tr>
             </thead>
             <tbody>
-              {customerList.map((customer) => (
-                <tr
-                  key={customer.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
-                  <td className="w-4 p-4">
-                    <div className="flex items-center">
-                      <input
-                        id={`checkbox-table-search-${customer.id}`}
-                        type="checkbox"
-                        className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      />
-                      <label
-                        htmlFor={`checkbox-table-search-${customer.id}`}
-                        className="sr-only"
-                      >
-                        checkbox
-                      </label>
-                    </div>
-                  </td>
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              {customerContactList &&
+                customerContactList.map((customer) => (
+                  <tr
+                    key={customer.id}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
-                    {customer.name}
-                  </th>
-                  <td className="px-6 py-4">{customer.email}</td>
-                </tr>
-              ))}
+                    <td className="w-4 p-4">
+                      <div className="flex items-center">
+                        <input
+                          id={`checkbox-table-search-${customer.id}`}
+                          type="checkbox"
+                          className="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          checked={checkedCustomers[customer.id] || false}
+                          onChange={(e) =>
+                            handleIndividualCheckChange(e, customer.id)
+                          }
+                        />
+                        <label
+                          htmlFor={`checkbox-table-search-${customer.id}`}
+                          className="sr-only"
+                        >
+                          checkbox
+                        </label>
+                      </div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {customer.name}
+                    </th>
+                    <td className="px-6 py-4">{customer.phoneNumber}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
@@ -121,6 +190,8 @@ const SmsReservation = () => {
               rows="10"
               class="resize-none font-noto text-base block p-2.5 w-full  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Write your thoughts here..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
 
             <label
@@ -131,9 +202,16 @@ const SmsReservation = () => {
             </label>
 
             <div class="w-full mb-4">
-              <DatePicker />
+              <DatePicker
+                value={reservationDate}
+                onChange={setReservationDate}
+              />
             </div>
-            <GradientButton label="예약전송" width="w-full" />
+            <GradientButton
+              label="예약전송"
+              width="w-full"
+              handleClickBtn={handleSubmitReservation}
+            />
           </div>
         </div>
       </div>
