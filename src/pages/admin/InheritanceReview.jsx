@@ -4,6 +4,7 @@ import { HiCheck, HiClock } from "react-icons/hi";
 import { InheritanceReviewCard } from "./InheritanceReviewCard";
 
 const InheritanceReview = () => {
+  
   return (
     <div className="w-full space-y-6">
       <div className="space-y-2">

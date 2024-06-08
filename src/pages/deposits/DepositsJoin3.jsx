@@ -223,6 +223,7 @@ function DepositsJoin3() {
           >
             다음
           </button>
+          </Link>
         </div>
     </div>
   );
