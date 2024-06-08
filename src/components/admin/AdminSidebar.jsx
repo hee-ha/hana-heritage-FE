@@ -8,12 +8,13 @@ import {
   HiMail,
   HiMailOpen,
 } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLogout } from "../../hooks/useAuth";
 import { getMyInfo } from "../../apis/customer/getMyInfo";
 
-
 const AdminSidebar = () => {
+  const location = useLocation();
+
   const [name, setName] = useState("");
   const logoutMutation = useLogout();
   
@@ -29,11 +30,11 @@ const AdminSidebar = () => {
   const handleLogout = () => {
     logoutMutation.mutate();
   };
-  
+
   useEffect(() => {
     doMyInfo();
   }, []);
-  
+
   return (
     <Sidebar>
       <Sidebar.Logo
@@ -77,6 +78,10 @@ const AdminSidebar = () => {
             icon={HiPresentationChartBar}
             labelColor="dark"
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/settlement" ? "bold" : "normal",
+            }}
           >
             정산
           </Sidebar.Item>
@@ -86,6 +91,10 @@ const AdminSidebar = () => {
             icon={HiEmojiHappy}
             labelColor="red"
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/deposits-preference" ? "bold" : "normal",
+            }}
           >
             상품 선호도
           </Sidebar.Item>
@@ -94,6 +103,10 @@ const AdminSidebar = () => {
             to="/admin/inheritance-review"
             icon={HiClipboard}
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/inheritance-review" ? "bold" : "normal",
+            }}
           >
             상속 계약 검토 목록
           </Sidebar.Item>
@@ -102,6 +115,10 @@ const AdminSidebar = () => {
             to="/admin/consulting-review"
             icon={HiChatAlt}
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/consulting-review" ? "bold" : "normal",
+            }}
           >
             상담 대기 목록
           </Sidebar.Item>
@@ -110,6 +127,10 @@ const AdminSidebar = () => {
             to="/admin/sms-reservation"
             icon={HiMail}
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/sms-reservation" ? "bold" : "normal",
+            }}
           >
             문자 예약 발송
           </Sidebar.Item>
@@ -118,6 +139,10 @@ const AdminSidebar = () => {
             to="/admin/sms-reservation/result"
             icon={HiMailOpen}
             className="my-4"
+            style={{
+              fontWeight:
+                location.pathname === "/admin/sms-reservation/result" ? "bold" : "normal",
+            }}
           >
             문자 예약 결과
           </Sidebar.Item>
