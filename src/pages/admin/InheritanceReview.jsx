@@ -1,11 +1,46 @@
-import { React, useState } from "react";
-import { Avatar, Badge, Button } from "flowbite-react";
-import { HiCheck, HiClock } from "react-icons/hi";
+import React, { useEffect, useState } from "react";
 import { InheritanceReviewCard } from "./InheritanceReviewCard";
 import InheritanceModal from "../../components/common/Modal/InheritanceModal";
+import { livingTrustContract } from "../../apis/admin/livingTrustContract";
+import { approveLivingTrustContract } from "../../apis/admin/approveLivingTrustContract"; // 승인 처리 API import
 
 const InheritanceReview = () => {
   const [showModal, setShowModal] = useState(false);
+  const [contracts, setContracts] = useState([]);
+  const [selectedContract, setSelectedContract] = useState(null);
+
+  const fetchContracts = async () => {
+    try {
+      const response = await livingTrustContract();
+      setContracts(response.result);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  const handleShowModal = (contract) => {
+    setSelectedContract(contract);
+    setShowModal(true);
+  };
+
+  const handleApprove = async (id) => {
+    try {
+      await approveLivingTrustContract(id);
+      // 승인 후, 상태 업데이트
+      setContracts((prevContracts) =>
+        prevContracts.map((contract) =>
+          contract.id === id ? { ...contract, isApproved: true } : contract
+        )
+      );
+    } catch (error) {
+      console.error("Failed to approve contract:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchContracts();
+  }, []);
+
   return (
     <div className="w-full space-y-6">
       <div className="space-y-2">
@@ -22,19 +57,24 @@ const InheritanceReview = () => {
         </p>
       </div>
       <div className="w-full">
-        <div class="grid sm:grid-cols-2 gap-6 md:grid-cols-3">
-          <InheritanceReviewCard setShowModal={setShowModal} />
-          <InheritanceReviewCard setShowModal={setShowModal} />
-          <InheritanceReviewCard setShowModal={setShowModal} />
-          <InheritanceReviewCard setShowModal={setShowModal} />
-          <InheritanceReviewCard setShowModal={setShowModal} />
-          <InheritanceReviewCard setShowModal={setShowModal} />
+        <div className="grid sm:grid-cols-2 gap-6 md:grid-cols-3">
+          {contracts.length > 0 ? (
+            contracts.map((contract) => (
+              <InheritanceReviewCard
+                key={contract.id}
+                contract={contract}
+                setShowModal={() => handleShowModal(contract)}
+                handleApprove={() => handleApprove(contract.id)} // 승인 처리 함수 전달
+              />
+            ))
+          ) : (
+            <p className="text-center col-span-3">검토 대기중인 계약이 없습니다.</p>
+          )}
         </div>
       </div>
 
-      {/* 상담 예약 폼 */}
       {showModal && (
-        <InheritanceModal setShowModal={setShowModal}/>
+        <InheritanceModal setShowModal={setShowModal} contract={selectedContract} />
       )}
     </div>
   );
