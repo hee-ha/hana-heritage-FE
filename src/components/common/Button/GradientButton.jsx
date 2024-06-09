@@ -26,7 +26,7 @@ const GradientButton = ({
     paddingY,
     paddingX,
     width,
-    "group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none bg-gradient-to-br from-green-400 to-cyan-600 text-white focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800 rounded-lg",
+    "group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow]  bg-gradient-to-br from-green-400 to-cyan-600 text-white  rounded-lg",
     {
       "cursor-not-allowed opacity-50": isDisabled, // disabled 상태일 때 색상 희미하게 변경
     },

@@ -1,9 +1,11 @@
-import React from "react";
+import { React, useState } from "react";
 import { Avatar, Badge, Button } from "flowbite-react";
 import { HiCheck, HiClock } from "react-icons/hi";
 import { InheritanceReviewCard } from "./InheritanceReviewCard";
+import InheritanceModal from "../../components/common/Modal/InheritanceModal";
 
 const InheritanceReview = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="w-full space-y-6">
       <div className="space-y-2">
@@ -21,14 +23,19 @@ const InheritanceReview = () => {
       </div>
       <div className="w-full">
         <div class="grid sm:grid-cols-2 gap-6 md:grid-cols-3">
-          <InheritanceReviewCard />
-          <InheritanceReviewCard />
-          <InheritanceReviewCard />
-          <InheritanceReviewCard />
-          <InheritanceReviewCard />
-          <InheritanceReviewCard />
+          <InheritanceReviewCard setShowModal={setShowModal} />
+          <InheritanceReviewCard setShowModal={setShowModal} />
+          <InheritanceReviewCard setShowModal={setShowModal} />
+          <InheritanceReviewCard setShowModal={setShowModal} />
+          <InheritanceReviewCard setShowModal={setShowModal} />
+          <InheritanceReviewCard setShowModal={setShowModal} />
         </div>
       </div>
+
+      {/* 상담 예약 폼 */}
+      {showModal && (
+        <InheritanceModal setShowModal={setShowModal}/>
+      )}
     </div>
   );
 };
