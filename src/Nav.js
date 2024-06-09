@@ -8,11 +8,6 @@ const getLinkClassName = (isActive) =>
     ? "text-white bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
     : "text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg";
 
-// 커스텀 isActive 함수
-const customIsActive = (match, location, path) => {
-  return location.pathname === path;
-};
-
 const Nav = () => {
   const location = useLocation();
 

@@ -132,7 +132,7 @@ function AutoTransfer() {
           출금 계좌 비밀번호를 입력하세요
         </label>
         <input
-          type="text"
+          type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
