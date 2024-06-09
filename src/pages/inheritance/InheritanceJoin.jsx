@@ -2,12 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import Video from "../../assets/mp4/heritage.mp4";
 import "aos/dist/aos.css"; // AOS CSS 파일 가져오기
 import AOS from "aos";
+import { useNavigate } from "react-router-dom";
 
 function InheritanceJoin() {
   const videoRef = useRef();
   const firstSectionRef = useRef();
   const secondSectionRef = useRef();
   const thirdSectionRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     AOS.init({
@@ -73,6 +75,11 @@ function InheritanceJoin() {
     }, 100);
   };
 
+  const moveToJoin = () => {
+    navigate("/inheritance/join2");
+    console.log("click");
+  };
+
   return (
     <div className="relative w-screen h-screen overflow-x-hidden">
       <div ref={firstSectionRef}>
@@ -87,10 +94,8 @@ function InheritanceJoin() {
           <source src={Video} type="video/mp4" />
         </video>
       </div>
-
       {/* 배경 어둡게 처리 */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
-
       {/* 첫 번째 섹션 */}
       <section
         className="relative h-screen flex items-center justify-center z-10"
@@ -106,7 +111,6 @@ function InheritanceJoin() {
           를 소개합니다!
         </h1>
       </section>
-
       {/* 스크롤 다운 버튼 */}
       <div className="absolute bottom-10 w-full flex justify-center z-10">
         <button
@@ -131,7 +135,6 @@ function InheritanceJoin() {
           </svg>
         </button>
       </div>
-
       {/* 두 번째 섹션 */}
       <section
         ref={secondSectionRef}
@@ -211,14 +214,13 @@ function InheritanceJoin() {
           </button>
         </div>
       </section>
-
       {/* 세번째 섹션 */}
       <section
         ref={thirdSectionRef}
         className="relative h-screen flex items-center justify-center space-x-8 bg-landing2"
       >
         <div
-          className="h-4/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col "
+          className="h-4/5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col "
           style={{ width: "525px" }}
         >
           <a href="#">
@@ -243,7 +245,7 @@ function InheritanceJoin() {
         </div>
 
         <div
-          className="h-4/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col whitespace-nowrap"
+          className="h-4/5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col whitespace-nowrap"
           style={{ width: "525px" }}
         >
           <a href="#">
@@ -268,7 +270,7 @@ function InheritanceJoin() {
         </div>
 
         <div
-          className="h-4/6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col"
+          className="h-4/5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 z-20 flex flex-col"
           style={{ width: "525px" }}
         >
           <a href="#">
@@ -294,6 +296,17 @@ function InheritanceJoin() {
           </div>
         </div>
       </section>
+      <button
+        class="fixed flex items-center bottom-10 right-14 bg-hanaGold text-black text-5xl font-hana2 font-bold p-6 rounded-3xl shadow-lg z-30 hover:animate-bubbly"
+        onClick={moveToJoin}
+      >
+        가입하기
+        <img
+          src="https://www.svgrepo.com/show/65639/contract.svg"
+          alt="가입 로고"
+          className="h-16 ml-3"
+        />
+      </button>
     </div>
   );
 }
