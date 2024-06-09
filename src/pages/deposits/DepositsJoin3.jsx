@@ -222,8 +222,9 @@ function DepositsJoin3() {
           <button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             취소
           </button>
-        </Link>
-      </div>
+          </Link>
+        </div>
+
     </div>
   );
 }
