@@ -7,12 +7,14 @@ export { default as AccountDetail } from "./account/AccountDetail";
 export { default as AccountInquiry } from "./account/AccountInquiry";
 export { default as AccountInquiryCard } from "./account/AccountInquiryCard";
 export { default as AccountHome } from "./account/AccountHome";
+
 // Admin
 export { default as AdminHome } from "./admin/AdminHome";
 export { default as ConsultingRevew } from "./admin/ConsultingReview";
 export { default as DepositsPreference } from "./admin/DepositsPreference";
 export { default as InheritanceReview } from "./admin/InheritanceReview";
-export { default as Mail } from "./admin/Mail";
+export { default as SmsReservation } from "./admin/SmsReservation";
+export { default as SmsReservationResult } from "./admin/SmsReservationResult";
 export { default as Settlement } from "./admin/Settlement";
 
 // Deposits (예적금)

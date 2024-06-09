@@ -1,10 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
-import GradientButton from "../Button/GradientButton";
-import StarAndLink from "../Rating/StarAndLink";
 
-const DatePicker = ({}) => {
+const DatePicker = ({ value, onChange }) => {
   return (
     <div className="relative w-full">
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -22,6 +18,8 @@ const DatePicker = ({}) => {
         type="date"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Select date"
+        value={value} // value prop 설정
+        onChange={(e) => onChange(e.target.value)} // onChange 이벤트 핸들러 설정
       />
     </div>
   );

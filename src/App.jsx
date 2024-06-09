@@ -17,7 +17,8 @@ import {
   ConsultingRevew,
   DepositsPreference,
   InheritanceReview,
-  Mail,
+  SmsReservation,
+  SmsReservationResult,
   Settlement,
   DepositsDetail,
   DepositsJoin1,
@@ -74,16 +75,12 @@ function App() {
             <Route path="/admin/" element={<AdminLayout />}>
               <Route index element={<AdminHome />} />
               <Route path="settlement" element={<Settlement />} />
-              <Route
-                path="deposits-preference"
-                element={<DepositsPreference />}
+              <Route path="deposits-preference" element={<DepositsPreference />}
               />
-              <Route
-                path="inheritance-review"
-                element={<InheritanceReview />}
-              />
+              <Route path="inheritance-review" element={<InheritanceReview />}/>
               <Route path="consulting-review" element={<ConsultingRevew />} />
-              <Route path="mail" element={<Mail />} />
+              <Route path="sms-reservation" element={<SmsReservation />} />
+              <Route path="sms-reservation/result" element={<SmsReservationResult />} />
             </Route>
 
             <Route path="/" element={<Layout />}>
@@ -102,11 +99,13 @@ function App() {
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
               <Route path="inheritance/join/2" element={<InheritanceJoin2 />} />
-              <Route path="inheritance/preplist" element={<InheritancePrepList />} />
+              <Route
+                path="inheritance/preplist"
+                element={<InheritancePrepList />}
+              />
               <Route path="inheritance/join" element={<InheritanceJoin />} />
-                
+
               <Route path="inheritance/ocr" element={<OcrAuthentication />} />
-                
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
