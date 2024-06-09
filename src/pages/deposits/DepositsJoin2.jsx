@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { getMyAccount } from "../../apis/transfer/TransferHistory";
+import { checkPassword } from "../../apis/account/checkPassword";
 
 function DepositsJoin2() {
   const [accountNumber, setAccountNumber] = useState("");
@@ -18,6 +19,8 @@ function DepositsJoin2() {
   const [autoTermination, setAutoTermination] = useState("만기일");
   const [smsNotification, setSmsNotification] = useState(null);
 
+  const [message, setMessage] = useState("");
+  
   const [dropdownVisibility1, setDropdownVisibility1] = useState(false);
   const [dropdownVisibility2, setDropdownVisibility2] = useState(false);
   const [selectedItem, setSelectedItem] = useState("계좌를 선택해주세요");
@@ -51,13 +54,26 @@ function DepositsJoin2() {
 
   const location = useLocation();
   const productDetail = location.state?.product || {};
-
   const [tooltip, setTooltip] = useState({
     visible: false,
     text: "",
     x: 0,
     y: 0,
   });
+
+  const handlePasswordCheck = async () => {
+    try {
+      const response = await checkPassword(selectedItem.id, password);
+
+      if (response.isSuccess) {
+        setMessage("비밀번호가 확인되었습니다.");
+      } else {
+        setMessage("비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      setMessage("서버와 통신 중 오류가 발생했습니다.");
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -244,22 +260,33 @@ function DepositsJoin2() {
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
             <label>계좌 비밀번호</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-5 border rounded mt-2"
-            />
+            <div className="flex items-center mt-2">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-5 border rounded mt-2"
+              />
+              <button
+                onClick={handlePasswordCheck}
+                className="ml-5 p-5 bg-hanaRed text-white w-1/4 rounded mt-2 hover:bg-hanaSilver"
+              >
+                비밀번호 확인
+              </button>
+            </div>
+            {message && (
+              <p className="mt-2 text-hana2 text-hanaRed">{message}</p>
+            )}
           </div>
         </div>
 
-        <div className="space-y-10 mb-6 rounded-lg overflow-hidden">
+        <div className="space-y-10 mb-10 rounded-lg overflow-hidden">
           <div className="bg-hanaGold text-white p-5 text-5xl rounded-t-lg font-hana2">
             상품정보
           </div>
           <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
-            <label className="text-4xl">신규금액</label>
-            <div className="grid w-full gap-6 grid-cols-2">
+            <label>신규금액</label>
+            <div className="grid w-full gap-6 grid-cols-2 mt-2">
               <div className="relative ">
                 <input
                   type="text"
@@ -598,28 +625,48 @@ function DepositsJoin2() {
                   type="text"
                   value={autoTransferAccount}
                   onChange={(e) => setAutoTransferAccount(e.target.value)}
-                  className="w-full p-2 border rounded mt-2"
+                  className="w-full p-5 border rounded mt-2"
                 />
               </div>
-              <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+              {/* <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 계좌 비밀번호</label>
                 <input
                   type="password"
                   value={autoTransferPassword}
                   onChange={(e) => setAutoTransferPassword(e.target.value)}
                   // onChange={(e) => setAutoTransferPassword(e.target.value)}
-                  className="w-full p-2 border rounded mt-2"
+                  className="w-full p-5 border rounded mt-2"
                 />
+              </div> */}
+              <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
+                <label>자동이체 계좌 비밀번호</label>
+                <div className="flex items-center">
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full p-5 border rounded mt-2"
+                  />
+                  <button
+                    onClick={handlePasswordCheck}
+                    className="ml-5 p-5 bg-hanaRed text-white w-1/3 rounded mt-2 hover:bg-hanaSilver"
+                  >
+                    비밀번호 확인
+                  </button>
+                </div>
+                {message && (
+                  <p className="mt-2 text-hana2 text-hanaRed">{message}</p>
+                )}
               </div>
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
                 <label>자동이체 금액</label>
-                <div className="grid w-full gap-6 grid-cols-2">
+                <div className="grid w-full gap-6 grid-cols-2 mt-2">
                   <div className="relative w-full">
                     <input
                       type="text"
                       value={autoTransferAmount.toLocaleString()}
                       onChange={(e) => setAutoTransferAmount(e.target.value)}
-                      className="w-full p-2 border rounded text-right pr-16"
+                      className="w-full p-5 border rounded text-right pr-16"
                       placeholder="10만원 이상~50만원 이하"
                     />
                     <span className="absolute right-4 top-1/2 transform -translate-y-1/2">
@@ -658,7 +705,7 @@ function DepositsJoin2() {
                   type="date"
                   value={autoTransferStartDate}
                   onChange={(e) => setAutoTransferStartDate(e.target.value)} //자동이체 테이블에 저장?
-                  className="w-full p-2 border rounded mt-2"
+                  className="w-full p-5 border rounded mt-2"
                 />
               </div>
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">
@@ -883,7 +930,6 @@ function DepositsJoin2() {
             </div>
           </div>
         </div>
-
         <div className="flex justify-between">
           <Link onClick={handleSubmit} className="flex-grow">
             <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
