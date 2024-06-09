@@ -46,6 +46,7 @@ import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
 import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import Property from "./pages/inheritance/component/Property";
+import InheritanceWait from "./pages/inheritance/InheritanceWait";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
