@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { getMyAccount } from "../../apis/transfer/TransferHistory";
+import { checkPassword } from "../../apis/account/checkPassword";
 
 function DepositsJoin2() {
   const [accountNumber, setAccountNumber] = useState("");
@@ -18,6 +19,8 @@ function DepositsJoin2() {
   const [autoTermination, setAutoTermination] = useState("만기일");
   const [smsNotification, setSmsNotification] = useState(null);
 
+  const [message, setMessage] = useState("");
+  
   const [dropdownVisibility1, setDropdownVisibility1] = useState(false);
   const [dropdownVisibility2, setDropdownVisibility2] = useState(false);
   const [selectedItem, setSelectedItem] = useState("계좌를 선택해주세요");
@@ -60,20 +63,9 @@ function DepositsJoin2() {
 
   const handlePasswordCheck = async () => {
     try {
-      const response = await fetch(
-        "https://your-api-endpoint.com/verify-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        },
-      );
+      const response = await checkPassword(selectedItem.id, password);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.isSuccess) {
         setMessage("비밀번호가 확인되었습니다.");
       } else {
         setMessage("비밀번호가 일치하지 않습니다.");
