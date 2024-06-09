@@ -57,10 +57,8 @@ function SimpleTransfer() {
     }
   };
 
-  const [firstAccountName, setFirstAccountName] = useState("No name available");
-  const [firstAccountValue, setFirstAccountValue] = useState(
-    "No balance available",
-  );
+  const [firstAccountName, setFirstAccountName] = useState("");
+  const [firstAccountValue, setFirstAccountValue] = useState("");
   const [selectedAccountNumber, setSelectedAccountNumber] = useState("");
 
   const accountChange = (e) => {
@@ -120,7 +118,7 @@ function SimpleTransfer() {
         >
           {accounts.map((account) => (
             <option key={account.id} value={account.id}>
-              {account.accountNumber}({account.name})
+              {account.accountNumber}
             </option>
           ))}
         </select>
@@ -137,7 +135,7 @@ function SimpleTransfer() {
           출금 계좌 비밀번호를 입력하세요
         </label>
         <input
-          type="text"
+          type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}

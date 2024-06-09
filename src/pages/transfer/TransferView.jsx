@@ -20,8 +20,13 @@ function TransferView() {
 
   const doTransfer = async (formDataToSend) => {
     try {
-      await Transfer(formDataToSend);
-      // console.log(response);
+      const response = await Transfer(formDataToSend);
+      if (response.isSuccess) {
+        console.log(response.result);
+        window.location.href = "/";
+      } else {
+        alert(response.message);
+      }
     } catch (error) {
       console.error("Failed to fetch response:", error);
     }
@@ -29,8 +34,14 @@ function TransferView() {
 
   const doAutoTransfer = async (formDataToSend) => {
     try {
-      await autoTransfer(formDataToSend);
+      const response = await autoTransfer(formDataToSend);
       // console.log(response);
+      if (response.isSuccess) {
+        console.log(response.result);
+        window.location.href = "/";
+      } else {
+        alert(response.message);
+      }
     } catch (error) {
       console.error("Failed to fetch response:", error);
     }
