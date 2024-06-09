@@ -10,7 +10,7 @@ export const useLogin = () => {
   return useMutation(postLogin, {
     onSuccess: (data) => {
       setAuth(data);
-      navigate("/");
+      //navigate("/");
     },
     onError: () => {
       alert("Login failed");

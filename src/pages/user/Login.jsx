@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useAuth";
 import axios from "axios";
+import PicComponent from "../../components/common/FaceId/PicComponent";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,10 +10,15 @@ function Login() {
   const [password, setPassword] = useState("");
   const { mutate: login } = useLogin();
   const navigate = useNavigate();
+  const [isPicModalOpen, setIsPicModalOpen] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
     login({ phoneNumber, password });
+  };
+
+  const openPicModal = () => {
+    setIsPicModalOpen(true);
   };
 
   const navigateToRegister = () => {
@@ -66,9 +72,17 @@ function Login() {
               <button
                 type="submit"
                 className="col w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
+                onClick={openPicModal}
               >
                 로그인
               </button>
+              {isPicModalOpen && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <PicComponent closeModal={() => setIsPicModalOpen(false)} />
+                  </div>
+                </div>
+              )}
               <button
                 type="button"
                 onClick={navigateToRegister}
