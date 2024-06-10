@@ -9,7 +9,7 @@ const InheritancePrepList = () => {
     { name: "주민등록증", image: residentImage },
     { name: "채권 계약서", image: bondImage },
     { name: "부동산 계약서", image: realEstateImage },
-    { name: "예금 잔액 증명서", image: bankBalanceImage },
+    { name: "유가증권 증명서", image: bankBalanceImage },
   ];
 
   return (
@@ -21,7 +21,7 @@ const InheritancePrepList = () => {
         </h2>
         <hr />
       </header>
-      <div className="text-center text-hana2 p-10 bg-hanaSilver rounded-lg shadow-md">
+      <div className="text-center text-hana2 p-10 bg-hanaGreen rounded-lg shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {documents.map((doc, index) => (
             <div
@@ -35,7 +35,7 @@ const InheritancePrepList = () => {
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
-              <li className="flex items-center text-white  font-hana2 text-3xl">
+              <li className="flex items-center text-white  font-hana2 font-semibold text-3xl">
                 <span className="flex items-center justify-center w-9 h-9 me-4 border-4 border-white rounded-full shrink-0">
                   {index + 1}
                 </span>

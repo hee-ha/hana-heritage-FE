@@ -23,7 +23,8 @@ function TransferView() {
       const response = await Transfer(formDataToSend);
       if (response.isSuccess) {
         console.log(response.result);
-        window.location.href = "/";
+        alert("이체 성공하셨습니다!");
+        window.location.href = "/transfer/history";
       } else {
         alert(response.message);
       }
