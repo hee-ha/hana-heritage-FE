@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createAccount } from "../../apis/account/createAccount";
+import OcrAuthenticationModal from "../inheritance/OcrAuthentication";
 import PicComponent from "../../components/common/FaceId/PicComponent";
 
 function AccountCreation3() {
@@ -10,14 +11,28 @@ function AccountCreation3() {
   const [userId, setUserId] = useState(location.state?.userId);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false); // 모달 상태 추가
+  const [ocrData, setOcrData] = useState(null); // OCR 데이터 상태 추가
   const [isPicModalOpen, setIsPicModalOpen] = useState(false);
 
   const navigate = useNavigate();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleCreateButton = () => {
+    setShowModal(true); // 개설 버튼 클릭 시 모달을 띄움
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleSaveModal = (data) => {
+    setOcrData(data);
+    setShowModal(false);
+    createAccountRequest(); // OCR 인증 후 계좌 생성 요청
+  };
+
+  const createAccountRequest = () => {
     let accountInfo = {
       accountName: formData.accountName,
       accountPassword: formData.password,
@@ -196,6 +211,12 @@ function AccountCreation3() {
           </button>
         </Link>
       </div>
+
+      <OcrAuthenticationModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        handleSave={handleSaveModal}
+      />
     </div>
   );
 }

@@ -1,8 +1,53 @@
-import React from "react";
-import { Avatar, Badge, Button } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import { Avatar } from "flowbite-react";
 import GradientButton from "../../components/common/Button/GradientButton";
+import { calculateConsulting } from "../../apis/admin/calculateConsulting";
+import { consultingComplete } from "../../apis/admin/consultingComplete";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+
 
 const ConsultingReview = () => {
+  const [reservations, setReservations] = useState([]);
+
+  const fetchReservations = async () => {
+    try {
+      const response = await calculateConsulting();
+      // console.log(response);
+      if (Array.isArray(response.result)) {
+        setReservations(response.result);
+      } else {
+        console.error("API 응답이 배열이 아닙니다.", response);
+        setReservations([]);
+      }
+    } catch (error) {
+      console.error("예약 목록을 가져오는 중 오류가 발생했습니다!", error);
+    }
+  };
+
+  const handleComplete = async (id) => {
+    console.log("handleComplete 호출됨: ", id); 
+    
+    try {
+      const response = await consultingComplete(id);
+      console.log(response);
+      setReservations((prevReservations) => 
+        // console.log(prevReservations)
+        prevReservations.map(reservation => 
+          reservation.id === id ? { ...reservation, isCompleted: true } : reservation
+        )
+      );
+    } catch (error) {
+      console.error("예약을 완료 처리하는 중 오류가 발생했습니다!", error);
+    }
+  };
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
+
   return (
     <div className="w-full space-y-6">
       <div className="space-y-2">
@@ -37,46 +82,44 @@ const ConsultingReview = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              <Avatar />
-              <div className="ps-3">
-                <div className="text-base font-semibold">황유진</div>
-              </div>
-            </th>
-            <td className="px-6 py-4">010-1234-2211</td>
-            <td className="px-6 py-4">대출</td>
-            <td className="px-6 py-4">
-              <div className="flex items-center">
-              <GradientButton label="완료 처리하기" width="w-32" /></div>
-            </td>
-          </tr>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              <Avatar />
-              <div className="ps-3">
-                <div className="text-base font-semibold">정찬수</div>
-              </div>
-            </th>
-            <td className="px-6 py-4">010-1234-2211</td>
-            <td className="px-6 py-4">대출</td>
-            <td className="px-6 py-4">
-              <div className="flex items-center">
-                
-                <GradientButton
-                  isDisabled="true"
-                  label="완료됨"
-                  width="w-32"
-                />
-              </div>
-            </td>
-          </tr>
+          {reservations?.length > 0 ? reservations.map(reservation => (
+            <tr key={reservation.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th
+                scope="row"
+                className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <Avatar />
+                <div className="ps-3">
+                  <div className="text-base font-semibold">{reservation.customerName}</div>
+                </div>
+              </th>
+              <td className="px-6 py-4">{reservation.phoneNumber}</td>
+              <td className="px-6 py-4">{reservation.workType}</td>
+              <td className="px-6 py-4">
+                <div className="flex items-center">
+                  {reservation.isCompleted ? (
+                    <GradientButton
+                      isDisabled={true}
+                      label="완료됨"
+                      width="w-32"
+                    />
+                  ) : (
+                    <GradientButton
+                      label="완료 처리하기"
+                      width="w-32"
+                      handleClickBtn={() => {handleComplete(reservation.id);}}
+                    />
+                  )}
+                </div>
+              </td>
+            </tr>
+          )) : (
+            <tr>
+              <td colSpan="4" className="px-6 py-4 text-center">
+                상담 대기 목록이 없습니다.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
@@ -84,3 +127,8 @@ const ConsultingReview = () => {
 };
 
 export default ConsultingReview;
+
+
+
+
+

@@ -1,10 +1,9 @@
 import axiosInstance from "../axiosInstance";
 
-export const Transfer = async (requestBody) => {
+export const livingTrustContract = async () => {
   try {
-    const response = await axiosInstance.post(
-      "/api/v1/account/simple",
-      requestBody,
+    const response = await axiosInstance.get(
+      "/api/v1/living-trust/contract/list"
     );
     return response.data;
   } catch (error) {

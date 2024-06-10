@@ -46,7 +46,7 @@ import { AuthProvider, useAuthContext } from "./context/authContext";
 import { getAuth, authState, signOut } from "./states/authState";
 import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import Property from "./pages/inheritance/component/Property";
-import OcrAuthentication from "./pages/inheritance/OcrAuthentication";
+import InheritanceWait from "./pages/inheritance/InheritanceWait";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
@@ -75,12 +75,20 @@ function App() {
             <Route path="/admin/" element={<AdminLayout />}>
               <Route index element={<AdminHome />} />
               <Route path="settlement" element={<Settlement />} />
-              <Route path="deposits-preference" element={<DepositsPreference />}
+              <Route
+                path="deposits-preference"
+                element={<DepositsPreference />}
               />
-              <Route path="inheritance-review" element={<InheritanceReview />}/>
+              <Route
+                path="inheritance-review"
+                element={<InheritanceReview />}
+              />
               <Route path="consulting-review" element={<ConsultingRevew />} />
               <Route path="sms-reservation" element={<SmsReservation />} />
-              <Route path="sms-reservation/result" element={<SmsReservationResult />} />
+              <Route
+                path="sms-reservation/result"
+                element={<SmsReservationResult />}
+              />
             </Route>
 
             <Route path="/" element={<Layout />}>
@@ -105,7 +113,8 @@ function App() {
               />
               <Route path="inheritance/join" element={<InheritanceJoin />} />
 
-              <Route path="inheritance/ocr" element={<OcrAuthentication />} />
+              <Route path="inheritance/join2" element={<InheritanceJoin2 />} />
+              <Route path="inheritance/wait" element={<InheritanceWait />} />
 
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />

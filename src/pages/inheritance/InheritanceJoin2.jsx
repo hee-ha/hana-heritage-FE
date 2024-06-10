@@ -8,8 +8,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import axiosInstance from "../../apis/axiosInstance";
+import { useNavigate } from "react-router-dom";
 import PicComponent from "../../components/common/FaceId/PicComponent";
-
 
 function InheritanceJoin2() {
   const [settlor, setSettlor] = useState("");
@@ -18,6 +19,7 @@ function InheritanceJoin2() {
   const [trustContractEndDate, setTrustContractEndDate] = useState(dayjs());
   const [isPicModalOpen, setIsPicModalOpen] = useState(false);
 
+  const navigate = useNavigate();
   const [realEstate, setRealEstate] = useState({
     title: "",
     material: "",
@@ -33,8 +35,8 @@ function InheritanceJoin2() {
   const [postBeneficiary, setPostBeneficiary] = useState([
     {
       name: "",
-      birth: "",
-      contact: "",
+      birthdate: "",
+      phoneNumber: "",
       address: "",
       relation: "",
       ratio: "",
@@ -44,8 +46,8 @@ function InheritanceJoin2() {
   const [deathNotifier, setDeathNotifier] = useState([
     {
       name: "",
-      birth: "",
-      contact: "",
+      birthdate: "",
+      phoneNumber: "",
       address: "",
       relation: "",
     },
@@ -56,12 +58,12 @@ function InheritanceJoin2() {
     trustContractEndDate: trustContractEndDate,
     settlor: settlor,
     trustee: trustee,
-    realEstate: realEstate,
-    bond: bond,
-    securities: securities,
+    // realEstate: realEstate,
+    // bond: bond,
+    // securities: securities,
     postBeneficiaries: postBeneficiary,
     deathNotifiers: deathNotifier,
-    specialNotes: "",
+    // specialNotes: "",
   });
 
   const [showModal1, setShowModal1] = useState(false);
@@ -130,8 +132,8 @@ function InheritanceJoin2() {
     let update = [...postBeneficiary];
     update.push({
       name: "",
-      birth: "",
-      contact: "",
+      birthdate: "",
+      phoneNumber: "",
       address: "",
       relation: "",
       ratio: "",
@@ -158,8 +160,8 @@ function InheritanceJoin2() {
     let update = [...deathNotifier];
     update.push({
       name: "",
-      birth: "",
-      contact: "",
+      birthdate: "",
+      phoneNumber: "",
       address: "",
       relation: "",
     });
@@ -182,20 +184,88 @@ function InheritanceJoin2() {
     }));
   };
 
-  const handleNestedChange = (e, section) => {
-    const { name, value } = e.target;
-    setContractDetails((prevDetails) => ({
-      ...prevDetails,
-      [section]: {
-        ...prevDetails[section],
-        [name]: value,
-      },
-    }));
+  //   const handleNestedChange = (e, section) => {
+  //     const { name, value } = e.target;
+  //     setContractDetails((prevDetails) => ({
+  //       ...prevDetails,
+  //       [section]: {
+  //         ...prevDetails[section],
+  //         [name]: value,
+  //       },
+  //     }));
+  //   };
+
+  const submitContractDetails = async () => {
+    const formattedDetails = {
+      ...contractDetails,
+      trustContractStartDate:
+        contractDetails.trustContractStartDate.format("YYYY-MM-DD"),
+      trustContractEndDate:
+        contractDetails.trustContractEndDate.format("YYYY-MM-DD"),
+      properties: [
+        {
+          propertyType: "금전신탁",
+          amount: formatToInteger(totalBalance),
+          location: realEstate.address,
+          quantity: 1,
+          name: "금전신탁",
+        },
+        {
+          propertyType: "부동산",
+          amount: formatToInteger(realEstate.value),
+          location: realEstate.address,
+          quantity: 1,
+          name: realEstate.title,
+        },
+        {
+          propertyType: "채권",
+          amount: formatToInteger(bond.value),
+          location: realEstate.address,
+          quantity: 1,
+          name: bond.title,
+        },
+        {
+          propertyType: "유가증권",
+          amount: formatToInteger(securities.value),
+          location: realEstate.address,
+          quantity: 1,
+          name: securities.title,
+        },
+      ],
+      postBeneficiaries: postBeneficiary.map((beneficiary) => ({
+        ...beneficiary,
+        birthdate: dayjs(beneficiary.birthdate).format("YYYY-MM-DD"),
+        phoneNumber: beneficiary.phoneNumber,
+      })),
+      deathNotifiers: deathNotifier.map((notifier) => ({
+        ...notifier,
+        birthdate: dayjs(notifier.birthdate).format("YYYY-MM-DD"),
+        phoneNumber: notifier.phoneNumber,
+      })),
+      trustee: trustee,
+      settlor: settlor,
+    };
+
+    try {
+      const response = await axiosInstance.post(
+        "/api/v1/living-trust/contract",
+        formattedDetails,
+      );
+      alert("가입심사 완료까지 영업일 기준 1~3일 소요됩니다.");
+      navigate("/");
+      console.log("Contract submission successful", response.data);
+    } catch (error) {
+      console.error("Failed to submit contract details", error);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(contractDetails);
+    setIsPicModalOpen(true);
+
+    setTimeout(() => {
+      submitContractDetails();
+    }, 5000);
   };
 
   const formatCurrency = (number) => {
@@ -229,16 +299,10 @@ function InheritanceJoin2() {
 
   const formatToInteger = (numberString) => {
     numberString = numberString ? numberString : "0";
-    // 쉼표를 제거하고 정수로 변환
     const formattedNumber = parseInt(numberString?.replace(/,/g, ""), 10);
     return formattedNumber;
   };
 
-  console.log(formatToInteger(totalBalance));
-  console.log(totalBalance);
-  console.log(realEstate.value);
-  console.log(bond.value);
-  console.log(securities.value);
   const chartData = {
     labels: ["금전신탁", "부동산", "채권", "유가증권"],
     datasets: [
@@ -249,7 +313,6 @@ function InheritanceJoin2() {
           formatToInteger(bond.value),
           formatToInteger(securities.value),
         ],
-        // data: [1000000, 1000000, 1400000, 4000000],
         backgroundColor: ["#FF8A80", "#7986CB", "#4DB6AC", "#FFF176"],
       },
     ],
@@ -319,7 +382,9 @@ function InheritanceJoin2() {
               <legend className="font-hana2 font-semibold text-5xl mb-5">
                 사후수익자 {index + 1}
               </legend>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 items-center">
+                {" "}
+                {/* Flexbox 설정 및 수평 중앙 정렬 */}
                 <input
                   type="text"
                   name="name"
@@ -328,19 +393,38 @@ function InheritanceJoin2() {
                   onChange={(e) => handleBeneficiaryChange(index, e)}
                   className="w-full mt-2 p-2 border rounded"
                 />
-                <input
-                  type="date"
-                  name="birth"
-                  placeholder="생년월일"
-                  value={beneficiary.birth}
-                  onChange={(e) => handleBeneficiaryChange(index, e)}
-                  className="w-full mt-2 p-2 border rounded"
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <div style={{ width: "450px" }}>
+                  <DatePicker
+                    value={dayjs(beneficiary.birthdate)}
+                    onChange={(newValue) =>
+                      handleBeneficiaryChange(index, {
+                        target: { name: "birthdate", value: newValue },
+                      })
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        InputProps={{
+                          style: {
+                            height: "3.5rem",
+                            fontFamily: "hana2, sans-serif",
+                            fontSize: "2.25rem",
+                            fontWeight: "bold",
+                          },
+                        }}
+                        className="w-full mt-2 p-2 border rounded"
+                        placeholder="생년월일"
+                      />
+                    )}
+                  />
+               </div>                  
+                </LocalizationProvider>
                 <input
                   type="text"
-                  name="contact"
+                  name="phoneNumber"
                   placeholder="연락처"
-                  value={beneficiary.contact}
+                  value={beneficiary.phoneNumber}
                   onChange={(e) => handleBeneficiaryChange(index, e)}
                   className="w-full mt-2 p-2 border rounded"
                 />
@@ -399,28 +483,47 @@ function InheritanceJoin2() {
               <legend className="font-hana2 font-semibold text-5xl mb-5">
                 사망통지인 {index + 1}
               </legend>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 items-center">
                 <input
                   type="text"
                   name="name"
                   placeholder="성명"
                   value={notifier.name}
                   onChange={(e) => handleDeathNotiChange(index, e)}
-                  className="w-full mt-2 p-2 border rounded"
+                  className="w-full mt-2 p-2 border rounded "
                 />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <div style={{ width: "450px" }}>
+                    <DatePicker
+                      value={dayjs(notifier.birthdate)}
+                      onChange={(newValue) =>
+                        handleDeathNotiChange(index, {
+                          target: { name: "birthdate", value: newValue },
+                        })
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          InputProps={{
+                            style: {
+                              height: "3.5rem",
+                              fontFamily: "hana2, sans-serif",
+                              fontSize: "2.25rem",
+                              fontWeight: "bold",
+                            },
+                          }}
+                          className="w-full mt-2 p-2 border rounded"
+                          placeholder="생년월일"
+                        />
+                      )}
+                    />
+                  </div>
+                </LocalizationProvider>
                 <input
                   type="text"
-                  name="birth"
-                  placeholder="생년월일"
-                  value={notifier.birth}
-                  onChange={(e) => handleDeathNotiChange(index, e)}
-                  className="w-full mt-2 p-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="contact"
+                  name="phoneNumber"
                   placeholder="연락처"
-                  value={notifier.contact}
+                  value={notifier.phoneNumber}
                   onChange={(e) => handleDeathNotiChange(index, e)}
                   className="w-full mt-2 p-2 border rounded"
                 />
@@ -440,7 +543,7 @@ function InheritanceJoin2() {
                   type="text"
                   name="relation"
                   placeholder="위탁자와 관계"
-                  value={notifier.value}
+                  value={notifier.relation}
                   onChange={(e) => handleDeathNotiChange(index, e)}
                   className="w-full mt-2 p-2 border rounded"
                 />
@@ -483,8 +586,8 @@ function InheritanceJoin2() {
             <div className="flex space-x-4">
               <input
                 type="text"
-                name="type"
-                placeholder="이름"
+                name="propertyType"
+                placeholder="재산종류"
                 value={"부동산"}
                 onChange={(e) =>
                   setRealEstate({ ...realEstate, material: e.target.value })
@@ -493,8 +596,8 @@ function InheritanceJoin2() {
               />
               <input
                 type="text"
-                name="type"
-                placeholder="재산종류"
+                name="name"
+                placeholder="이름"
                 value={realEstate.title}
                 onChange={(e) =>
                   setRealEstate({ ...realEstate, material: e.target.value })
@@ -503,7 +606,7 @@ function InheritanceJoin2() {
               />
               <input
                 type="text"
-                name="material"
+                name="location"
                 placeholder="소재지"
                 value={realEstate.address}
                 onChange={(e) =>
@@ -523,7 +626,7 @@ function InheritanceJoin2() {
               />
               <input
                 type="text"
-                name="value"
+                name="amount"
                 placeholder="부동산가액"
                 value={realEstate.value ? `${realEstate.value} 원` : ""}
                 onChange={(e) =>
@@ -548,23 +651,23 @@ function InheritanceJoin2() {
             <div className="flex space-x-4">
               <input
                 type="text"
-                name="type"
-                placeholder="이름"
+                name="propertyType"
+                placeholder="재산종류"
                 value={"채권"}
                 onChange={(e) => setBond({ ...bond, material: e.target.value })}
                 className="w-full mt-2 p-2 border rounded"
               />
               <input
                 type="text"
-                name="type"
-                placeholder="재산종류"
+                name="name"
+                placeholder="이름"
                 value={bond.title}
                 onChange={(e) => setBond({ ...bond, material: e.target.value })}
                 className="w-full mt-2 p-2 border rounded"
               />
               <input
                 type="text"
-                name="material"
+                name="location"
                 placeholder="소재지"
                 value={realEstate.address}
                 onChange={(e) => setBond({ ...bond, material: e.target.value })}
@@ -580,7 +683,7 @@ function InheritanceJoin2() {
               />
               <input
                 type="text"
-                name="value"
+                name="amount"
                 placeholder="채권가액"
                 value={bond.value ? `${bond.value} 원` : ""}
                 onChange={(e) => setBond({ ...bond, value: e.target.value })}
@@ -603,8 +706,8 @@ function InheritanceJoin2() {
             <div className="flex space-x-4">
               <input
                 type="text"
-                name="type"
-                placeholder="이름"
+                name="propertyType"
+                placeholder="재산종류"
                 value={"유가증권"}
                 onChange={(e) =>
                   setSecurities({ ...securities, type: e.target.value })
@@ -614,7 +717,7 @@ function InheritanceJoin2() {
               <input
                 type="text"
                 name="name"
-                placeholder="재산종류"
+                placeholder="이름"
                 value={securities.title}
                 onChange={(e) =>
                   setSecurities({ ...securities, material: e.target.value })
@@ -681,26 +784,26 @@ function InheritanceJoin2() {
           handleSave={handleSaveModal3}
         />
 
-        <div className="form-group mt-6 mb-6">
+        {/* <div className="form-group mt-6 mb-6">
           <legend className="font-hana2 font-semibold text-5xl mb-5">
             특약사항
           </legend>
           <textarea
             type="text"
-            name="amount"
+            name="specialNotes"
             rows={10}
             value={contractDetails.specialNotes}
             onChange={handleChanges}
             className="w-full mt-2 p-2 border rounded"
           />
           <div className="mt-4"></div>
-        </div>
+        </div> */}
 
         <div className="form-group mt-6 mb-6">
           <legend className="font-hana2 font-semibold text-5xl mb-5">
             위탁자 정보
           </legend>
-          <input
+          {/* <input
             type="text"
             name="address"
             placeholder="주소"
@@ -710,9 +813,9 @@ function InheritanceJoin2() {
           />
           <input
             type="text"
-            name="contact"
+            name="phoneNumber"
             placeholder="연락처"
-            value={contractDetails.representative?.contact || ""}
+            value={contractDetails.representative?.phoneNumber || ""}
             onChange={(e) => handleNestedChange(e, "representative")}
             className="w-full mt-2 p-2 border rounded"
           />
@@ -723,17 +826,16 @@ function InheritanceJoin2() {
             value={contractDetails.representative?.birthDate || ""}
             onChange={(e) => handleNestedChange(e, "representative")}
             className="w-full mt-2 p-2 border rounded"
-          />
+          /> */}
           <input
             type="text"
             name="name"
             placeholder="성명"
-            value={contractDetails.representative?.name || ""}
-            onChange={(e) => handleNestedChange(e, "representative")}
+            value={settlor}
+            onChange={(e) => setSettlor(e.target.value)}
             className="w-full mt-2 p-2 border rounded"
           />
           <div className="mt-4"></div>
-
           <legend className="font-hana2 font-semibold text-5xl mb-5">
             수탁자
           </legend>
@@ -741,8 +843,8 @@ function InheritanceJoin2() {
             type="text"
             name="signature"
             placeholder="하나은행"
-            value={contractDetails.trustee?.signature || ""}
-            onChange={(e) => handleNestedChange(e, "trustee")}
+            value={trustee}
+            onChange={(e) => setTrustee(e.target.value)}
             className="w-full mt-2 p-2 border rounded"
           />
         </div>
@@ -754,12 +856,12 @@ function InheritanceJoin2() {
           제출
         </button>
         {isPicModalOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <PicComponent closeModal={() => setIsPicModalOpen(false)} />
-              </div>
+          <div className="modal">
+            <div className="modal-content">
+              <PicComponent closeModal={() => setIsPicModalOpen(false)} />
             </div>
-          )}
+          </div>
+        )}
       </form>
     </div>
   );

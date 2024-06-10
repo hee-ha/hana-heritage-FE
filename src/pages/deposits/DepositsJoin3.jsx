@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
 import { createSaving, createDeposit } from "../../apis/account/createAccount";
+import OcrAuthenticationModal from "../inheritance/OcrAuthentication";
+
 import PicComponent from "../../components/common/FaceId/PicComponent";
 
 function DepositsJoin3() {
@@ -12,12 +14,25 @@ function DepositsJoin3() {
 
   const navigate = useNavigate();
 
+  const [showModal, setShowModal] = useState(false);
+  const [ocrData, setOcrData] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     setIsPicModalOpen(true);
 
+    setShowModal(true); // 개설 버튼 클릭 시 모달을 띄움
+  };
 
+  const handleCloseModal = () => setShowModal(false);
+  const handleSaveModal = (data) => {
+    setOcrData(data);
+    setShowModal(false);
+    submitForm(); // OCR 인증 후 폼 제출
+  };
+
+  const submitForm = () => {
     if (productDetail.type === "예금") {
       setTimeout(() => {
         doSaving();
@@ -226,7 +241,7 @@ function DepositsJoin3() {
       <div className="flex justify-between">
         <Link onClick={handleSubmit} className="flex-grow">
           <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            개설
+            주민등록증 확인 후 개설
           </button>
           {isPicModalOpen && (
             <div className="modal">
@@ -242,6 +257,12 @@ function DepositsJoin3() {
           </button>
         </Link>
       </div>
+
+      <OcrAuthenticationModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        handleSave={handleSaveModal}
+      />
     </div>
   );
 }

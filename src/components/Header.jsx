@@ -18,9 +18,9 @@ const Header = () => {
         <div className="flex flex-row items-center">
           <Link to="/">
             <img
-              src="/png/Hana_Bank.png"
+              src="/png/hana-logo.png"
               alt="하나은행 로고"
-              className="h-12 mr-2"
+              className="h-16 mr-2"
             />
           </Link>
           <Nav />

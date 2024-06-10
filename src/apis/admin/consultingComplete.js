@@ -1,10 +1,9 @@
 import axiosInstance from "../axiosInstance";
 
-export const Transfer = async (requestBody) => {
+export const consultingComplete = async (id) => {
   try {
-    const response = await axiosInstance.post(
-      "/api/v1/account/simple",
-      requestBody,
+    const response = await axiosInstance.put(
+      "/api/v1/consulting/reservation/complete?id="+id
     );
     return response.data;
   } catch (error) {

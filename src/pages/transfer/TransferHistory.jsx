@@ -21,7 +21,6 @@ function TransferHistory() {
   const [selectedPeriod, setSelectedPeriod] = useState(null);
   const [transactions, setTransactions] = useState(null);
   const [myAccounts, setMyAccounts] = useState([]);
-
   const handleItemClick = (item) => {
     setSelectedItem(item);
     setDropdownVisibility(false);
@@ -89,13 +88,22 @@ function TransferHistory() {
           className={`${dropdownVisibility ? "block" : "hidden"} mt-2 border border-hanaGreen border-opacity-30 rounded-md bg-white shadow-lg font-hana2 font-semibold text-4xl`}
         >
           <ul>
-            {myAccounts.map((account) => (
+            {myAccounts?.map((account) => (
               <li
                 key={account?.id}
                 className="px-6 py-4 hover:bg-hanaGreen hover:bg-opacity-30 cursor-pointer"
                 onClick={() => handleItemClick(account)}
               >
-                {account.name ? account.name : "계좌를 선택해 주세요"}
+                {account?.name ? (
+                  <>
+                    {account.name}{" "}
+                    <span className="text-hanaRed">
+                      ({account.accountNumber})
+                    </span>
+                  </>
+                ) : (
+                  "계좌를 선택해 주세요"
+                )}
               </li>
             ))}
           </ul>
