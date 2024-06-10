@@ -17,14 +17,25 @@ function Property({ props }) {
     realty: [],
   });
 
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState({
+    금전: 0,
+    유가증권: 0,
+    금전채권: 0,
+    부동산: 0,
+  });
+
   const [name, setName] = useState("");
   console.log(properties);
   const data = {
     labels: ["금전", "부동산", "채권", "유가증권"],
     datasets: [
       {
-        data: chartData,
+        data: [
+          chartData.금전,
+          chartData.부동산,
+          chartData.금전채권,
+          chartData.유가증권,
+        ],
         backgroundColor: ["#FFCDD2", "#C5CAE9", "#B2DFDB", "#FFF9C4"],
         hoverBackgroundColor: ["#FF8A80", "#7986CB", "#4DB6AC", "#FFF176"],
       },
