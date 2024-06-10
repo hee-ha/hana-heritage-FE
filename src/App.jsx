@@ -47,6 +47,7 @@ import { getAuth, authState, signOut } from "./states/authState";
 import InheritanceJoin from "./pages/inheritance/InheritanceJoin";
 import Property from "./pages/inheritance/component/Property";
 import InheritanceWait from "./pages/inheritance/InheritanceWait";
+import AccountPrepList from "./pages/account/AccountPrepList";
 
 function App() {
   const { auth, setAuth } = useAuthContext();
@@ -96,14 +97,12 @@ function App() {
               {/* 유저 */}
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
-
               {/* 이체 */}
               <Route path="transfer" element={<TransferHome />} />
               <Route path="transfer/simple" element={<SimpleTransfer />} />
               <Route path="transfer/auto" element={<AutoTransfer />} />
               <Route path="transfer/confirm" element={<TransferView />} />
               <Route path="transfer/history" element={<TransferHistory />} />
-
               {/* 상속 */}
               <Route path="inheritance" element={<Inheritance />} />
               <Route path="inheritance/join/2" element={<InheritanceJoin2 />} />
@@ -112,10 +111,8 @@ function App() {
                 element={<InheritancePrepList />}
               />
               <Route path="inheritance/join" element={<InheritanceJoin />} />
-
               <Route path="inheritance/join2" element={<InheritanceJoin2 />} />
               <Route path="inheritance/wait" element={<InheritanceWait />} />
-
               {/* 예적금 */}
               <Route path="deposits" element={<DepositsList />} />
               <Route path="deposits/detail" element={<DepositsDetail />} />
@@ -123,11 +120,10 @@ function App() {
               <Route path="deposits/join/2" element={<DepositsJoin2 />} />
               <Route path="deposits/join/3" element={<DepositsJoin3 />} />
               <Route path="deposits/join/4" element={<DepositsJoin4 />} />
-
               {/* 내 계좌 */}
               <Route path="account" element={<AccountInquiry />} />
               <Route path="account/detail" element={<AccountDetail />} />
-
+              <Route path="account/preplist" element={<AccountPrepList />} />
               {/* 계좌 개설 */}
               <Route path="account/home" element={<AccountHome />} />
               <Route path="account/creation/1" element={<AccountCreation1 />} />
