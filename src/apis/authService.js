@@ -43,7 +43,15 @@ export const certificate = async (certInfo) => {
 };
 
 export const logout = async () => {
-  await axiosInstance.post("/api/v1/auth/logout");
-  localStorage.removeItem("jwtToken");
-  localStorage.removeItem("refreshToken");
+  try {
+    await axiosInstance.post("/api/v1/auth/logout");
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("refreshToken");
+  } catch (error) {
+    if (error.response && error.response.status === 500) {
+      window.location.href = "/login";
+    } else {
+      console.error("Logout failed:", error);
+    }
+  }
 };

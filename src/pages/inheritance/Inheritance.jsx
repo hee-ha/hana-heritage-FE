@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Property from "./component/Property";
 import Contract from "./component/Contract";
+import { getInheritanceStatus } from "../../apis/inheritance/getInheritanceStatus";
 
 function Inheritance() {
   const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
 
   const renderContent = () => {
     switch (activeTab) {
@@ -17,24 +19,29 @@ function Inheritance() {
     }
   };
 
+  const getStatus = async () => {
+    try {
+      const response = await getInheritanceStatus();
+      console.log(response.isSuccess == false);
+
+      if (response.code == "2010") {
+        navigate("/inheritance/join");
+      } else if (response.isSuccess == false) {
+        navigate("/inheritance/wait");
+      }
+      console.log(response);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
+  };
+
+  useEffect(() => {
+    getStatus();
+  }, []);
+
   return (
     <div className="px-24">
-      <div className="text-center mt-10">
-        <Link
-          to="/inheritance/join"
-          className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
-          aria-current="page"
-        >
-          상속 홈페이지 바로가기(임시)
-        </Link>
-        <Link
-          to="/inheritance/ocr"
-          className="text-hanaBlack hover:text-white hover:bg-hanaGreen font-hana2 font-semibold rounded-md px-3 py-2 text-4xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
-          aria-current="page"
-        >
-          ocr 바로가기(임시)
-        </Link>
-      </div>
+      <div className="text-center mt-10"></div>
       <div className="flex justify-center mt-10">
         <div
           className={`px-6 py-2 mx-2 text-3xl font-hana2 cursor-pointer rounded-t-lg ${
@@ -55,6 +62,25 @@ function Inheritance() {
       </div>
       <hr />
       <div className="mt-6">{renderContent()}</div>
+      {/* <div className="parent-component">
+        <button variant="primary" onClick={handleOpenModal}>
+          OCR 인증
+        </button>
+
+        <OcrAuthenticationModal
+          show={showModal}
+          handleClose={handleCloseModal}
+          handleSave={handleSaveModal}
+        />
+
+        {ocrData && (
+          <div className="ocr-result">
+            <h3>OCR 인증 결과</h3>
+            <p>이름: {ocrData.fields[0]?.inferText}</p>
+            <p>주민등록 번호: {ocrData.fields[1]?.inferText}</p>
+          </div>
+        )}
+      </div> */}
     </div>
   );
 }
