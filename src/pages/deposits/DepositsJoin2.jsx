@@ -78,7 +78,7 @@ function DepositsJoin2() {
 
   const handleAutoPasswordCheck = async () => {
     try {
-      const response = await checkPassword(selectedItem.id, password);
+      const response = await checkPassword(selectedTransfer.id, autoTransferPassword);
 
       if (response.isSuccess) {
         setAutoMessage("비밀번호가 확인되었습니다.");
