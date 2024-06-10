@@ -7,13 +7,13 @@ import { getInheritanceStatus } from "../../apis/inheritance/getInheritanceStatu
 function Inheritance() {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
-
+  const [trustId, setTrustId] = useState("");
   const renderContent = () => {
     switch (activeTab) {
       case 0:
         return <Contract />;
       case 1:
-        return <Property />;
+        return <Property props={trustId} />;
       default:
         return <Contract />;
     }
@@ -23,10 +23,10 @@ function Inheritance() {
     try {
       const response = await getInheritanceStatus();
       console.log(response.isSuccess == false);
-
+      setTrustId(response.result.livingTrustId);
       if (response.code == "2010") {
         navigate("/inheritance/join");
-      } else if (response.isSuccess == false) {
+      } else if (response.result.approved == false) {
         navigate("/inheritance/wait");
       }
       console.log(response);

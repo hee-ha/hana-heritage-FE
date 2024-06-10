@@ -204,11 +204,11 @@ function InheritanceJoin2() {
         contractDetails.trustContractEndDate.format("YYYY-MM-DD"),
       properties: [
         {
-          propertyType: "금전신탁",
+          propertyType: "금전",
           amount: formatToInteger(totalBalance),
           location: realEstate.address,
           quantity: 1,
-          name: "금전신탁",
+          name: "금전",
         },
         {
           propertyType: "부동산",
@@ -218,7 +218,7 @@ function InheritanceJoin2() {
           name: realEstate.title,
         },
         {
-          propertyType: "채권",
+          propertyType: "금전채권",
           amount: formatToInteger(bond.value),
           location: realEstate.address,
           quantity: 1,
@@ -304,7 +304,7 @@ function InheritanceJoin2() {
   };
 
   const chartData = {
-    labels: ["금전신탁", "부동산", "채권", "유가증권"],
+    labels: ["금전", "부동산", "금전채권", "유가증권"],
     datasets: [
       {
         data: [
@@ -394,31 +394,31 @@ function InheritanceJoin2() {
                   className="w-full mt-2 p-2 border rounded"
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <div style={{ width: "450px" }}>
-                  <DatePicker
-                    value={dayjs(beneficiary.birthdate)}
-                    onChange={(newValue) =>
-                      handleBeneficiaryChange(index, {
-                        target: { name: "birthdate", value: newValue },
-                      })
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        InputProps={{
-                          style: {
-                            height: "3.5rem",
-                            fontFamily: "hana2, sans-serif",
-                            fontSize: "2.25rem",
-                            fontWeight: "bold",
-                          },
-                        }}
-                        className="w-full mt-2 p-2 border rounded"
-                        placeholder="생년월일"
-                      />
-                    )}
-                  />
-               </div>                  
+                  <div style={{ width: "450px" }}>
+                    <DatePicker
+                      value={dayjs(beneficiary.birthdate)}
+                      onChange={(newValue) =>
+                        handleBeneficiaryChange(index, {
+                          target: { name: "birthdate", value: newValue },
+                        })
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          InputProps={{
+                            style: {
+                              height: "3.5rem",
+                              fontFamily: "hana2, sans-serif",
+                              fontSize: "2.25rem",
+                              fontWeight: "bold",
+                            },
+                          }}
+                          className="w-full mt-2 p-2 border rounded"
+                          placeholder="생년월일"
+                        />
+                      )}
+                    />
+                  </div>
                 </LocalizationProvider>
                 <input
                   type="text"

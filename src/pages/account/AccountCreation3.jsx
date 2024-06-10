@@ -39,6 +39,7 @@ function AccountCreation3() {
   };
 
   const handleCreateButton = () => {
+    setIsPicModalOpen(true);
     setShowModal(true); // 개설 버튼 클릭 시 모달을 띄움
   };
 
@@ -55,11 +56,7 @@ function AccountCreation3() {
       accountPassword: formData.password,
     };
 
-    setIsPicModalOpen(true);
-
-    setTimeout(() => {
-      doCreate(accountInfo);
-    }, 4500);
+    doCreate(accountInfo);
   };
 
   const doCreate = async (data) => {
