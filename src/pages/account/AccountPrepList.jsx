@@ -1,32 +1,28 @@
 import React from "react";
 import residentImage from "./images/resident.png";
-import bondImage from "./images/bond.png";
-import realEstateImage from "./images/real_estate.png";
-import bankBalanceImage from "./images/bank_balance.png";
+import bondImage from "./images/phone.png";
 
-const InheritancePrepList = () => {
+const AccountPrepList = () => {
   const documents = [
     { name: "주민등록증", image: residentImage },
-    { name: "채권 계약서", image: bondImage },
-    { name: "부동산 계약서", image: realEstateImage },
-    { name: "유가증권 증명서", image: bankBalanceImage },
+    { name: "핸드폰", image: bondImage },
   ];
 
   return (
     <div className="mx-auto px-24 border rounded-lg shadow-lg bg-white">
       <header className="sectionHead">
         <h2 className="font-hana2 font-semibold text-6xl z-10 text-center">
-          <span className="text-hanaGreen">신탁 계약에 필요한 준비물</span>을
+          <span className="text-hanaGreen">계좌 개설에 필요한 준비물</span>을
           안내드립니다.
         </h2>
         <hr />
       </header>
-      <div className="text-center text-hana2 p-10 bg-hanaGreen rounded-lg shadow-md">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="text-center text-hana2 p-10 bg-hanaGreen rounded-lg shadow-md ">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-10 place-items-center">
           {documents.map((doc, index) => (
             <div
               key={index}
-              className="flex flex-col items-center w-full h-80 bg-hanaGold p-10 rounded-lg shadow-lg"
+              className="flex flex-col items-center w-1/2 h-80 bg-hanaGold p-10 rounded-lg shadow-lg"
             >
               <div className="w-full h-48  flex items-center justify-center mb-4">
                 <img
@@ -60,4 +56,4 @@ const InheritancePrepList = () => {
   );
 };
 
-export default InheritancePrepList;
+export default AccountPrepList;

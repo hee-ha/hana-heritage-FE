@@ -9,7 +9,7 @@ import { getMyProperty } from "../../../apis/inheritance/getMyProperty";
 import { getChartData } from "../../../apis/inheritance/getChartData";
 import { getMyInfo } from "../../../apis/customer/getMyInfo";
 
-function Property() {
+function Property({ props }) {
   const [properties, setProperties] = useState({
     cash: [],
     security: [],
@@ -19,9 +19,9 @@ function Property() {
 
   const [chartData, setChartData] = useState([]);
   const [name, setName] = useState("");
-
+  console.log(properties);
   const data = {
-    labels: ["금전", "유가증권", "채권", "부동산"],
+    labels: ["금전", "부동산", "채권", "유가증권"],
     datasets: [
       {
         data: chartData,
@@ -77,7 +77,7 @@ function Property() {
   };
   const doProperty = async () => {
     try {
-      const response = await getMyProperty(2);
+      const response = await getMyProperty(props);
       setProperties(response.result);
       console.log(response.result);
     } catch (error) {
@@ -86,7 +86,7 @@ function Property() {
   };
   const doGetChartData = async () => {
     try {
-      const response = await getChartData(2);
+      const response = await getChartData(props);
       setChartData(response.result);
       console.log(response.result);
     } catch (error) {

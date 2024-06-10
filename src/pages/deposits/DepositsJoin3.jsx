@@ -33,15 +33,13 @@ function DepositsJoin3() {
   };
 
   const submitForm = () => {
+    console.log(formData);
+    console.log(productDetail);
     if (productDetail.type === "예금") {
-      setTimeout(() => {
-        doSaving();
-      }, 4500);
+      doSaving();
       return;
     }
-    setTimeout(() => {
-      doDeposit();
-    }, 4500);
+    doDeposit();
   };
 
   const doSaving = async () => {
@@ -237,11 +235,14 @@ function DepositsJoin3() {
           </label>
         </div>
       </div>
-
+      <h5 className="font-hana2 font-semibold text-5xl py-10">
+        <span className="text-hanaRed">얼굴인식,주민등록증</span>확인 후 가입
+        절차가 마무리 됩니다.
+      </h5>
       <div className="flex justify-between">
         <Link onClick={handleSubmit} className="flex-grow">
           <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
-            주민등록증 확인 후 개설
+            개설하기
           </button>
           {isPicModalOpen && (
             <div className="modal">
