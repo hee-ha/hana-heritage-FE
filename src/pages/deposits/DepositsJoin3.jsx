@@ -33,6 +33,8 @@ function DepositsJoin3() {
   };
 
   const submitForm = () => {
+    console.log(formData);
+    console.log(productDetail);
     if (productDetail.type === "예금") {
       setTimeout(() => {
         doSaving();
