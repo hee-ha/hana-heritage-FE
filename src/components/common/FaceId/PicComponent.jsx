@@ -1,16 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Webcam from "react-webcam";
 import Modal from "react-modal";
 
 const PicComponent = () => {
   const webcamRef = useRef(null);
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isCheckVisible, setIsCheckVisible] = useState(false);
   const navigate = useNavigate();
 
   const navigateToHome = () => {
-    navigate("/");
+    setIsModalOpen(false);
+  };
+
+  const stopVideoStream = () => {
+    if (webcamRef.current && webcamRef.current.srcObject) {
+      webcamRef.current.srcObject.getTracks().forEach((track) => track.stop());
+    }
+    setIsCameraOn(false);
   };
 
   useEffect(() => {
@@ -19,21 +26,30 @@ const PicComponent = () => {
     const startAndStopVideoStream = async () => {
       await startVideoStream();
       timeout = setTimeout(() => {
-        stopVideoStream();
+        setIsCheckVisible(true);
+        pauseVideoStream();
+        setTimeout(() => {
+          stopVideoStream();
+          navigateToHome();
+        }, 1000);
       }, 3000);
     };
 
     startAndStopVideoStream();
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const modalStyle = {
     overlay: {
-      backgroundColor: "rgba(255, 255, 255, 0.75)",
+      backgroundColor: "rgba(255, 255, 255, 0.3)",
       zIndex: 1000,
     },
     content: {
-      backgroundColor: "white",
+      backgroundColor: "rgba(255, 255, 255, 0.8)",
       zIndex: 1001,
+      border: "none",
+      boxShadow: "none",
     },
   };
 
@@ -45,45 +61,53 @@ const PicComponent = () => {
       });
       setIsCameraOn(true);
       setIsModalOpen(true);
+      setIsCheckVisible(false);
       if (webcamRef.current) {
         webcamRef.current.srcObject = stream;
-        webcamRef.current.play();
+        await webcamRef.current.play().catch((error) => {
+          console.error("Failed to play the video: ", error);
+        });
       }
     } catch (error) {
-      alert("Webcam not working");
+      alert("웹캠이 작동하지 않습니다");
     }
   };
 
-  const stopVideoStream = () => {
-    if (webcamRef.current && webcamRef.current.srcObject) {
-      webcamRef.current.srcObject.getTracks().forEach((track) => track.stop());
-      webcamRef.current.srcObject = null;
+  const pauseVideoStream = () => {
+    if (webcamRef.current) {
+      webcamRef.current.pause();
     }
-    setIsCameraOn(false);
   };
+
 
   return (
     <div className="col-sm-8 text-left">
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        onRequestClose={navigateToHome}
         contentLabel="Webcam Modal"
         ariaHideApp={false}
         style={modalStyle}
       >
-        {isCameraOn ? (
-          <>
-            <video
-              ref={webcamRef}
-              width={"100%"}
-              height={"100%"}
-              style={{ border: "1px solid #ddd" }}
-            />
-            <br />
-          </>
-        ) : (
-          <p className="flex  flex-col  items-center mt-10">
-            <div className="content">
+        <div style={{ position: "relative" }}>
+          <video
+            ref={webcamRef}
+            width={"100%"}
+            height={"100%"}
+            style={{ border: "1px solid #ddd" }}
+            autoPlay
+            muted
+          />
+          {isCheckVisible && (
+            <div
+              style={{
+                position: "absolute",
+                top: "30%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 1002,
+              }}
+            >
               <svg width="400" height="400">
                 <circle
                   fill="none"
@@ -91,7 +115,7 @@ const PicComponent = () => {
                   strokeWidth="20"
                   cx="200"
                   cy="200"
-                  r="150"
+                  r="190"
                   strokeLinecap="round"
                   transform="rotate(-90 200 200)"
                   className="circle"
@@ -107,15 +131,8 @@ const PicComponent = () => {
                 />
               </svg>
             </div>
-            <button
-              type="submit"
-              className="col w-1/3 text-white font-hana2 font-semibold text-5xl  bg-hanaRed py-3 px-8 z-10 mt-32 transition-transform transform hover:animate-bubbly rounded-lg"
-              onClick={navigateToHome}
-            >
-              확인
-            </button>
-          </p>
-        )}
+          )}
+        </div>
       </Modal>
       <br />
     </div>

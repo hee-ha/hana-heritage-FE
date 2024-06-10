@@ -3,12 +3,16 @@ import { getContractDetail } from "../../../apis/inheritance/getContractDetail";
 
 function Contract() {
   const [contractDetail, setContractDetail] = useState([]);
+  const [postBeneficiary, setPostBeneficiary] = useState([]);
+  const [deathNotifiers, setDeathNotifiers] = useState([]);
 
   const doGetContractDetail = async () => {
     try {
       const response = await getContractDetail();
       console.log(response);
       setContractDetail(response.result);
+      setPostBeneficiary(response.result.postBeneficiary);
+      setDeathNotifiers(response.result.deathNotifiers);
     } catch (error) {
       console.error("Failed to fetch response:", error);
     }
@@ -18,47 +22,15 @@ function Contract() {
     doGetContractDetail();
   }, []);
 
-  function formattedDate(date) {
-    new Date(date).toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); 
+    const day = String(date.getDate()).padStart(2, "0"); 
+
+    return `${year}-${month}-${day}`;
   }
-
-  // const deathNotifiers = [
-  //   {
-  //     name: "김말숙",
-  //     phone: "010-2224-1235",
-  //     address: "영등포구",
-  //     birthdate: "1970-03-11",
-  //     relationship: "자녀",
-  //   },
-  //   {
-  //     name: "이름2",
-  //     phone: "010-0000-0000",
-  //     address: "주소2",
-  //     birthdate: "1980-05-22",
-  //     relationship: "친구",
-  //   },
-  // ];
-
-  // const postBeneficiary = [
-  //   {
-  //     name: "김말숙",
-  //     phone: "010-2224-1235",
-  //     address: "영등포구",
-  //     birthdate: "1970-03-11",
-  //     relationship: "자녀",
-  //   },
-  //   {
-  //     name: "이름2",
-  //     phone: "010-0000-0000",
-  //     address: "주소2",
-  //     birthdate: "1980-05-22",
-  //     relationship: "친구",
-  //   },
-  // ];
 
   return (
     <div className="px-24 font-noto text-3xl">
@@ -88,7 +60,7 @@ function Contract() {
             계약시작일자
           </p>
           <p className="text-5xl mb-5 leading-snug">
-            {formattedDate(contractDetail.trustContractStartDate)}
+            {formatDate(contractDetail.trustContractStartDate)}
           </p>
         </li>
         <>
@@ -97,7 +69,7 @@ function Contract() {
               계약종료일자
             </p>
             <p className="text-5xl mb-5 leading-snug">
-              {formattedDate(contractDetail.trustContractEndDate)}{" "}
+              {formatDate(contractDetail.trustContractEndDate)}{" "}
             </p>
           </li>
           <li className="justify-between gap-x-6 py-5">
@@ -117,11 +89,11 @@ function Contract() {
 
       {/* 사후수익자 정보 섹션 */}
       <div className="bg-gray-100 rounded-lg p-10 mt-10">
-        <h3 className="font-hana2 font-semibold text-4xl text-hanaBlack">
+        <h3 className="font-hana2 font-semibold text-4xl text-hanaGreen">
           사후수익자 정보
         </h3>
       </div>
-      {contractDetail.map((notifier, index) => (
+      {postBeneficiary.map((notifier, index) => (
         <div
           key={index}
           className="grid grid-cols-2 py-7  border-b border-hanaSilver"
@@ -132,7 +104,7 @@ function Contract() {
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">연락처</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.phone}
+            {notifier.phoneNumber}
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">주소</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
@@ -140,24 +112,24 @@ function Contract() {
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">생년월일</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.birthdate}
+            {formatDate(notifier.birthdate)}
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
             위탁자와의 관계
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.relationship}
+            {notifier.relation}
           </p>
         </div>
       ))}
 
       {/* 사망통지인 정보 섹션 */}
       <div className="bg-gray-100 rounded-lg p-10 mt-10">
-        <h3 className="font-hana2 font-semibold text-4xl text-hanaBlack">
+        <h3 className="font-hana2 font-semibold text-4xl text-hanaGreen">
           사망통지인 정보
         </h3>
       </div>
-      {contractDetail.map((notifier, index) => (
+      {deathNotifiers.map((notifier, index) => (
         <div
           key={index}
           className="grid grid-cols-2 py-7  border-b border-hanaSilver"
@@ -168,7 +140,7 @@ function Contract() {
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">연락처</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.phone}
+            {notifier.phoneNumber}
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">주소</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
@@ -176,13 +148,13 @@ function Contract() {
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">생년월일</p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.birthdate}
+            {formatDate(notifier.birthdate)}
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
             위탁자와의 관계
           </p>
           <p className="font-hana2 text-3xl text-hanaBlack mb-4">
-            {notifier.relationship}
+            {notifier.relation}
           </p>
         </div>
       ))}

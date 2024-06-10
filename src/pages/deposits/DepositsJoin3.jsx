@@ -1,21 +1,32 @@
-import React from "react";
+import { React, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
 import { createSaving, createDeposit } from "../../apis/account/createAccount";
+import PicComponent from "../../components/common/FaceId/PicComponent";
+
 function DepositsJoin3() {
   const location = useLocation();
   const formData = location.state?.formData || {};
   const productDetail = location.state?.productDetail || {};
+  const [isPicModalOpen, setIsPicModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsPicModalOpen(true);
+
+
     if (productDetail.type === "예금") {
-      doSaving();
+      setTimeout(() => {
+        doSaving();
+      }, 4500);
       return;
     }
-    doDeposit();
+    setTimeout(() => {
+      doDeposit();
+    }, 4500);
   };
 
   const doSaving = async () => {
@@ -217,6 +228,13 @@ function DepositsJoin3() {
           <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             개설
           </button>
+          {isPicModalOpen && (
+            <div className="modal">
+              <div className="modal-content">
+                <PicComponent closeModal={() => setIsPicModalOpen(false)} />
+              </div>
+            </div>
+          )}
         </Link>
         <Link to={"/deposits"} className="flex-grow ml-4">
           <button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
