@@ -20,7 +20,8 @@ function DepositsJoin2() {
   const [smsNotification, setSmsNotification] = useState(null);
 
   const [message, setMessage] = useState("");
-  
+  const [automessage, setAutoMessage] = useState("");
+
   const [dropdownVisibility1, setDropdownVisibility1] = useState(false);
   const [dropdownVisibility2, setDropdownVisibility2] = useState(false);
   const [selectedItem, setSelectedItem] = useState("계좌를 선택해주세요");
@@ -72,6 +73,20 @@ function DepositsJoin2() {
       }
     } catch (error) {
       setMessage("서버와 통신 중 오류가 발생했습니다.");
+    }
+  };
+
+  const handleAutoPasswordCheck = async () => {
+    try {
+      const response = await checkPassword(selectedTransfer.id, autoTransferPassword);
+
+      if (response.isSuccess) {
+        setAutoMessage("비밀번호가 확인되었습니다.");
+      } else {
+        setAutoMessage("비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      setAutoMessage("서버와 통신 중 오류가 발생했습니다.");
     }
   };
 
@@ -643,19 +658,19 @@ function DepositsJoin2() {
                 <div className="flex items-center">
                   <input
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={autoTransferPassword}
+                    onChange={(e) => setAutoTransferPassword(e.target.value)}
                     className="w-full p-5 border rounded mt-2"
                   />
                   <button
-                    onClick={handlePasswordCheck}
+                    onClick={handleAutoPasswordCheck}
                     className="ml-5 p-5 bg-hanaRed text-white w-1/3 rounded mt-2 hover:bg-hanaSilver"
                   >
                     비밀번호 확인
                   </button>
                 </div>
-                {message && (
-                  <p className="mt-2 text-hana2 text-hanaRed">{message}</p>
+                {automessage && (
+                  <p className="mt-2 text-hana2 text-hanaRed">{automessage}</p>
                 )}
               </div>
               <div className="p-4 border-b border-gray-300 text-4xl font-hana2">

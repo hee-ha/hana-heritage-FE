@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createAccount } from "../../apis/account/createAccount";
 import OcrAuthenticationModal from "../inheritance/OcrAuthentication";
+import PicComponent from "../../components/common/FaceId/PicComponent";
 
 function AccountCreation3() {
   const location = useLocation();
@@ -12,6 +13,8 @@ function AccountCreation3() {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false); // 모달 상태 추가
   const [ocrData, setOcrData] = useState(null); // OCR 데이터 상태 추가
+  const [isPicModalOpen, setIsPicModalOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -35,7 +38,11 @@ function AccountCreation3() {
       accountPassword: formData.password,
     };
 
-    doCreate(accountInfo);
+    setIsPicModalOpen(true);
+
+    setTimeout(() => {
+      doCreate(accountInfo);
+    }, 4500);
   };
 
   const doCreate = async (data) => {
@@ -190,6 +197,13 @@ function AccountCreation3() {
           <button className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">
             개설
           </button>
+          {isPicModalOpen && (
+            <div className="modal">
+              <div className="modal-content">
+                <PicComponent closeModal={() => setIsPicModalOpen(false)} />
+              </div>
+            </div>
+          )}
         </Link>
         <Link to={"/deposits"} className="flex-grow ml-4">
           <button className="w-full text-hanaGreen font-hana2 font-semibold text-5xl border-4 border-hanaGreen py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg">

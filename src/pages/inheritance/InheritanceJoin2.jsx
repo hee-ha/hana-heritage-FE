@@ -10,12 +10,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import axiosInstance from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import PicComponent from "../../components/common/FaceId/PicComponent";
 
 function InheritanceJoin2() {
   const [settlor, setSettlor] = useState("");
   const [trustee, setTrustee] = useState("");
   const [trustContractStartDate, setTrustContractStartDate] = useState(dayjs());
   const [trustContractEndDate, setTrustContractEndDate] = useState(dayjs());
+  const [isPicModalOpen, setIsPicModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const [realEstate, setRealEstate] = useState({
     title: "",
@@ -258,7 +261,11 @@ function InheritanceJoin2() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitContractDetails();
+    setIsPicModalOpen(true);
+
+    setTimeout(() => {
+      submitContractDetails();
+    }, 5000);
   };
 
   const formatCurrency = (number) => {
@@ -375,7 +382,9 @@ function InheritanceJoin2() {
               <legend className="font-hana2 font-semibold text-5xl mb-5">
                 사후수익자 {index + 1}
               </legend>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 items-center">
+                {" "}
+                {/* Flexbox 설정 및 수평 중앙 정렬 */}
                 <input
                   type="text"
                   name="name"
@@ -385,6 +394,7 @@ function InheritanceJoin2() {
                   className="w-full mt-2 p-2 border rounded"
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <div style={{ width: "450px" }}>
                   <DatePicker
                     value={dayjs(beneficiary.birthdate)}
                     onChange={(newValue) =>
@@ -408,6 +418,7 @@ function InheritanceJoin2() {
                       />
                     )}
                   />
+               </div>                  
                 </LocalizationProvider>
                 <input
                   type="text"
@@ -472,39 +483,41 @@ function InheritanceJoin2() {
               <legend className="font-hana2 font-semibold text-5xl mb-5">
                 사망통지인 {index + 1}
               </legend>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 items-center">
                 <input
                   type="text"
                   name="name"
                   placeholder="성명"
                   value={notifier.name}
                   onChange={(e) => handleDeathNotiChange(index, e)}
-                  className="w-full mt-2 p-2 border rounded"
+                  className="w-full mt-2 p-2 border rounded "
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    value={dayjs(notifier.birthdate)}
-                    onChange={(newValue) =>
-                      handleDeathNotiChange(index, {
-                        target: { name: "birthdate", value: newValue },
-                      })
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        InputProps={{
-                          style: {
-                            height: "3.5rem",
-                            fontFamily: "hana2, sans-serif",
-                            fontSize: "2.25rem",
-                            fontWeight: "bold",
-                          },
-                        }}
-                        className="w-full mt-2 p-2 border rounded"
-                        placeholder="생년월일"
-                      />
-                    )}
-                  />
+                  <div style={{ width: "450px" }}>
+                    <DatePicker
+                      value={dayjs(notifier.birthdate)}
+                      onChange={(newValue) =>
+                        handleDeathNotiChange(index, {
+                          target: { name: "birthdate", value: newValue },
+                        })
+                      }
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          InputProps={{
+                            style: {
+                              height: "3.5rem",
+                              fontFamily: "hana2, sans-serif",
+                              fontSize: "2.25rem",
+                              fontWeight: "bold",
+                            },
+                          }}
+                          className="w-full mt-2 p-2 border rounded"
+                          placeholder="생년월일"
+                        />
+                      )}
+                    />
+                  </div>
                 </LocalizationProvider>
                 <input
                   type="text"
@@ -842,6 +855,13 @@ function InheritanceJoin2() {
         >
           제출
         </button>
+        {isPicModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <PicComponent closeModal={() => setIsPicModalOpen(false)} />
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );

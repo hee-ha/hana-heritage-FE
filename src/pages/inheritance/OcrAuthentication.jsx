@@ -10,9 +10,7 @@ const OcrAuthenticationModal = ({ show, handleClose, handleSave }) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     if (!selectedFile) {
       alert("파일을 선택해주세요.");
       return;
@@ -43,7 +41,6 @@ const OcrAuthenticationModal = ({ show, handleClose, handleSave }) => {
   const handleSaveClick = () => {
     handleSave(ocrResult);
   };
-  const matching = {};
 
   useEffect(() => {
     setOcrMessage("판독이 완료되었습니다.");
@@ -66,7 +63,7 @@ const OcrAuthenticationModal = ({ show, handleClose, handleSave }) => {
             &times;
           </button>
         </div>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form encType="multipart/form-data">
           <div className="form-group mb-6">
             <label className="font-hana2 font-semibold text-5xl block mb-4 text-wrap">
               이미지 파일 업로드
@@ -78,7 +75,8 @@ const OcrAuthenticationModal = ({ show, handleClose, handleSave }) => {
             />
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             className="w-full text-white font-hana2 font-semibold text-5xl bg-hanaRed py-3 px-8 z-10 mt-4 transition-transform transform hover:animate-bubbly rounded-lg"
           >
             OCR 실행
