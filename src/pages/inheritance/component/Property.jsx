@@ -7,6 +7,7 @@ import { ListCard } from "../../../components/inheritance/card";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { getMyProperty } from "../../../apis/inheritance/getMyProperty";
 import { getChartData } from "../../../apis/inheritance/getChartData";
+import { getMyInfo } from "../../../apis/customer/getMyInfo";
 
 function Property() {
   const [properties, setProperties] = useState({
@@ -17,6 +18,7 @@ function Property() {
   });
 
   const [chartData, setChartData] = useState([]);
+  const [name, setName] = useState("");
 
   const data = {
     labels: ["금전", "유가증권", "채권", "부동산"],
@@ -27,6 +29,15 @@ function Property() {
         hoverBackgroundColor: ["#FF8A80", "#7986CB", "#4DB6AC", "#FFF176"],
       },
     ],
+  };
+
+  const doMyInfo = async () => {
+    try {
+      const response = await getMyInfo();
+      setName(response.result.name);
+    } catch (error) {
+      console.error("Failed to fetch response:", error);
+    }
   };
 
   const options = {
@@ -86,6 +97,7 @@ function Property() {
   useEffect(() => {
     doProperty();
     doGetChartData();
+    doMyInfo();
   }, []);
 
   return (
@@ -114,7 +126,7 @@ function Property() {
           style={{ height: "925px" }}
         >
           <h2 className="font-hana2 text-3xl font-bold mb-6 text-center mb-10">
-            이땡땡님의 자산현황입니다.
+            {name}님의 자산현황입니다.
           </h2>
           <div className="flex flex-col items-center h-full w-[450px]">
             <div className="h-1/2 w-full mb-12">
